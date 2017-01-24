@@ -1,4 +1,4 @@
-var mysql = require('../utils/config.db');
+var mysql = require('../config.db');
 
 var menusModel = {};
 

@@ -8,26 +8,39 @@
   dataservice.$inject = ['$http', '$q', 'exception', 'logger'];
   /* @ngInject */
   function dataservice($http, $q, exception, logger) {
-    var service = {
-      sendEmail: sendEmail
-    };
+      var service = {
+          sendEmail: sendEmail,
+          getMenus: getMenus
+      };
 
-    return service;
+      return service;
 
-    function sendEmail(data) {
+      function sendEmail(data) {
+          return $http.post('/api/sendmail', data)
+            .then(success)
+            .catch(fail);
 
-      return $http.post('/api/sendmail', data)
-        .then(success)
-        .catch(fail);
+          function success() {
+            return true;
+          }
 
-      function success() {
-        return true;
+          function fail() {
+            return false;
+          }
       }
 
-      function fail() {
-        return false;
+      function getMenus() {
+          return $http.get('/api/menus')
+            .then(success)
+            .catch(fail);
+
+          function success(response) {
+            return response.data;
+          }
+
+          function fail(e) {
+            return exception.catcher('XHR Failed for getMenus')(e);
+          }
       }
-    }
   }
-
 })();

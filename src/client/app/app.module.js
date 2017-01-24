@@ -2,10 +2,11 @@
   'use strict';
 
   angular.module('app', [
+    'app.contact',
     'app.core',
     'app.home',
-    'app.contact',
-    'app.layout'
+    'app.layout',
+    'app.menus'
   ]);
 
 })();

@@ -5,7 +5,7 @@
   <style>
     /* This helps the ng-show/ng-hide animations start at the right place. */
     /* Since Angular has this but needs to load, this gives us the class early. */
-    
+
     .ng-hide {
       display: none!important;
     }
@@ -30,10 +30,11 @@
  <link rel="stylesheet" href="/.tmp/styles.css">
  <!-- endinject -->
   <!-- endbuild -->
-  
+
   <link rel="stylesheet" href="/styles/style.css">
   <link rel="stylesheet" href="/styles/general.css">
   <link rel="stylesheet" href="/styles/forms.css">
+  <link rel="stylesheet" href="/styles/menus.css">
 </head>
 
 <body>
@@ -50,12 +51,20 @@
       </div>
     </div>
   </div>
-
+  <script src='//maps.googleapis.com/maps/api/js?key=AIzaSyALz3o_cMEcTa8pzYf5jUhJcBDn48Wlpn8'></script>
   <!-- build:js js/lib.js -->
   <!-- bower:js -->
   <script src="/bower_components/jquery/dist/jquery.js"></script>
   <script src="/bower_components/angular/angular.js"></script>
   <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="/bower_components/angular-simple-logger/dist/angular-simple-logger.js"></script>
+  <script src="/bower_components/lodash/lodash.js"></script>
+  <script src="/bower_components/markerclustererplus/src/markerclusterer.js"></script>
+  <script src="/bower_components/google-maps-utility-library-v3-markerwithlabel/dist/markerwithlabel.js"></script>
+  <script src="/bower_components/google-maps-utility-library-v3-infobox/dist/infobox.js"></script>
+  <script src="/bower_components/google-maps-utility-library-v3-keydragzoom/dist/keydragzoom.js"></script>
+  <script src="/bower_components/js-rich-marker/src/richmarker.js"></script>
+  <script src="/bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
   <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
   <script src="/bower_components/extras.angular.plus/ngplus-overlay.js"></script>
   <script src="/bower_components/moment/moment.js"></script>
@@ -77,6 +86,7 @@
   <script src="/src/client/app/home/home.module.js"></script>
   <script src="/src/client/app/layout/layout.module.js"></script>
   <script src="/src/client/app/menus/menus.module.js"></script>
+  <script src="/src/client/app/widgets/widgets.module.js"></script>
   <script src="/src/client/app/blocks/exception/exception-handler.provider.js"></script>
   <script src="/src/client/app/blocks/exception/exception.js"></script>
   <script src="/src/client/app/blocks/logger/logger.js"></script>
@@ -93,6 +103,7 @@
   <script src="/src/client/app/layout/shell.controller.js"></script>
   <script src="/src/client/app/menus/menus.controller.js"></script>
   <script src="/src/client/app/menus/menus.route.js"></script>
+  <script src="/src/client/app/widgets/configApiGoogleMaps.js"></script>
   <!-- endinject -->
 
   <!-- inject:templates:js -->

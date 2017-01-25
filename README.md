@@ -28,7 +28,7 @@ Tener en cuenta aspectos sobre Accesibilidad**
 
 2.2- Ejecutar el comando `bower install`
 
--> MOMENTANEO: añadir archivo sendgrid.env en la ruta /src/server/utils
+-> MOMENTANEO: añadir archivos sendgrid.env y config.db.js en la ruta /src/server/
 
 3.- Run the project with `gulp serve-dev`
 

@@ -10,7 +10,9 @@
   function MenusController($q, dataservice, logger) {
     var vm = this;
     vm.title = 'Menus';
-    vm.messageCount = 0;
+    //Map centered on spain
+    vm.map = { center: { latitude: 39.5770969, longitude: -3.5280415 }, zoom: 6 };
+
     vm.menus = [];
 
     activate();

@@ -23,7 +23,7 @@
             var data = {
                 name: vm.inputName,
                 from: vm.inputEmail,
-                to: 'gv.web.denvelopers@gmail.com',
+                to: '',
                 subject: vm.inputSubject,
                 text: vm.inputMessage,
                 type: 'admin'

@@ -13,7 +13,7 @@ exports.sendEmail = function (req, res) {
     switch (req.body.type) {
         case 'user':
             emailTo = req.body.from;
-            emailFrom = req.body.to;
+            emailFrom = 'gv.web.denvelopers@gmail.com';
              body = '<body>' +
                     '<div id="contact-email">' +
                     '<div> <h1>Contacto con Findmenu</h1> <h4>Sugerencia: ' + req.body.subject +
@@ -29,7 +29,7 @@ exports.sendEmail = function (req, res) {
 
             break;
         case 'admin':
-            emailTo = req.body.to;
+            emailTo = 'gv.web.denvelopers@gmail.com';
             emailFrom = req.body.from;
 
              body = '<body>' +

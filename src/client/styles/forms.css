@@ -178,7 +178,9 @@ ul.icons{
 }
 
 .msg_ok {
-    background: #589D05;
+    color: green;
+    padding:1%;
+    margin:1%;
 }
 
 .msg_error {
@@ -187,13 +189,22 @@ ul.icons{
     margin:1%;
 }
 
-.ng-invalid.ng-dirty{
-    border-color: #FA787E;
+input.ng-invalid.ng-dirty{
+    background-color:pink;
 }
 
-.ng-valid.ng-dirty{
-    border-color: #78FA89;
+input.ng-valid.ng-dirty{
+    background-color:lightgreen;
 }
+
+textarea.ng-invalid.ng-dirty{
+    background-color:pink;
+}
+
+textarea.ng-valid.ng-dirty{
+    background-color:lightgreen;
+}
+
 
 /*Animaciones*/
 @keyframes pulse {

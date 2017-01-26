@@ -20,6 +20,7 @@ app.use(logger('dev'));
 
 //importo routers de cada modulo
 require('./contact/contact.router.js')(app);
+require('./menus/menus.router.js')(app);
 
 console.log('About to crank up node');
 console.log('PORT=' + port);

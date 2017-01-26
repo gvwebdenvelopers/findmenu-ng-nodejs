@@ -1,6 +1,7 @@
 var nodemailer = require('nodemailer');
 var sgTransport = require('nodemailer-sendgrid-transport');
-var sg = require('./sendgrid.env');
+
+var sg = require('./../sendgrid.env');
 var style = require('./style.email.js');
 
 exports.sendEmail = function (req, res) {
@@ -24,7 +25,7 @@ exports.sendEmail = function (req, res) {
                     '<p>Puede seguir disfrutando de los servicios de Findmenu pulsando'+
                     '<a href="http://localhost:3000/">aqu&iacute;</a></p>' +
                     '<img src="findmenu_logo.png" alt="Logo">'+
-                    '</div>' +                 
+                    '</div>' +
                     ' </body>';
 
             break;
@@ -41,7 +42,7 @@ exports.sendEmail = function (req, res) {
                     'Email: <p>' + req.body.from + '</p>' +
                     'Mensaje:<p>' + req.body.text + '</p></section>' +
                     '<img src="findmenu_logo.png" alt="Logo">'+
-                    '</div>' +                
+                    '</div>' +
                     ' </body>';
 
             break;
@@ -59,7 +60,7 @@ exports.sendEmail = function (req, res) {
             '<head>' +
             '<meta charset="utf-8" />' +
             style +
-            '</head>' + body + 
+            '</head>' + body +
             '</html>';
 
     var email = {
@@ -87,11 +88,11 @@ exports.sendEmail = function (req, res) {
             res.status('200').json({
                 success: true
             });
-            
-            
+
+
         }
     });
-    
-    
+
+
 
 };

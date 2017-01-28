@@ -1,0 +1,103 @@
+
+
+<div class="container">
+
+    <div class="row">
+        <h1 class="text-center login-title">Sign up </h1>
+        <div class="col-sm-6 col-md-4 col-md-offset-4 signup-well">
+            <form class="form" name="form"  novalidate>
+                <div class="form-group">
+                     
+                    <input class="form-control"
+                           placeholder="Your Email"
+                           type="email"
+                           name="email"
+                           ng-model="vm.inputEmail"
+                           required
+                           autofocus
+                           on-focus
+                           mongoose-error/>
+                    <p class="help-block"
+                       ng-show="form.inputEmail.$error.email && !form.inputEmail.$focused">
+                        Not a valid email.
+                    </p>
+                    <p class="help-block"
+                       ng-show="form.inputEmail.$error.mongoose">
+                        {{ errors.email}}
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    <!--usar directiva-->
+                    <input class="form-control"
+                           placeholder="Username"
+                           type="text"
+                           name="username"
+                           ng-model="vm.inputUser"
+                           required
+                           
+                           unique-username
+                           mongoose-error/>
+                    <p class="help-block"
+                       ng-show="form.inputUser.$error.unique && form.inputUser">
+                        That username is already taken.
+                    </p>
+                    <p class="help-block"
+                       ng-show="form.password.$error.mongoose">
+                        {{ errors.username}}
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    
+                    <input class="form-control"
+                           placeholder="Password"
+                           type="password"
+                           name="password"
+                           ng-model="vm.inputPass"
+                           ng-minlength="5"
+                           required
+                           mongoose-error/>
+                    <p class="help-block"
+                       ng-show="(form.inputPass.$error.minlength || form.inputPass.$invalid)
+                                       && form.inputPass.$dirty
+                                       && !form.inputPass.$error.required">
+                        Password must be at least 5 characters.
+                    </p>
+                    <p class="help-block"
+                       ng-show="form.inputPass.$error.mongoose">
+                        {{ errors.password}}
+                    </p>
+                </div>
+
+                <div class="form-group">
+                     
+                    <input class="form-control"
+                           placeholder="Password"
+                           type="password"
+                           name="password"
+                           ng-model="vm.inputPass2"
+                           ng-minlength="5"
+                           required
+                           mongoose-error/>
+                    <!--comparar passwords-->
+                    <p class="help-block"
+                       
+                       ng-show="(form.inputPass2.$error.minlength || form.inputPass2.$invalid)
+                                       && form.inputPass2.$dirty
+                                       && !form.inputPass2.$error.required">
+                        Password must be at least 5 characters.
+                    </p>
+                    <p class="help-block"
+                       ng-show="form.password.$error.mongoose">
+                        {{ errors.password}}
+                    </p>
+                </div>
+                <br />
+                <button class="btn btn-lg btn-primary btn-block"
+                        type="submit"
+                        ng-disabled="form.$invalid" ng-click="vm.SubmitSignup()">Sign up</button>
+            </form>
+        </div>
+    </div>
+</div>

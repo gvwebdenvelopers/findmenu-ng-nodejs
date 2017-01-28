@@ -7,7 +7,8 @@
     'app.home',
     'app.layout',
     'app.menus',
-    'app.widgets'
+    'app.widgets',
+    'app.login'
   ]);
 
 })();

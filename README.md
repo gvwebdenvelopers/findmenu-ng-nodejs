@@ -27,6 +27,7 @@ Tener en cuenta aspectos sobre Accesibilidad**
 2.1- Ejecutar el comando `npm install`
 
 2.2- Ejecutar el comando `bower install`
+2.3- Al realizar el bowwer install tener en cuenta si usamos ngmaterials escoger la version 1.4.14
 
 -> MOMENTANEO: añadir archivos sendgrid.env y config.db.js en la ruta /src/server/
 

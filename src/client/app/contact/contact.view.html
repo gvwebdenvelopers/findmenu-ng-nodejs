@@ -2,44 +2,62 @@
     <form id="contact_form" name="contact_form" class="details-holder" novalidate>
         <div class="modal-header">
             <h1><C>CONTACT US</C></h1>
-        </div>
+        </div>    
+            
+        <md-input-container class="md-block">
+          <label>Nombre</label>
+          <input required name="inputName" ng-model="vm.inputName">
+          <div ng-messages="contact_form.inputName.$error">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
 
-        <div>
-            <input required ng-model="vm.inputName" class="input" type="text" name="inputName" placeholder="Name" >
-            <p class="msg_error" 
-                 ng-show="contact_form.inputName.$error.required && (contact_form.inputName.$dirty || contact_form.inputName.$touched)">El campo es obligatorio</p>
-        </div>
-        <div>
-        <input required ng-model="vm.inputEmail" class="input" type="email"  name="inputEmail" placeholder="Email *"> 
-        <p class="msg_error" 
-             ng-show="contact_form.inputEmail.$error.required && (contact_form.inputEmail.$dirty || contact_form.inputEmail.$touched)">El campo es obligatorio</p>
-        <p class="msg_error" ng-show="contact_form.inputEmail.$error.email && (contact_form.inputEmail.$dirty || contact_form.inputEmail.$touched)">Email not valid</p>
-        </div>
-        <div>
-            <label class="subject" for="sel1" >Subject:</label>
-            <select required ng-model="vm.inputSubject" class="select" id="inputSubject" name="inputSubject" title="Choose subject">
-                <option value="compra">Info relativa a tu compra</option>
-                <option value="evento">Celebra un evento con nosotros</option>
-                <option value="programacion">Contacta con nuestro dpto de programación</option>
-                <option value="Trabaja">Trabaja con nosotros</option>
-                <option value="proyectos">Deseas proponernos proyectos</option>
-                <option value="sugerencias">Haznos sugerencias</option>
-                <option value="reclamaciones">Atendemos tus reclamaciones</option>
-                <option value="club">Club FindMenu</option>
-                <option value="sociales">Proyectos sociales</option>
-                <option value="novedades">Te avisamos de nuestras novedades</option>
-                <option value="diferente">Algo diferente</option>
-            </select>
-            <p class="msg_error" 
-                 ng-show="contact_form.inputSubject.$error.required && (contact_form.inputSubject.$dirty || contact_form.inputSubject.$touched)">El campo es obligatorio</p>
-        </div>
+        
+        <md-input-container class="md-block">
+        <label>Email</label>
+        <input required type="email"  name="inputEmail" ng-model="vm.inputEmail"
+               minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/" />
 
-        <div>
-            <textarea required ng-model="vm.inputMessage" class="input" type="text" rows="4" name="inputMessage" placeholder="Message *" style="max-width: 100%;" ></textarea>
-            <p class="msg_error" 
-                 ng-show="contact_form.inputMessage.$error.required && (contact_form.inputMessage.$dirty || contact_form.inputMessage.$touched)">El campo es obligatorio</p>
+        <div ng-messages="contact_form.inputEmail.$error" role="alert">
+          <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+            Your email must be between 10 and 100 characters long and look like an e-mail address.
+          </div>
         </div>
-        <input class="btn-read-more" type="submit" name="submit" id="submitBtn" value="send" ng-click="vm.SubmitContact()"/>
+      </md-input-container>
+        <div>
+         <md-input-container class="md-block">
+          <label>Sugerencia</label>
+          <md-select name="inputSubject" ng-model="vm.inputSubject" required>
+            
+                <md-option value="compra">Info relativa a tu compra</md-option>
+                <md-option value="evento">Celebra un evento con nosotros</md-option>
+                <md-option value="programacion">Contacta con nuestro dpto de programación</md-option>
+                <md-option value="Trabaja">Trabaja con nosotros</md-option>
+                <md-option value="proyectos">Deseas proponernos proyectos</md-option>
+                <md-option value="sugerencias">Haznos sugerencias</md-option>
+                <md-option value="reclamaciones">Atendemos tus reclamaciones</md-option>
+                <md-option value="club">Club FindMenu</md-option>
+                <md-option value="sociales">Proyectos sociales</md-option>
+                <md-option value="novedades">Te avisamos de nuestras novedades</md-option>
+                <md-option value="diferente">Algo diferente</md-option>
+          </md-select>
+           <div ng-messages="contact_form.inputSubject.$error">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+           
+        </div>   
+        
+        <md-input-container class="md-block">
+          <label>Mensaje</label>
+          <textarea required  name="inputMessage" ng-model="vm.inputMessage" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+           <div ng-messages="contact_form.inputMessage.$error">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+        
+        
+        <md-button class="md-raised md-primary" type="submit" name="submit" id="submitBtn" value="send" ng-click="vm.SubmitContact()">Enviar</md-button>
         <div id="resultMessageOk" class="msg_ok">{{vm.resultMessageOk}}</div>
         <div id="resultMessageFail" class="msg_error">{{vm.resultMessageFail}}</div>
 </div>

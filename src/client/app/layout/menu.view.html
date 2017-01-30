@@ -1,6 +1,7 @@
 <nav class="menu" ng-controller="MenuController as vm">
     <!--idea a la derecha del logo colocamos acceder que cambiara por la foto al estar logueado-->
     <a href="/" ><img class="logo" src="/images/findmenu_2.png"</a>
+    <a id="acceder" href="" class="button special" ng-click="vm.showModalSignup()">Acceder</a>
     <ul >
         <!--anulo el css-->
         <li  ng-class="vm.isCurrent(r)" ng-repeat="r in vm.navRoutes">

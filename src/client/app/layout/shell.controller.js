@@ -5,14 +5,14 @@
     .module('app.layout')
     .controller('ShellController', ShellController);
 
-  ShellController.$inject = ['$rootScope', '$timeout'];
+  ShellController.$inject = ['$rootScope', '$timeout','$uibModal'];
   /* @ngInject */
-  function ShellController($rootScope, $timeout) {
+  function ShellController($rootScope, $timeout,$uibModal) {
     var vm = this;
     vm.busyMessage = 'Please wait ...';
     vm.isBusy = true;
     $rootScope.showSplash = true;
-
+    
     //mostramos barra de carga
     hideSplash();
 
@@ -22,5 +22,6 @@
         $rootScope.showSplash = false;
       }, 1000);
     }
+    
   }
 })();

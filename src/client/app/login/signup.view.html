@@ -5,98 +5,68 @@
     <div class="row">
         <h1 class="text-center login-title">Sign up </h1>
         <div class="col-sm-6 col-md-4 col-md-offset-4 signup-well">
-            <form class="form" name="form"  novalidate>
-                <div class="form-group">
-                     
-                    <input class="form-control"
-                           placeholder="Your Email"
-                           type="email"
-                           name="email"
-                           ng-model="vm.inputEmail"
-                           required
-                           autofocus
-                           on-focus
-                           mongoose-error/>
-                    <p class="help-block"
-                       ng-show="form.inputEmail.$error.email && !form.inputEmail.$focused">
-                        Not a valid email.
-                    </p>
-                    <p class="help-block"
-                       ng-show="form.inputEmail.$error.mongoose">
-                        {{ errors.email}}
-                    </p>
-                </div>
+            <form class="signup_form" name="signup_form"  novalidate>
+                <md-input-container class="md-block">
+                    <label>Email</label>
+                    <input required type="email"  name="inputEmail" ng-model="vm.inputEmail"
+                           minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/" />
 
-                <div class="form-group">
-                    <!--usar directiva-->
+                    <div ng-messages="signup_form.inputEmail.$error" role="alert">
+                        <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                            Your email must be between 10 and 100 characters long and look like an e-mail address.
+                        </div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Nombre de usuario</label>
+                    <input required name="inputUser" ng-model="vm.inputUser">
+                    <div ng-messages="signup_form.inputUser.$error">
+                        <div ng-message="required">This is required.</div>
+                    </div>
+                </md-input-container>
+                <!--<div class="form-group">
+                    usar directiva
                     <input class="form-control"
                            placeholder="Username"
                            type="text"
                            name="username"
                            ng-model="vm.inputUser"
-                           required
-                           
+                           required                     
                            unique-username
-                           mongoose-error/>
+                           />
                     <p class="help-block"
                        ng-show="form.inputUser.$error.unique && form.inputUser">
                         That username is already taken.
                     </p>
-                    <p class="help-block"
-                       ng-show="form.password.$error.mongoose">
-                        {{ errors.username}}
-                    </p>
-                </div>
 
-                <div class="form-group">
-                    
-                    <input class="form-control"
-                           placeholder="Password"
-                           type="password"
-                           name="password"
-                           ng-model="vm.inputPass"
-                           ng-minlength="5"
-                           required
-                           mongoose-error/>
-                    <p class="help-block"
-                       ng-show="(form.inputPass.$error.minlength || form.inputPass.$invalid)
-                                       && form.inputPass.$dirty
-                                       && !form.inputPass.$error.required">
-                        Password must be at least 5 characters.
+                </div>-->
+                <md-input-container class="md-block">
+                    <label>Password</label>
+                    <input required ng-minlength="5" ng-maxlength="10"type="password" name="inputPass" ng-model="vm.inputPass">
+                    <div ng-messages="signup_form.inputPass.$error" role="alert">
+                        <div ng-message-exp="['required', 'minlength', 'maxlength']">
+                            The password is required.Password must be at least 5 characters and maximun 10.
+                        </div>
+                    </div>   
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Repeat Password</label>
+                    <input required ng-minlength="5" ng-maxlength="10"type="password" name="inputPass2" ng-model="vm.inputPass2">
+                    <div ng-messages="signup_form.inputPass2.$error" role="alert">
+                        <div ng-message-exp="['required', 'minlength', 'maxlength']">
+                            The password is required.Password must be at least 5 characters and maximun 10.
+                        </div>
+                    </div>   
+                    <p ng-show="vm.inputPass !== vm.inputPass2">
+                        Password do not match
                     </p>
-                    <p class="help-block"
-                       ng-show="form.inputPass.$error.mongoose">
-                        {{ errors.password}}
-                    </p>
-                </div>
+                </md-input-container>
 
-                <div class="form-group">
-                     
-                    <input class="form-control"
-                           placeholder="Password"
-                           type="password"
-                           name="password"
-                           ng-model="vm.inputPass2"
-                           ng-minlength="5"
-                           required
-                           mongoose-error/>
-                    <!--comparar passwords-->
-                    <p class="help-block"
-                       
-                       ng-show="(form.inputPass2.$error.minlength || form.inputPass2.$invalid)
-                                       && form.inputPass2.$dirty
-                                       && !form.inputPass2.$error.required">
-                        Password must be at least 5 characters.
-                    </p>
-                    <p class="help-block"
-                       ng-show="form.password.$error.mongoose">
-                        {{ errors.password}}
-                    </p>
-                </div>
                 <br />
                 <button class="btn btn-lg btn-primary btn-block"
                         type="submit"
-                        ng-disabled="form.$invalid" ng-click="vm.SubmitSignup()">Sign up</button>
+                        ng-disabled="signup_form.$invalid" ng-click="vm.SubmitSignup()">Sign up</button>
+                <div id="resultMessageFail" class="msg_error">{{vm.resultMessageFail}}</div>
             </form>
         </div>
     </div>

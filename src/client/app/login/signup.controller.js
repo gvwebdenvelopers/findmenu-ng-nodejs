@@ -3,11 +3,11 @@
 
     angular
             .module('app.login')
-            .controller('SignupController', HomeController);
+            .controller('SignupController', SignupController);
 
-    HomeController.$inject = ['dataservice', '$state', '$timeout', 'logger'];
+    SignupController.$inject = ['dataservice', '$state', '$timeout'];
 
-    function HomeController(logger, dataservice, $state, $timeout) {
+    function SignupController(dataservice, $state, $timeout) {
         var vm = this;
         vm.title = 'Signup';
         vm.inputUser = '';
@@ -16,42 +16,56 @@
         vm.inputPass2 = '';
         vm.SubmitSignup = SubmitSignup;
 
-        activate();
-
-        function activate() {
-            //logger.info('Activated Signup View');
-        }
-
         function SubmitSignup() {
-            
-            console.log("entro");
 
-            /*var data = {"user_email": vm.signup.inputEmail,
-                "password": vm.signup.inputPass, "password2": vm.signup.inputPass2};
-            var data = JSON.stringify(data);
-            dataservice.singup(data).then(function (response) {
-                if (response.success) {
-                    $timeout(function () {
-                        //$location.path('/');
-                        //CommonService.banner("El usuario se ha dado de alta correctamente, revisa su correo para activarlo", "");
-                    }, 2000);
-                } else {
-                    if (response.typeErr === "User") {
-                        // $scope.err = true;
-                        //$scope.error = response.message;
+
+            if (vm.inputPass == vm.inputPass2) {
+                //console.log("entro");
+                var data = {
+                    "user": vm.inputUser,
+                    "user_email": vm.inputEmail,
+                    "password": vm.inputPass,
+                    "usertype": "client"
+                };
+               // console.log(data);
+                var data_user_JSON = JSON.stringify(data);
+                dataservice.signup(data_user_JSON).then(function (response) {
+
+                    console.log(response);
+                    if (response.success) {
                         $timeout(function () {
-                            // $scope.err = false;
-                            // $scope.errorpass = "";
-                        }, 3000);
+                            $state.go('home');
+                            //CommonService.banner("El usuario se ha dado de alta correctamente, revisa su correo para activarlo", "");
+                            
+                            vm.resultMessageFail = 'Usuario introducido';
+                        }, 2000);
+                    } else {
+                        console.log(response);
+                        if (response.typeErr === "Name") {
+                            vm.resultMessageFail = 'Ya existe un usuario con ese nombre';
+                            $timeout(function () {
+                                vm.resultMessageFail = '';
+                            }, 3000);
+                        
 
 
-                    } else if (response.typeErr === "error_server") {
-                        //CommonService.banner("Error en el servidor", "Err");
+                        } else if (response.typeErr === "error_server") {
+                            //CommonService.banner("Error en el servidor", "Err");
+                            vm.resultMessageFail = 'Error en el server';
+                            $timeout(function () {
+                                vm.resultMessageFail = '';
+                            }, 3000);
+                        }
                     }
-                }
+                });
 
-            });*/
-        };
+            } else {
+                vm.resultMessageFail = 'Los dos passwords deben ser iguales';
+                $timeout(function () {
+                    vm.resultMessageFail = '';
+                }, 3000);
 
+            }
+        }
     }
 })();

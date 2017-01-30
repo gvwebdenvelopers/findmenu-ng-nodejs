@@ -32,7 +32,7 @@
 
                 if (response) {
                     data.type='user';
-                    console.log(data);
+                    //console.log(data);
                     dataservice.sendEmail(data).then(function (response) {
 
                         if (response) {

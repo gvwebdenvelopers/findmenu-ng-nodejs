@@ -1,11 +1,13 @@
   <section id="menus">
     <article class="container_maps">
-        <ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom'></ui-gmap-google-map>
+        <ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom'>
+          <ui-gmap-markers models="randomMarkers" coords="'self'" icon="'icon'"></ui-gmap-markers>
+        </ui-gmap-google-map>
     </article>
 
     <article class="menus">
-        <div ng-repeat="menu in vm.menus" id="{{menu.id}}">
-            <div >
+        <div ng-repeat="menu in vm.menus " id="{{menu.id}}">
+            <div ng-click="vm.showModalDetails()">
                 <div class="details" ><a href='#/menus'>
                   <div class="inline"><img class="list" src="{{menu.foto_menu}}" alt="Imagen de menu"/></div>
                   <div class="inline"><h3>{{menu.nombre}}</h3><div> {{menu.poblacion}}</div><div >Menú: {{menu.precio_menu }} €</div>  </div>
@@ -17,4 +19,5 @@
             <uib-pagination total-items="menu.length" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
         </div>-->
     </article>
+
   </section>

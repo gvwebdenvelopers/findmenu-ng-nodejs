@@ -42,5 +42,19 @@
             return exception.catcher('XHR Failed for getMenus')(e);
           }
       }
+
+      function getMenu(data) {
+          return $http.get('/api/menu', data)
+            .then(success)
+            .catch(fail);
+
+          function success(response) {
+            return response.data;
+          }
+
+          function fail(e) {
+            return exception.catcher('XHR Failed for getMenus')(e);
+          }
+      }
   }
 })();

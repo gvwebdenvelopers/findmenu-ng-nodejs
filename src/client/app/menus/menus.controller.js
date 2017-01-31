@@ -5,15 +5,23 @@
     .module('app.menus')
     .controller('MenusController', MenusController);
 
-  MenusController.$inject = ['$q', 'dataservice', 'logger'];
+  MenusController.$inject = ['$q', 'dataservice', 'logger', '$uibModal'];
   /* @ngInject */
-  function MenusController($q, dataservice, logger) {
+  function MenusController($q, dataservice, logger, $uibModal) {
     var vm = this;
     vm.title = 'Menus';
+    vm.showModalDetails = showModalDetails;
     //Map centered on spain
-    vm.map = { center: { latitude: 39.5770969, longitude: -3.5280415 }, zoom: 6 };
+    vm.map = { center: { latitude: 38.810543, longitude: -0.604137 }, zoom: 10 };
 
     vm.menus = [];
+    vm.menu_detail = [];
+    //modal variables
+    vm.viewOnMap = viewOnMap();
+
+    vm.showing = false;
+    vm.template = "app/menus/menus.view.html"
+    vm.animationsEnabled = true;
 
     activate();
 
@@ -29,6 +37,29 @@
         vm.menus = data;
         return vm.menus;
       });
+    }
+
+    function getMenu(id_menu){
+      return dataservice.getMenu(id_menu).then(function(data) {
+        vm.menu = data;
+        return vm.menu;
+      });
+    }
+
+    function showModalDetails() {
+        console.log("En showModalDetails");
+        var modalInstance = $uibModal.open({
+            animation: 'true',
+            templateUrl: 'app/menus/menu-details.html',
+            controller: 'MenusController',
+            controllerAs: 'vm',
+            size: "lg"
+        });
+    }
+
+    function viewOnMap(){
+      console.log("View on map");
+      //$ubiModalInstance.dismiss("cancel");
     }
   }
 })();

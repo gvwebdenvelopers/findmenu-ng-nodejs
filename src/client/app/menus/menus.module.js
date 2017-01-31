@@ -3,7 +3,9 @@
 
   angular.module('app.menus', [
       'app.core',
-      'app.widgets'
+      'app.widgets',
+      'ngAnimate',
+      'ui.bootstrap'
   ]);
 
 })();

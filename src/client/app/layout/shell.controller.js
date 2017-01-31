@@ -5,9 +5,9 @@
     .module('app.layout')
     .controller('ShellController', ShellController);
 
-  ShellController.$inject = ['$rootScope', '$timeout','$uibModal'];
+  ShellController.$inject = ['$rootScope', '$timeout'];
   /* @ngInject */
-  function ShellController($rootScope, $timeout,$uibModal) {
+  function ShellController($rootScope, $timeout) {
     var vm = this;
     vm.busyMessage = 'Please wait ...';
     vm.isBusy = true;

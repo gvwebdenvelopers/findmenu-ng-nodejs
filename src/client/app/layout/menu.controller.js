@@ -39,7 +39,9 @@
 
             var modalInstance = $uibModal.open({
                 animation: 'true',
-                templateUrl: 'app/layout/modal.html',
+                templateUrl: 'app/login/login.html',
+                controller: 'LoginController',
+                controllerAs: 'vm',
                 size: "lg"
             });
         }

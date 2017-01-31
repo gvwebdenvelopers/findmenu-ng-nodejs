@@ -19,13 +19,11 @@
         templateUrl: 'app/login/signup.view.html',
         controller: 'SignupController',
         controllerAs: 'vm',
-        title: 'Signup',
-        settings: {
-          nav: 4,
-          content: '<i class="fa fa-lock"></i> Registro'
-        }
+        title: 'Signup'
+        
       }
     }];
   }
+  
 })();
 

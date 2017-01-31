@@ -1,0 +1,38 @@
+
+<!--<div ng-controller="LoginController as vm">-->
+    <div class="contact">
+        <form id="login_form" name="login_form"  novalidate>
+            <div class="modal-header">
+                <h1><C>Iniciar sesión</C></h1>
+            </div>    
+            <md-input-container class="md-block">
+                <label>Email</label>
+                <input required type="email"  name="inputEmail" ng-model="vm.inputEmail"
+                       minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/" />
+                <div ng-messages="login_form.inputEmail.$error" role="alert">
+                    <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                        Your email must be between 10 and 100 characters long and look like an e-mail address.
+                    </div>
+                </div>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <label>Password</label>
+                <input required ng-minlength="5" ng-maxlength="10"type="password" name="inputPass" ng-model="vm.inputPass">
+                <div ng-messages="login_form.inputPass.$error" role="alert">
+                    <div ng-message-exp="['required', 'minlength', 'maxlength']">
+                        The password is required.Password must be at least 5 characters and maximun 10.
+                    </div>
+                </div>   
+            </md-input-container>
+            <h2><a href="#" id="linkRest">¿Has olvidado tu contraseña?</a></h2>
+            <br>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" ng-disabled="login_form.$invalid" ng-click="vm.SubmitLogin()">Sign up</button>
+            <div id="resultMessageFail" class="msg_error">{{vm.resultMessageFail}}</div>
+            <p>¿Eres un nuevo cliente?</p>
+            <hr class="login">
+            <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="vm.SubmitSignup()">Crea tu cuenta Findmenu</button>
+    </div>
+</form>
+</div>
+<!--</div>-->

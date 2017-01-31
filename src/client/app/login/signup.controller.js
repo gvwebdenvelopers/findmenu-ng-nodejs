@@ -18,7 +18,6 @@
 
         function SubmitSignup() {
 
-
             if (vm.inputPass == vm.inputPass2) {
                 //console.log("entro");
                 var data = {

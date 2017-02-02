@@ -12,12 +12,13 @@ exports.getMenus = function(req, res) {
 }
 
 exports.getMenu = function(req, res) {
+	console.log("En server_getMenu" + req.param.menu_id);
 	Menus.getMenu( req.param.menu_id,
 		function(err, menu) {
 			if (err)
   			res.send(err)
       console.log(menu);
-			res.json(menu); // devuelve el menu en JSON
+			res.json(menu); // devuelve el menu requerido con id = req.param.menu_id en JSON
 		}
 	);
 }

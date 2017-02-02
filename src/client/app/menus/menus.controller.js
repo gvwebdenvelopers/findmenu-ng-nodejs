@@ -5,9 +5,9 @@
     .module('app.menus')
     .controller('MenusController', MenusController);
 
-  MenusController.$inject = ['$q', 'dataservice', 'logger', '$uibModal'];
+  MenusController.$inject = ['$q', '$location', 'dataservice', 'logger', '$uibModal'];
   /* @ngInject */
-  function MenusController($q, dataservice, logger, $uibModal) {
+  function MenusController($q, $location, dataservice, logger, $uibModal) {
     var vm = this;
     vm.title = 'Menus';
     vm.showModalDetails = showModalDetails;
@@ -15,12 +15,11 @@
     vm.map = { center: { latitude: 38.810543, longitude: -0.604137 }, zoom: 10 };
 
     vm.menus = [];
-    vm.menu_detail = [];
+    vm.menuDetail = [];
     //modal variables
-    vm.viewOnMap = viewOnMap();
 
     vm.showing = false;
-    vm.template = "app/menus/menus.view.html"
+    vm.template = 'app/menus/menus.view.html';
     vm.animationsEnabled = true;
 
     activate();
@@ -39,27 +38,53 @@
       });
     }
 
-    function getMenu(id_menu){
-      return dataservice.getMenu(id_menu).then(function(data) {
-        vm.menu = data;
-        return vm.menu;
-      });
+    function getMenu(idMenu){
+      console.log( 'En get menu: ' + idMenu );
+
+      /*return dataservice.getMenu(idMenu).then(function(data) {
+        console.log( 'Data ' + data );
+        vm.menuDetail = data;
+        return vm.menuDetail;
+      });*/
+      for( var i=0; i< vm.menus.length; i++){
+        if( vm.menus[i].id == idMenu ){
+          console.log(vm.menus[i]);
+          return vm.menus[i];
+        }
+      }
+      return "Menu not found";
     }
 
-    function showModalDetails() {
-        console.log("En showModalDetails");
+    function showModalDetails( menuId ) {
         var modalInstance = $uibModal.open({
             animation: 'true',
-            templateUrl: 'app/menus/menu-details.html',
-            controller: 'MenusController',
+            controller: 'MenusDetailsCtrl',
             controllerAs: 'vm',
-            size: "lg"
+            scope: vm,
+            size: 'lg',
+            templateUrl: 'app/menus/menu-details.html',
+            resolve: {
+              param: function(){
+                return getMenu( menuId );
+              }
+            }
         });
     }
 
-    function viewOnMap(){
-      console.log("View on map");
-      //$ubiModalInstance.dismiss("cancel");
-    }
+    /*
+    function getCurrentLocation(){
+      return dataservice.getCurrentLocation().then( function( data ){
+        vm.currentMarker = {
+            id:0,
+            coords:{
+              latitude= data.coords.latitude,
+              longitude = data.coords.longitude            }
+            }
+        };
+         data;
+        return vm.currentMarker;
+      });
+    };
+    */
   }
 })();

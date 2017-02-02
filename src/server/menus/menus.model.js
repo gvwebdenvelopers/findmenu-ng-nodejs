@@ -9,7 +9,6 @@ menusModel.getMenus = function (callback){
           if(error){
               throw error;
           }else{
-            console.log(rows);
               callback(null, rows);
           }
       });
@@ -17,12 +16,14 @@ menusModel.getMenus = function (callback){
 }
 
 menusModel.getMenu = function(id,callback){
+    console.log("En menu model: " + id);
     if (connection) {
         var sql = 'SELECT * FROM restaurantes WHERE id = ' + mysql.connection.escape(id);
         mysql.connection.query(sql, function(error, row) {
             if(error){
                 throw error;
             }else{
+                console.log("En server: row = " + row);
                 callback(null, row);
             }
         });

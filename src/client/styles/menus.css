@@ -5,3 +5,20 @@
 .container_maps{
     height: 400px;
 }
+
+/* Pantallas tamaño medio */
+@media screen and (min-width: 456px) {
+
+  #menus .container_maps{
+    float: left;
+    width: 55%;
+    margin-top: 2em;
+  }
+
+  #menus .menus{
+    background-color: rgb(251,173,58);
+    float: right;
+    margin: 0;
+    width: 35%;
+  }
+}

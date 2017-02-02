@@ -14,10 +14,10 @@ menusModel.getMenus = function (callback){
           }
       });
   }
-}
+};
 
 menusModel.getMenu = function(id,callback){
-    if (connection) {
+    if (mysql.connection) {
         var sql = 'SELECT * FROM restaurantes WHERE id = ' + mysql.connection.escape(id);
         mysql.connection.query(sql, function(error, row) {
             if(error){
@@ -27,6 +27,6 @@ menusModel.getMenu = function(id,callback){
             }
         });
     }
-}
+};
 
 module.exports = menusModel;

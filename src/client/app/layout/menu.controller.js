@@ -42,7 +42,7 @@
                 templateUrl: 'app/login/login.html',
                 controller: 'LoginController',
                 controllerAs: 'vm',
-                size: "lg"
+                size: 'lg'
             });
         }
     }

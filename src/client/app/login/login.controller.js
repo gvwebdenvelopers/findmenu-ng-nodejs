@@ -13,21 +13,21 @@
         vm.inputPass = '';
         vm.SubmitLogin = SubmitLogin;
         vm.SubmitSignup = SubmitSignup;
-        vm.CloseModal = CloseModal;
+        //vm.CloseModal = CloseModal;
 
         function CloseModal() {
             $uibModalInstance.dismiss('cancel');
         }
 
         function SubmitLogin() {
-            console.log("entro al login");
-            CloseModal();
+            console.log('entro al login');
+            $uibModalInstance.dismiss('cancel');
         }
 
         function SubmitSignup() {
-            console.log("entro al signup");
+            console.log('entro al signup');
             $state.go('signup');
-           CloseModal();
+             $uibModalInstance.dismiss('cancel');
 
         }
     }

@@ -48,11 +48,14 @@
             return $http.post('/api/signup', data)
                     .then(success)
                     .catch(fail);
-
+            //console.log("success: "+success);
+            //console.log("fail: "+fail);
+            
+            //si devuelve promesa ejecuta success
             function success() {
                 return true;
             }
-
+            //si no ejecuta fail
             function fail() {
                 return false;
             }

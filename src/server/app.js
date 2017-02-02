@@ -8,6 +8,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var port = process.env.PORT || 8001;
 var four0four = require('./utils/404')();
+var passport = require('passport');
 
 var environment = process.env.NODE_ENV;
 
@@ -18,10 +19,23 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(logger('dev'));
 
+//importamos la configuración passport y le pasamos lavariable passport
+require('./config/passport.js')(passport);
+
 //importo routers de cada modulo
 require('./contact/contact.router.js')(app);
 require('./menus/menus.router.js')(app);
-require('./login/login.router.js')(app);
+//hay que pasarle lavariable passport a este router
+require('./login/login.router.js')(app,passport);
+
+//En una aplicación basada en Connect o Express, se requiere el middleware passport.
+//initialize () para inicializar Passport. Si su aplicación utiliza sesiones
+//de inicio de sesión persistentes, se debe utilizar el middleware passport.session ().
+//Asegúrese de usar express.session () antes de passport.session () para asegurarse de
+//que la sesión de inicio de sesión se restaure en el orden correcto.
+//app.use(express.session({ secret:'nodejsfindmenufindmenufindmeufindmenu'}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 console.log('About to crank up node');
 console.log('PORT=' + port);

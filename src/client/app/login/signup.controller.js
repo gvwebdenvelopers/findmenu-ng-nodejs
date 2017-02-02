@@ -18,37 +18,35 @@
 
         function SubmitSignup() {
 
-            if (vm.inputPass == vm.inputPass2) {
-                //console.log("entro");
-                var data = {
-                    "user": vm.inputUser,
-                    "user_email": vm.inputEmail,
-                    "password": vm.inputPass,
-                    "usertype": "client"
-                };
-               // console.log(data);
-                var data_user_JSON = JSON.stringify(data);
-                dataservice.signup(data_user_JSON).then(function (response) {
+            if (vm.inputPass === vm.inputPass2) {
 
+                var data = {
+                    'user': vm.inputUser,
+                    'email': vm.inputEmail,
+                    'password': vm.inputPass,
+                    'usertype': 'client'
+                };
+
+                var dataUserJSON = JSON.stringify(data);
+                dataservice.signup(dataUserJSON).then(function (response) {
                     console.log(response);
-                    if (response.success) {
+                    if (response === true) {
                         $timeout(function () {
-                            $state.go('home');
-                            //CommonService.banner("El usuario se ha dado de alta correctamente, revisa su correo para activarlo", "");
-                            
                             vm.resultMessageFail = 'Usuario introducido';
+                            $state.go('home');
+                            //CommonService.banner("El usuario se ha dado de alta
+                            // correctamente, revisa su correo para activarlo", "");
+
                         }, 2000);
                     } else {
-                        console.log(response);
-                        if (response.typeErr === "Name") {
+                        // console.log(response);
+                        if (response.typeErr === 'Name') {
                             vm.resultMessageFail = 'Ya existe un usuario con ese nombre';
                             $timeout(function () {
                                 vm.resultMessageFail = '';
                             }, 3000);
-                        
 
-
-                        } else if (response.typeErr === "error_server") {
+                        } else if (response.typeErr === 'error_server') {
                             //CommonService.banner("Error en el servidor", "Err");
                             vm.resultMessageFail = 'Error en el server';
                             $timeout(function () {

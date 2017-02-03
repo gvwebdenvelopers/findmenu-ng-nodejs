@@ -1,14 +1,18 @@
-var Users = require('./users.model.js');
 
-exports.signup = function (req, res) {
-    Users.insertUser(req.body,
-            function (err, callback) {
-                if (err) {
-                    res.send(err);
-                }
-                res.json(callback); // devuelve todos los menus en JSON
-            }
-    );
+var passport = require('passport');
+
+exports.signup = function (req, res, next) {
+    passport.authenticate('local-signup', function (err, user, info) {
+        if (err) {
+            return res.send("err");
+        }
+        if (!user) {
+            return res.send("name");
+        }
+        return res.send(true);
+
+    })(req, res, next);
+
 };
 
 

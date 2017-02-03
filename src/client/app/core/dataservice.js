@@ -52,8 +52,8 @@
             //console.log("fail: "+fail);
             
             //si devuelve promesa ejecuta success
-            function success() {
-                return true;
+            function success(response) {
+                return response;
             }
             //si no ejecuta fail
             function fail() {

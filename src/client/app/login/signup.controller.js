@@ -29,26 +29,26 @@
 
                 var dataUserJSON = JSON.stringify(data);
                 dataservice.signup(dataUserJSON).then(function (response) {
-                    console.log(response);
-                    if (response === true) {
-                        $timeout(function () {
+                    if (response.data === true) {
+                        $timeout(function () {                           
                             vm.resultMessageFail = 'Usuario introducido';
-                            $state.go('home');
+                            //$state.go('home');
                             //CommonService.banner("El usuario se ha dado de alta
                             // correctamente, revisa su correo para activarlo", "");
 
                         }, 2000);
                     } else {
                         // console.log(response);
-                        if (response.typeErr === 'Name') {
-                            vm.resultMessageFail = 'Ya existe un usuario con ese nombre';
+                        if (response.data === 'name') {
+                            vm.resultMessageFail = 'Ya existe un usuario con ese nombre';                          
                             $timeout(function () {
                                 vm.resultMessageFail = '';
                             }, 3000);
 
-                        } else if (response.typeErr === 'error_server') {
+                        } else if (response.data === 'err') {
                             //CommonService.banner("Error en el servidor", "Err");
                             vm.resultMessageFail = 'Error en el server';
+                            console.log("fallo en labase de datos");
                             $timeout(function () {
                                 vm.resultMessageFail = '';
                             }, 3000);

@@ -2,11 +2,12 @@ var LocalStrategy = require('passport-local').Strategy;
 //var Users = require('./users.model.js');
 var bcrypt = require('bcrypt-nodejs');
 var mysql = require('../config.db');
+//var passport =require('passport');
 
 
 //exportamos lalibreria de funciones
 module.exports = function (passport) {
-
+    
     // =========================================================================
     // passport session setup ==================================================
     // =========================================================================
@@ -48,6 +49,7 @@ module.exports = function (passport) {
                 passReqToCallback: true // allows us to pass back the entire request to the callback
             },
                     function (req, user, password, done) {
+                        console.log('entro');
                         // we are checking to see if the user trying to login already exists
                         mysql.connection.query('SELECT COUNT(*) AS userCount FROM users WHERE user like "' + user + '"',
                         function (error, rows) {
@@ -71,7 +73,7 @@ module.exports = function (passport) {
                                     if (error){
                                         return done(error);
                                         }
-                                    return done(null, res);
+                                    return done(null, user);
                                 });
                             }
                         });

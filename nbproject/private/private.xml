@@ -2,6 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/home/jorge/Proyectos/findmenu-ng-nodejs/src/server/menus/menus.controller.js</file>
+            <file>file:/home/jorge/Proyectos/findmenu-ng-nodejs/src/server/contact/contact.controller.js</file>
+            <file>file:/home/jorge/Proyectos/findmenu-ng-nodejs/src/server/login/login.router.js</file>
+            <file>file:/home/jorge/Proyectos/findmenu-ng-nodejs/src/server/login/login.controller.js</file>
+            <file>file:/home/jorge/Proyectos/findmenu-ng-nodejs/src/server/config/passport.js</file>
+            <file>file:/home/jorge/Proyectos/findmenu-ng-nodejs/src/server/contact/contact.router.js</file>
+            <file>file:/home/jorge/Proyectos/findmenu-ng-nodejs/src/server/app.js</file>
+        </group>
     </open-files>
 </project-private>

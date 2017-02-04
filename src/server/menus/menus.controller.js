@@ -9,7 +9,7 @@ exports.getMenus = function(req, res) {
 			res.json(menus); // devuelve todos los menus en JSON
 		}
 	);
-}
+};
 
 exports.getMenu = function(req, res) {
 	Menus.getMenu( req.param.menu_id,
@@ -20,4 +20,4 @@ exports.getMenu = function(req, res) {
 			res.json(menu); // devuelve el menu en JSON
 		}
 	);
-}
+};

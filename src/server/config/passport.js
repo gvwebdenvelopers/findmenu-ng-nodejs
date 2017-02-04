@@ -1,13 +1,10 @@
 var LocalStrategy = require('passport-local').Strategy;
-//var Users = require('./users.model.js');
 var bcrypt = require('bcrypt-nodejs');
-var mysql = require('../config.db');
-//var passport =require('passport');
-
+var Mysql = require('../users/users.model');
 
 //exportamos lalibreria de funciones
 module.exports = function (passport) {
-    
+
     // =========================================================================
     // passport session setup ==================================================
     // =========================================================================
@@ -21,13 +18,15 @@ module.exports = function (passport) {
     //Passport serializará y deserializará las instancias de usuario de la sesión.
 
     passport.serializeUser(function (user, done) {
+        console.log('uso serializer');//no borrar
         done(null, user.id);
     });
 
     // used to deserialize the user
     passport.deserializeUser(function (id, done) {
-        mysql.connection.query('SELECT * FROM users WHERE id =' + id, function (err, rows) {
-            done(err, rows[0]);
+        console.log('uso deserialize');//no borrar
+        Mysql.getUser(function (error, rows) {
+            done(error, rows[0]);
         });
     });
 
@@ -49,36 +48,26 @@ module.exports = function (passport) {
                 passReqToCallback: true // allows us to pass back the entire request to the callback
             },
                     function (req, user, password, done) {
-                        console.log('entro');
-                        // we are checking to see if the user trying to login already exists
-                        mysql.connection.query('SELECT COUNT(*) AS userCount FROM users WHERE user like "' + user + '"',
-                        function (error, rows) {
-                            if (error){
-                                return done(error);
-                            }
+
+                        Mysql.countUser(user, function (rows) {
                             if (rows[0].userCount >= 1) {
-                                console.log('existe y no lo inserto');
                                 return done(null, false, 'el nombre de usuario ya existe');
                             } else {
                                 // if there is no user with that username
                                 // create the user
                                 var newUser = {
                                     user: user,
-                                    password: bcrypt.hashSync(password, null, null), 
+                                    password: bcrypt.hashSync(password, null, null),
                                     email: req.body.email,
                                     usertype: req.body.usertype
                                 };
-                                console.log('no existe y lo inserto');
-                                mysql.connection.query('INSERT INTO users SET ?', newUser, function (error, res) {
-                                    if (error){
-                                        return done(error);
-                                        }
-                                    return done(null, user);
-                                });
-                            }
-                        });
-                    })
-            );
+
+                                Mysql.insertUser(newUser, function (rows) {
+                                    if (rows) {
+                                        return done(null, user);
+                                    }
+                                });//fin de consulta
+                            }//fin del else
+                        });//fin de count
+                    }));//fin de local                 
 };
-
-

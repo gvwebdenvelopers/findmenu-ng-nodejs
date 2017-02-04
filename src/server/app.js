@@ -26,7 +26,7 @@ require('./config/passport.js')(passport);
 //importo routers de cada modulo
 require('./contact/contact.router.js')(app);
 require('./menus/menus.router.js')(app);
-require('./login/login.router.js')(app);
+require('./users/users.router.js')(app);
 
 //En una aplicación basada en Connect o Express, se requiere el middleware passport.
 //initialize () para inicializar Passport. Si su aplicación utiliza sesiones

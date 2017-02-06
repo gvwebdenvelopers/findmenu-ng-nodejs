@@ -5,18 +5,20 @@
             .module('app.layout')
             .controller('MenuController', MenuController);
 
-    MenuController.$inject = ['$state', 'routerHelper', '$uibModal'];
+    MenuController.$inject = ['$state', 'routerHelper', '$uibModal','headerService'];
     /* @ngInject */
-    function MenuController($state, routerHelper, $uibModal) {
+    function MenuController($state, routerHelper, $uibModal,headerService) {
         var vm = this;
         var states = routerHelper.getStates();
         vm.isCurrent = isCurrent;
         vm.showModalSignup = showModalSignup;
+        vm.logout= logout;
 
         activate();
 
         function activate() {
             getNavRoutes();
+            headerService.login();
         }
 
         function getNavRoutes() {
@@ -45,5 +47,11 @@
                 size: 'lg'
             });
         }
+        
+        function logout(){
+            headerService.logout();
+        }
+        
+        
     }
 })();

@@ -5,9 +5,9 @@
             .module('app.login')
             .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['dataservice', '$state', '$timeout', '$uibModalInstance', 'cookiesService', 'logger'];
+    LoginController.$inject = ['dataservice', '$state', '$uibModalInstance', 'cookiesService', 'logger','headerService'];
 
-    function LoginController(dataservice, $state, $timeout, $uibModalInstance, cookiesService, logger) {
+    function LoginController(dataservice, $state, $uibModalInstance, cookiesService, logger,headerService) {
         var vm = this;
         vm.inputUser = '';
         vm.inputPass = '';
@@ -32,6 +32,9 @@
 
                     logger.success('Usuario autentificado');
                     cookiesService.SetCredentials(response.data);
+                    $uibModalInstance.dismiss('cancel');
+                    headerService.login();
+                    $state.go('home');
                 } else if (response.data === 'errorcredentials') {
 
                     logger.error('Error en las credenciales, el usuario o la contraseña no son correctos');
@@ -41,8 +44,6 @@
                 }
 
             });
-
-
         }
 
         function SubmitSignup() {

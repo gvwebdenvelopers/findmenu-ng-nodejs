@@ -18,11 +18,14 @@
     /* Maps variables */
     //Map centered on spain
     vm.map = { center: { latitude: 38.810543, longitude: -0.604137 }, zoom: 14 };
-    vm.icon = "../../images/icon.png";
+    vm.icon = {
+        url: "../../images/findmenuGreen.png",
+        scaledSize: new google.maps.Size(50, 50),
+    }
     vm.markers = [
 
     ];
-    vm.markersOptions = { animation: window.google.maps.Animation.DROP };
+    vm.markersOptions = { animation: window.google.maps.Animation.BOUNCE };
 
 
     /*para mostar menus en un radio 1 punto latitud = 111km  */
@@ -60,11 +63,6 @@
     }
 
     function getMarkers( menusData ){
-      /*return dataservice.getMenusMarkers().then(function(data) {
-        vm.menusMarkers = data;
-        console.log("En getMarkers " + vm.menusMarkers );
-        return vm.menusMarkers;
-      });*/
       console.log(vm.markers);
       for (var i=0; i<menusData.length; i++){
           vm.markers.push({
@@ -73,6 +71,7 @@
             longitude: menusData[i].longitud,
             title: menusData[i].nombre,
             icon: vm.icon
+
           });
           console.log("En getMarkers " + vm.markers[i]);
       }

@@ -2,11 +2,16 @@
       <div class="modal-header">
           <h3 class="modal-title">{{vm.title}}</h3>
       </div>
-      <section class="modal-body">
-        <div class="inline">
-          <h3>Nombre: {{menuDetail.nombre}}</h3>
-          <!--<label>{{$scope.menuDetail.poblacion}}</label>-->
-          <!--<label>Menú: {{vm.menuDetail.precio_menu }} €</label>-->
+      <section class="modal-body detailmenu" style="background-image:url('src/client/images/res02.jpg');">
+        <div class="inline" >
+          <address>
+            <h1 class="header-h">{{menuDetail.nombre}}</h1>
+            <br>
+            <h3>Dirección: <strong>{{menuDetail.direccion}}</strong></h3>
+            <br>
+            <h3>Puntuacion findmenu</h3>
+            {{menuDetail.valoracion}}
+          </address>
         </div>
       </section>
       <div class="modal-footer">

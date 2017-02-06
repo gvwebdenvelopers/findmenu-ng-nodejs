@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Sarina');
+
 /* ==========================================================================
    CSS general de la aplicacion "mobile first"
    ========================================================================== */
@@ -58,18 +60,25 @@
 /* ==========================================================================
    Css para el section
    ========================================================================== */
+  main{
+    background-color: #313b3d;
+    padding: 0.2em;
+  }
+  
   section{
+      display: flex;
       background-color: #313b3d;
-      padding: 0.2em;
-      justify-content: space-around;
+      padding: 0.5em;
   }
 /* ==========================================================================
    Css footer
    ========================================================================== */
    footer {
      flex: 2 1 auto;
+     align-self: flex-end;
      background-color: #dcdcdc;
      text-align: center;
+     max-height: 10%;
    }
   .footer {
       width: 100%;

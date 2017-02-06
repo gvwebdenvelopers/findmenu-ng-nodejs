@@ -12,6 +12,7 @@
           sendEmail: sendEmail,
           getMenus: getMenus,
           getMenu: getMenu,
+          getMenusMarkers: getMenusMarkers
           //getCurrentLocation: getCurrenLocation
       };
 
@@ -51,9 +52,43 @@
             .catch(fail);
 
           function success(response) {
-            console.log("getMenu success " + response.data);
+            //console.log("getMenu success " + response.data);
 
             return response.data;
+          }
+
+          function fail(e) {
+            console.log("getMenu fail");
+            return exception.catcher('XHR Failed for getMenu')(e);
+          }
+      }
+      /*Call /api/menuMarkers sending a menu id and get menu from DB*/
+      function getMenusMarkers(data) {
+          return $http.get('/api/menusMarkers', data)
+            .then(success)
+            .catch(fail);
+
+          function success(response) {
+            console.log("getMenuMarkers success " + response.data);
+            var markers = [];
+            console.log("markers" + response.data.length);
+            for (var i=0; i<response.data.length; i++){
+                console.log(response.data[i]);
+                var newLongitude = response.data[i].longitud;
+                var newLatitude = response.data[i].latitud;
+                var newTitle = response.data[i].nombre;
+                var newId = response.data[i].id;
+                markers.push({
+                  id: newId,
+                  latitude: newLatitude,
+                  longitude: newLongitude,
+                  title: newTitle,
+                  icon: "../../images/icon.png"
+                });
+                console.log("En getMarkers " + vm.markers[i]);
+            }
+            //console.log("En getMarkers " + vm.markers);
+            return markers;
           }
 
           function fail(e) {

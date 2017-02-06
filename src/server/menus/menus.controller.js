@@ -11,6 +11,17 @@ exports.getMenus = function(req, res) {
 	);
 }
 
+exports.getMenusMarkers = function(req, res) {
+	Menus.getMenus(
+		function(err, markers) {
+			if (err)
+  			res.send(err)
+      console.log("En server getMenusMarkers" + markers);
+			res.json(markers); // devuelve todos los menus en JSON
+		}
+	);
+}
+
 exports.getMenu = function(req, res) {
 	console.log("En server_getMenu" + req.param.menu_id);
 	Menus.getMenu( req.param.menu_id,

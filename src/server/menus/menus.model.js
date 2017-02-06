@@ -15,6 +15,18 @@ menusModel.getMenus = function (callback){
   }
 }
 
+menusModel.getMenusMarkers = function (callback){
+  if (mysql.connection) {
+      mysql.connection.query('SELECT id, latitud, longitud, nombre FROM restaurantes ORDER BY id', function(error, rows) {
+          if(error){
+              throw error;
+          }else{
+              callback(null, rows);
+          }
+      });
+  }
+}
+
 menusModel.getMenu = function(id,callback){
     console.log("En menu model: " + id);
     if (connection) {

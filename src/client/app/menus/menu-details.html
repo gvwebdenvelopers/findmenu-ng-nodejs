@@ -1,15 +1,15 @@
-<script type="text/ng-template" id="ModalMenuDetails">
+<div type="text/ng-template" id="ModalMenuDetails">
       <div class="modal-header">
           <h3 class="modal-title">{{vm.title}}</h3>
       </div>
       <section class="modal-body">
         <div class="inline">
-          <h3>{{vm.menuDetail.nombre}}</h3>
-          <label>{{vm.menuDetail.poblacion}}</label>
-          <label>Menú: {{vm.menuDetail.precio_menu }} €</label>
+          <h3>Nombre: {{menuDetail.nombre}}</h3>
+          <!--<label>{{$scope.menuDetail.poblacion}}</label>-->
+          <!--<label>Menú: {{vm.menuDetail.precio_menu }} €</label>-->
         </div>
       </section>
       <div class="modal-footer">
           <button class="btn" ng-click="vm.viewOnMap()">View on map</button>
       </div>
-</script>
+</div>

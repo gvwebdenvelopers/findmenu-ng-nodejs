@@ -5,16 +5,14 @@
             <div class="modal-header">
                 <h1><C>Iniciar sesión</C></h1>
             </div>    
+            
             <md-input-container class="md-block">
-                <label>Email</label>
-                <input required type="email"  name="inputEmail" ng-model="vm.inputEmail"
-                       minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/" />
-                <div ng-messages="login_form.inputEmail.$error" role="alert">
-                    <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                        Your email must be between 10 and 100 characters long and look like an e-mail address.
+                    <label>Nombre de usuario</label>
+                    <input required name="inputUser" ng-model="vm.inputUser">
+                    <div ng-messages="login_form.inputUser.$error">
+                        <div ng-message="required">This is required.</div>
                     </div>
-                </div>
-            </md-input-container>
+                </md-input-container>
 
             <md-input-container class="md-block">
                 <label>Password</label>

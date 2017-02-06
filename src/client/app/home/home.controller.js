@@ -14,7 +14,7 @@
     activate();
 
     function activate() {
-      logger.info('Activated Home View');
+      //logger.info('Activated Home View');
     }
   }
 })();

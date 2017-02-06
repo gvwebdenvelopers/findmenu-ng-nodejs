@@ -25,7 +25,7 @@ module.exports = function (passport) {
     // used to deserialize the user
     passport.deserializeUser(function (id, done) {
         console.log('uso deserialize');//no borrar
-        Mysql.getUser(function (error, rows) {
+        Mysql.getUser(id, function (error, rows) {
             done(error, rows[0]);
         });
     });
@@ -69,5 +69,31 @@ module.exports = function (passport) {
                                 });//fin de consulta
                             }//fin del else
                         });//fin de count
-                    }));//fin de local                 
+                    }));//fin de local   
+
+    passport.use(
+            'local-login',
+            new LocalStrategy({
+                // by default, local strategy uses username and password, we will override with email
+                usernameField: 'user',
+                passwordField: 'password',
+                passReqToCallback: true // allows us to pass back the entire request to the callback
+            },
+                    function (req, user, password, done) { 
+                        Mysql.getUser(user, function (error, rows) {
+                            if (!rows.length) {
+                                
+                                return done(null, false, 'nouser'); 
+                            }
+                            if (!bcrypt.compareSync(password, rows[0].password)) {
+                               
+                                return done(null, false, 'wrongpassword'); 
+                            } else {
+                             
+                                return done(null, rows[0]);
+                            }
+                        });
+                        
+                    })
+            );
 };

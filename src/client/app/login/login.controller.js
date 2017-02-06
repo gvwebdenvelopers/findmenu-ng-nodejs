@@ -5,15 +5,15 @@
             .module('app.login')
             .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['dataservice', '$state', '$timeout', '$uibModalInstance'];
+    LoginController.$inject = ['dataservice', '$state', '$timeout', '$uibModalInstance', 'cookiesService', 'logger'];
 
-    function LoginController(dataservice, $state, $timeout, $uibModalInstance) {
+    function LoginController(dataservice, $state, $timeout, $uibModalInstance, cookiesService, logger) {
         var vm = this;
-        vm.inputEmail = '';
+        vm.inputUser = '';
         vm.inputPass = '';
         vm.SubmitLogin = SubmitLogin;
         vm.SubmitSignup = SubmitSignup;
-        //vm.CloseModal = CloseModal;
+
 
         function CloseModal() {
             $uibModalInstance.dismiss('cancel');
@@ -21,13 +21,33 @@
 
         function SubmitLogin() {
             console.log('entro al login');
-            $uibModalInstance.dismiss('cancel');
+            var data = {
+                'user': vm.inputUser,
+                'password': vm.inputPass
+            };
+
+            var dataUserJSON = JSON.stringify(data);
+            dataservice.localSignin(dataUserJSON).then(function (response) {
+                if (response.data.user === vm.inputUser) {
+
+                    logger.success('Usuario autentificado');
+                    cookiesService.SetCredentials(response.data);
+                } else if (response.data === 'errorcredentials') {
+
+                    logger.error('Error en las credenciales, el usuario o la contraseña no son correctos');
+                } else {
+
+                    logger.error('Error en el server');
+                }
+
+            });
+
+
         }
 
         function SubmitSignup() {
-            console.log('entro al signup');
             $state.go('signup');
-             $uibModalInstance.dismiss('cancel');
+            $uibModalInstance.dismiss('cancel');
 
         }
     }

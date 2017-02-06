@@ -5,9 +5,9 @@
             .module('app.login')
             .controller('SignupController', SignupController);
 
-    SignupController.$inject = ['dataservice', '$state', '$timeout'];
+    SignupController.$inject = ['dataservice', '$state', '$timeout','logger'];
 
-    function SignupController(dataservice, $state, $timeout) {
+    function SignupController(dataservice, $state, $timeout,logger) {
         var vm = this;
         vm.title = 'Signup';
         vm.inputUser = '';
@@ -31,24 +31,26 @@
                 dataservice.signup(dataUserJSON).then(function (response) {
                     if (response.data === true) {
                         $timeout(function () {                           
-                            vm.resultMessageFail = 'Usuario introducido';
-                            //$state.go('home');
+                            //vm.resultMessageFail = 'Usuario introducido';
+                            logger.success('Usuario introducido');
+                            $state.go('home');
                             //CommonService.banner("El usuario se ha dado de alta
                             // correctamente, revisa su correo para activarlo", "");
 
-                        }, 2000);
+                        }, 4000);
                     } else {
                         // console.log(response);
                         if (response.data === 'name') {
-                            vm.resultMessageFail = 'Ya existe un usuario con ese nombre';                          
+                            //vm.resultMessageFail = 'Ya existe un usuario con ese nombre'; 
+                            logger.warning('Ya existe un usuario con ese nombre');
                             $timeout(function () {
                                 vm.resultMessageFail = '';
                             }, 3000);
 
                         } else if (response.data === 'err') {
                             //CommonService.banner("Error en el servidor", "Err");
-                            vm.resultMessageFail = 'Error en el server';
-                            console.log("fallo en labase de datos");
+                            //vm.resultMessageFail = 'Error en el server';
+                            logger.error('Error en el server');
                             $timeout(function () {
                                 vm.resultMessageFail = '';
                             }, 3000);

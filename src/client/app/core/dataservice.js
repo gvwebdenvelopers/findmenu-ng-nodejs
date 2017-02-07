@@ -11,9 +11,9 @@
       var service = {
           sendEmail: sendEmail,
           getMenus: getMenus,
-          getMenu: getMenu,
-          getMenusMarkers: getMenusMarkers
-          //getCurrentLocation: getCurrenLocation
+          //getMenu: getMenu,
+          //getMenusMarkers: getMenusMarkers,
+          getCurrentLocation: getCurrenLocation
       };
 
       return service;
@@ -45,7 +45,7 @@
             return exception.catcher('XHR Failed for getMenus')(e);
           }
       }
-      /*Call /api/menu sending a menu id and get menu from DB*/
+      /*Call /api/menu sending a menu id and get menu from DB
       function getMenu(data) {
           return $http.get('/api/menu', data)
             .then(success)
@@ -61,8 +61,9 @@
             console.log("getMenu fail");
             return exception.catcher('XHR Failed for getMenu')(e);
           }
-      }
+      }*/
       /*Call /api/menuMarkers sending a menu id and get menu from DB*/
+      /*
       function getMenusMarkers(data) {
           return $http.get('/api/menusMarkers', data)
             .then(success)
@@ -95,11 +96,11 @@
             console.log("getMenu fail");
             return exception.catcher('XHR Failed for getMenu')(e);
           }
-      }
-      /*
+      }*/
+
       function getCurrenLocation(){
           var deferred = $q.defer();
-          if(!window.navigator.geolocation){
+          if(!$window.navigator.geolocation){
             deferred.reject('Geolocation not supported');
           } else{
             $window.navigator.geolocation.getCurrentPosition(
@@ -112,6 +113,5 @@
           }
           return deferred.promise;
       }
-      */
   }
 })();

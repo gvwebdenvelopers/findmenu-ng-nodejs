@@ -11,10 +11,10 @@
     var vm = this;
     vm.title = 'Menus';
     /* Pagination funcionality */
-    $scope.filteredMenus = [];
-    $scope.menusPerPage = 3;
-    $scope.maxSize = 5;
-    $scope.currentPage = 1;
+    vm.filteredMenus = [];
+    vm.menusPerPage = 3;
+    vm.maxSize = 5;
+    vm.currentPage = 1;
     $scope.$watch('currentPage + numPerPage', update);
 
     /* Funcitions modal */
@@ -23,15 +23,14 @@
     $scope.menuDetail = [];
     vm.selectedMenu = "";
     /* Maps variables */
+
     //Map centered on spain
     vm.map = { center: { latitude: 38.810543, longitude: -0.604137 }, zoom: 14 };
     vm.icon = {
         url: "../../images/findmenuGreen.png",
         scaledSize: new google.maps.Size(50, 50),
     }
-    vm.markers = [
-
-    ];
+    vm.markers = [];
     vm.markersOptions = { animation: window.google.maps.Animation.BOUNCE };
 
 
@@ -39,7 +38,7 @@
     activate();
 
     function activate() {
-      var promises = [getMenus()];
+      var promises = [getMenus(), getCurrentLocation()];
       return $q.all(promises).then(function() {
             logger.info('Activated Menus View');
         });
@@ -51,18 +50,12 @@
       return dataservice.getMenus().then(function(data) {
         vm.menus = data;
         update();
-        getMarkers( $scope.filteredMenus );
+        getMarkers( vm.filteredMenus );
         return vm.menus;
       });
     }
 
     function getMenu(idMenu){
-      console.log( 'En get menu: ' + idMenu );
-      /*return dataservice.getMenu(idMenu).then(function(data) {
-        console.log( 'Data ' + data );
-        vm.menuDetail = data;
-        return vm.menuDetail;
-      });*/
       for( var i=0; i< vm.menus.length; i++){
         if( vm.menus[i].id == idMenu ){
           console.log(vm.menus[i]);
@@ -72,7 +65,36 @@
       return "Menu not found";
     }
 
+    function showModalDetails( idMenu ) {
+        //$scope.menuDetail = vm.menus[idMenu];
+        $scope.menuDetail = getMenu(idMenu);
+        console.log("En showModalDetails" + $scope.menuDetail.nombre);
+        var modalInstance = $uibModal.open({
+            animation: 'true',
+            scope: $scope,
+            size: 'lg',
+            templateUrl: 'app/menus/menu-details.html',
+
+        });
+    }
+
     /* maps functions */
+    function getCurrentLocation(){
+      return dataservice.getCurrentLocation().then( function( data ){
+        console.log(JSON.stringify(data));
+        vm.map = {
+            id:0,
+            center:{
+              latitude: data.coords.latitude,
+              longitude: data.coords.longitude
+            }
+        };
+        
+        console.log(JSON.stringify(vm.map));
+        return vm.map;
+      });
+    };
+
     function viewOnMap(){
       //console.log("View on map");
       $ubiModalInstance.dismiss("cancel");
@@ -95,37 +117,10 @@
       return vm.markers;
     }
 
-    function showModalDetails( idMenu ) {
-        //$scope.menuDetail = vm.menus[idMenu];
-        $scope.menuDetail = getMenu(idMenu);
-        console.log("En showModalDetails" + $scope.menuDetail.nombre);
-        var modalInstance = $uibModal.open({
-            animation: 'true',
-            scope: $scope,
-            size: 'lg',
-            templateUrl: 'app/menus/menu-details.html',
-
-        });
-    }
-
     function update() {
-        var begin = (($scope.currentPage - 1) * $scope.menusPerPage), end = begin + $scope.menusPerPage;
-        $scope.filteredMenus = vm.menus.slice(begin, end);
+        var begin = ((vm.currentPage - 1) * vm.menusPerPage), end = begin + vm.menusPerPage;
+        vm.filteredMenus = vm.menus.slice(begin, end);
     };
-    /*
-    function getCurrentLocation(){
-      return dataservice.getCurrentLocation().then( function( data ){
-        vm.currentMarker = {
-            id:0,
-            coords:{
-              latitude= data.coords.latitude,
-              longitude = data.coords.longitude            }
-            }
-        };
-         data;
-        return vm.currentMarker;
-      });
-    };
-    */
+
   }
 })();

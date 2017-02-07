@@ -9,7 +9,7 @@
 
     <article class="menus">
         <h2 class="header-h">Encuentra tu menu</h2>
-        <div class="list-menus" ng-repeat="menu in filteredMenus | filter:{nombre:filtro}" id="{{menu.id}}" style="background-image: url('src/client/images{{menu.foto_menu}}');">
+        <div class="list-menus" ng-repeat="menu in vm.filteredMenus | filter:{nombre:filtro}" id="{{menu.id}}" style="background-image: url('src/client/images{{menu.foto_menu}}');">
             <div ng-click="vm.showModalDetails( menu.id )">
                 <div class="detailmenu" ><a href='#/menus'>
                   <!-- <div class="inline"><img class="list" src="src/client/images{{menu.foto_menu}}" alt="Imagen de menu"/></div>-->
@@ -27,7 +27,7 @@
             </a>
         </div>
         <div id="pager">
-            <uib-pagination total-items="vm.menus.length" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
+            <uib-pagination total-items="vm.menus.length" ng-model="vm.currentPage" max-size="vm.maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
         </div>
     </article>
 

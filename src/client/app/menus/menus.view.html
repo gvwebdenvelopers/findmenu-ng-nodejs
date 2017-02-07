@@ -1,23 +1,34 @@
   <section id="menus">
+
     <article class="container_maps">
+        <label>Busca tu menú:</label><input type="text" class="filtrar" ng-model="filtro" />
         <ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom'>
           <ui-gmap-markers models="testMarkers" coords="'self'" icon="'icon'" options="vm.markersOptions"></ui-gmap-markers>
         </ui-gmap-google-map>
     </article>
 
     <article class="menus">
-        <div ng-repeat="menu in vm.menus " id="{{menu.id}}">
-            <div ng-click="vm.showModalDetails( $index )">
-                <div class="details" ><a href='#/menus'>
-                  <div class="inline"><img class="list" src="{{menu.foto_menu}}" alt="Imagen de menu"/></div>
-                  <div class="inline"><h3>{{menu.nombre}}</h3><div> {{menu.poblacion}}</div><div >Menú: {{menu.precio_menu }} €</div>  </div>
+        <h2 class="header-h">Encuentra tu menu</h2>
+        <div class="list-menus" ng-repeat="menu in filteredMenus | filter:{nombre:filtro}" id="{{menu.id}}" style="background-image: url('src/client/images{{menu.foto_menu}}');">
+            <div ng-click="vm.showModalDetails( menu.id )">
+                <div class="detailmenu" ><a href='#/menus'>
+                  <!-- <div class="inline"><img class="list" src="src/client/images{{menu.foto_menu}}" alt="Imagen de menu"/></div>-->
+                  <address>
+                    <strong>{{menu.nombre}}</strong>
+                    <br>
+                    Dirección:
+                    <strong>{{menu.direccion}}</strong>
+                    <br>
+                    Precio:
+                    <strong>{{menu.precio_menu }} €</strong>
+                  </address>
                   <div class="inline"><img class="stars" src="../../img/estrellas-{{menu.valoracion}}.png" alt="Imagen de valoracion"></div>
                 </a></div>
             </a>
         </div>
-        <!--<div id="pager">
-            <uib-pagination total-items="menu.length" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
-        </div>-->
+        <div id="pager">
+            <uib-pagination total-items="vm.menus.length" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
+        </div>
     </article>
 
   </section>

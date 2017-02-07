@@ -5,6 +5,26 @@
   /* ==========================================================================
      navegacion
      ========================================================================== */
+     .logo{
+         padding:1em;
+     }
+     nav{
+         /* contenido justificado ocupando huecos */
+         display: flex;
+         flex-flow: row wrap;
+         justify-content: space-around;
+     }
+     nav li{
+         display: inline-flex;
+         padding: 0.25em;
+     }
+     nav.menu ul li {
+         float: left;
+         font-size: 2em;
+         padding-top: 0.5em;
+     }
 
-
+     section{
+         display: flex;
+    }
 }

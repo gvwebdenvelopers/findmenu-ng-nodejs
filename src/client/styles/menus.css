@@ -10,7 +10,6 @@
 .detailmenu{
   background-clip: border-box;
   background-repeat: no-repeat;
-  min-height: 60%;
 }
 
 section #menu{
@@ -25,6 +24,28 @@ section #menu{
   order: 2;
   background-color: rgb(251,173,58);
   margin: 0.5em;
+}
+
+
+#menus address{
+    background-color: RGBA(0, 0, 0, 0.61);
+    color: #FFF;
+    align-self: flex-end;
+    padding: 1em;
+
+}
+
+#menus address strong {
+    color: #FFB03B;
+    padding: 10px 0px;
+    font-weight: bold;
+    font-size: 1.6em;
+}
+
+.list-menus{
+  border: 1px solid lightgrey;
+  margin: 0.3em;
+  background-color: RGBA(0, 0, 0, 0.61);
 }
 
 #ModalMenuDetails h2 {

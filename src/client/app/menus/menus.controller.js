@@ -10,7 +10,14 @@
   function MenusController($q, $location, dataservice, logger, $uibModal, $scope) {
     var vm = this;
     vm.title = 'Menus';
-    /* Funcitions public */
+    /* Pagination funcionality */
+    $scope.filteredMenus = [];
+    $scope.menusPerPage = 3;
+    $scope.maxSize = 5;
+    $scope.currentPage = 1;
+    $scope.$watch('currentPage + numPerPage', update);
+
+    /* Funcitions modal */
     vm.showModalDetails = showModalDetails;
     vm.menus = [];
     $scope.menuDetail = [];
@@ -38,10 +45,13 @@
         });
     }
 
+    /* menus functions */
+
     function getMenus(){
       return dataservice.getMenus().then(function(data) {
         vm.menus = data;
-        getMarkers( vm.menus );
+        update();
+        getMarkers( $scope.filteredMenus );
         return vm.menus;
       });
     }
@@ -62,8 +72,14 @@
       return "Menu not found";
     }
 
+    /* maps functions */
+    function viewOnMap(){
+      //console.log("View on map");
+      $ubiModalInstance.dismiss("cancel");
+    }
+
     function getMarkers( menusData ){
-      console.log(vm.markers);
+      //console.log(vm.markers);
       for (var i=0; i<menusData.length; i++){
           vm.markers.push({
             id: menusData[i].id,
@@ -73,14 +89,15 @@
             icon: vm.icon
 
           });
-          console.log("En getMarkers " + vm.markers[i]);
+          //console.log("En getMarkers " + vm.markers[i]);
       }
       $scope.testMarkers = vm.markers;
       return vm.markers;
     }
 
     function showModalDetails( idMenu ) {
-        $scope.menuDetail = vm.menus[idMenu];
+        //$scope.menuDetail = vm.menus[idMenu];
+        $scope.menuDetail = getMenu(idMenu);
         console.log("En showModalDetails" + $scope.menuDetail.nombre);
         var modalInstance = $uibModal.open({
             animation: 'true',
@@ -91,10 +108,10 @@
         });
     }
 
-    function viewOnMap(){
-      console.log("View on map");
-      $ubiModalInstance.dismiss("cancel");
-    }
+    function update() {
+        var begin = (($scope.currentPage - 1) * $scope.menusPerPage), end = begin + $scope.menusPerPage;
+        $scope.filteredMenus = vm.menus.slice(begin, end);
+    };
     /*
     function getCurrentLocation(){
       return dataservice.getCurrentLocation().then( function( data ){

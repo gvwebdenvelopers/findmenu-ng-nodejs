@@ -64,9 +64,9 @@
     background-color: #313b3d;
     padding: 0.2em;
   }
-  
+
   section{
-      display: flex;
+      display: block;
       background-color: #313b3d;
       padding: 0.5em;
   }

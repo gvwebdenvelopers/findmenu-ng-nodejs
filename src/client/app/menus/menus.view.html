@@ -26,9 +26,11 @@
                 </a></div>
             </a>
         </div>
-        <div id="pager">
-            <uib-pagination total-items="vm.menus.length" ng-model="vm.currentPage" max-size="vm.maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
-        </div>
+      </div>
+      <div id="pager">
+          <ul uib-pagination total-items="vm.menus.length" num-pages="vm.pagination.numPages" ng-model="vm.pagination.currentPage" class="pagination-sm" max-size="vm.pagination.maxSize" boundary-link-numbers="true" rotate="true" previous-text="&lsaquo;" next-text="&rsaquo;" ></ul>
+
+      </div>
     </article>
 
   </section>

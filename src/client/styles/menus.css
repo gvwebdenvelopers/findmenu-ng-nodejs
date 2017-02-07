@@ -48,6 +48,13 @@ section #menu{
   background-color: RGBA(0, 0, 0, 0.61);
 }
 
+#pager{
+  width: auto;
+  height: 50px;
+  text-align: center;
+}
+
+
 #ModalMenuDetails h2 {
     color: #37a000;
     font-size: 32px;

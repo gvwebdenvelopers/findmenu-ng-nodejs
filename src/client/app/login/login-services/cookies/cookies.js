@@ -2,13 +2,13 @@
     'use strict';
 
 angular
-        .module('blocks.cookiesService')
+        .module('cookiesService')
         .factory('cookiesService', cookies);
 
-cookies.$inject =['$cookies', 'localstorageService'];
+cookies.$inject =['$cookies'];
     
      /* @ngInject */
-    function cookies( $cookies,localstorageService ) {
+    function cookies( $cookies ) {
         return {
         SetCredentials : SetCredentials,
         ClearCredentials : ClearCredentials,
@@ -35,14 +35,14 @@ cookies.$inject =['$cookies', 'localstorageService'];
             
             //almacenarlos en localstorage
             user = GetCredentials_encode(users);
-            localstorageService.Create(users).then(function (response) {
+            /*localstorageService.Create(users).then(function (response) {
                 //console.log(response.success);
                 if (response.success) {
                     console.log(response.message);
                 } else {
                     console.log(response.message);
                 }
-            });
+            });*/
         }
 
         function ClearCredentials() {

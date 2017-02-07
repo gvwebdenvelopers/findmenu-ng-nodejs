@@ -4,8 +4,6 @@ var userModel = {};
 
 userModel.getUser = function (user, callback) {
     if (mysql.connection) {
-        //var sql = 'SELECT * FROM users WHERE id = ' + id;
-        //'SELECT * FROM users WHERE id =' + id, function (err, rows)
         mysql.connection.query('SELECT * FROM users WHERE user like "' + user + '"',
         function (error, row) {
             if (error) {

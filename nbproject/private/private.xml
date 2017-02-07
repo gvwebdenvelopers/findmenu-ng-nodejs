@@ -2,6 +2,19 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/home/jorge/Proyectos/findmenu-ng-nodejs/src/server/users/users.controller.js</file>
+            <file>file:/home/jorge/Proyectos/findmenu-ng-nodejs/src/client/app/core/dataservice.js</file>
+            <file>file:/home/jorge/Proyectos/findmenu-ng-nodejs/src/server/users/users.model.js</file>
+            <file>file:/home/jorge/Proyectos/findmenu-ng-nodejs/src/client/app/blocks/headerservice/header.service.js</file>
+            <file>file:/home/jorge/Proyectos/findmenu-ng-nodejs/src/server/config.db.js</file>
+            <file>file:/home/jorge/Proyectos/findmenu-ng-nodejs/src/client/app/blocks/cookies/cookies.js</file>
+            <file>file:/home/jorge/Proyectos/findmenu-ng-nodejs/src/client/app/login/signup.controller.js</file>
+            <file>file:/home/jorge/Proyectos/findmenu-ng-nodejs/src/client/app/layout/menu.view.html</file>
+            <file>file:/home/jorge/Proyectos/findmenu-ng-nodejs/src/server/config/passport.js</file>
+            <file>file:/home/jorge/Proyectos/findmenu-ng-nodejs/src/server/users/users.router.js</file>
+            <file>file:/home/jorge/Proyectos/findmenu-ng-nodejs/src/client/app/login/login.controller.js</file>
+            <file>file:/home/jorge/Proyectos/findmenu-ng-nodejs/src/server/app.js</file>
+        </group>
     </open-files>
 </project-private>

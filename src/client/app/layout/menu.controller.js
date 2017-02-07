@@ -5,19 +5,20 @@
             .module('app.layout')
             .controller('MenuController', MenuController);
 
-    MenuController.$inject = ['$state', 'routerHelper', '$uibModal','headerService'];
+    MenuController.$inject = ['$state', 'routerHelper', '$uibModal', 'headerService'];
     /* @ngInject */
-    function MenuController($state, routerHelper, $uibModal,headerService) {
+    function MenuController($state, routerHelper, $uibModal, headerService) {
         var vm = this;
         var states = routerHelper.getStates();
         vm.isCurrent = isCurrent;
         vm.showModalSignup = showModalSignup;
-        vm.logout= logout;
+        vm.logout = logout;
 
         activate();
 
         function activate() {
             getNavRoutes();
+            //La dependencia headerService debe estar en el core para funcionar
             headerService.login();
         }
 
@@ -37,21 +38,16 @@
             return $state.current.title.substr(0, menuName.length) === menuName ? 'current' : '';
         }
 
+        //Funciones que dependen de header Service y si no esta no funcionaran
         function showModalSignup() {
+            headerService.openLoginModal();
 
-            var modalInstance = $uibModal.open({
-                animation: 'true',
-                templateUrl: 'app/login/login.html',
-                controller: 'LoginController',
-                controllerAs: 'vm',
-                size: 'lg'
-            });
         }
-        
-        function logout(){
+
+        function logout() {
             headerService.logout();
         }
-        
-        
+
+
     }
 })();

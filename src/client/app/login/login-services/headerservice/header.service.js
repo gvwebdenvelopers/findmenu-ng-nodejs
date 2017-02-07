@@ -2,16 +2,17 @@
     'use strict';
 
     angular
-            .module('blocks.headerService')
+            .module('headerService')
             .factory('headerService', header);
 
-    header.$inject = ['cookiesService', '$rootScope', '$state'];
+    header.$inject = ['cookiesService', '$rootScope', '$state', '$uibModal'];
 
     /* @ngInject */
-    function header(cookiesService, $rootScope, $state) {
+    function header(cookiesService, $rootScope, $state, $uibModal) {
         return {
             login: login,
-            logout: logout
+            logout: logout,
+            openLoginModal: openLoginModal
         };
 
         function login() {
@@ -29,11 +30,11 @@
                 //Esta funcionalidad no funciona por ahora ya que no reconoce si el nombre esta vacio.
 
                 /*if (user.user.length === 1) {
-                   
-                    $rootScope.profile = user.user;
-                } else {
-                    $rootScope.profile = user.name;
-                }*/
+                 
+                 $rootScope.profile = user.user;
+                 } else {
+                 $rootScope.profile = user.name;
+                 }*/
 
                 //redirigimos al home si nos logueamos
                 $state.go('home');
@@ -44,7 +45,7 @@
         }
 
         function logout() {
-            
+
             cookiesService.ClearCredentials();
 
             //habilitamos o deshabilitamos enlaces
@@ -55,6 +56,18 @@
             $rootScope.logoutV = false;
             //redirigimos al home
             $state.go('home');
+        }
+
+        function openLoginModal() {
+
+            var modalInstance = $uibModal.open({
+                animation: 'true',
+                templateUrl: 'app/login/login.html',
+                controller: 'LoginController',
+                controllerAs: 'vm',
+                size: 'lg'
+            });
+
         }
 
     }

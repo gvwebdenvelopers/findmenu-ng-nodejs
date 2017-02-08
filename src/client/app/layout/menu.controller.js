@@ -40,6 +40,7 @@
 
         //Funciones que dependen de header Service y si no esta no funcionaran
         function showModalSignup() {
+          
             headerService.openLoginModal();
 
         }

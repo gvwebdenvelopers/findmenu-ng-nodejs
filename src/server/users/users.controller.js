@@ -31,6 +31,21 @@ exports.localSignin = function (req, res, next) {
 
 };
 
+exports.facebook = function (req, res, next) {
+
+    passport.authenticate('facebook', function (err, user, info) {
+      
+        if (err) {
+            return res.send('err');
+        }
+        if (!user) {
+            return res.send('errorcredentials');
+        }
+        return res.send(user);
+    })(req, res, next);
+
+};
+
 
 
 

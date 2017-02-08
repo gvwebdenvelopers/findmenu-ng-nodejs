@@ -16,7 +16,7 @@
       state: 'signup',
       config: {
         url: '/signup',
-        templateUrl: 'app/login/signup.view.html',
+        templateUrl: 'app/login/signup.html',
         controller: 'SignupController',
         controllerAs: 'vm',
         title: 'Signup'

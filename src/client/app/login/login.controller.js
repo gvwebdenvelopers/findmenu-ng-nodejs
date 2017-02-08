@@ -13,6 +13,9 @@
         vm.inputPass = '';
         vm.SubmitLogin = SubmitLogin;
         vm.SubmitSignup = SubmitSignup;
+        vm.SigninFacebook=SigninFacebook;
+        vm.SigninTwitter=SigninTwitter;
+        vm.SigninGoogle=SigninGoogle;
 
 
         function CloseModal() {
@@ -50,6 +53,19 @@
             $state.go('signup');
             $uibModalInstance.dismiss('cancel');
 
+        }
+        
+        function SigninFacebook(){
+            
+            dataservice.facebook().then(function (response) {
+                
+            });
+        }
+        function SigninTwitter(){
+           
+        }
+        function SigninGoogle(){
+            
         }
     }
 })();

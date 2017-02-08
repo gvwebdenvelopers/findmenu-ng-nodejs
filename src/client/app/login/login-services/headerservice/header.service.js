@@ -26,15 +26,7 @@
                 $rootScope.profileV = true;
                 $rootScope.logoutV = true;
                 $rootScope.profile = user.user;
-                //El usuario que se registra por email no suele tener nombre, asi que mostramos su correo
-                //Esta funcionalidad no funciona por ahora ya que no reconoce si el nombre esta vacio.
-
-                /*if (user.user.length === 1) {
-                 
-                 $rootScope.profile = user.user;
-                 } else {
-                 $rootScope.profile = user.name;
-                 }*/
+                
 
                 //redirigimos al home si nos logueamos
                 $state.go('home');
@@ -68,7 +60,7 @@
                 size: 'lg'
             });
 
-        }
+        };
 
     }
 

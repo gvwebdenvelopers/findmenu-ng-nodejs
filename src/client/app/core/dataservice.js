@@ -5,14 +5,15 @@
             .module('app.core')
             .factory('dataservice', dataservice);
 
-    dataservice.$inject = ['$http', '$q', 'exception', 'logger'];
+    dataservice.$inject = ['$http', '$q', 'exception'];
     /* @ngInject */
-    function dataservice($http, $q, exception, logger) {
+    function dataservice($http, $q, exception) {
         var service = {
             sendEmail: sendEmail,
             getMenus: getMenus,
             signup: signup,
-            localSignin:localSignin 
+            localSignin:localSignin ,
+            facebook:facebook
         };
 
         return service;
@@ -62,12 +63,27 @@
             return $http.post('/api/localSignin',data)
                     .then(success)
                     .catch(fail);
-            //si devuelve promesa ejecuta success
+            
+            function success(response) {
+                
+                return response;
+            }
+           
+            function fail() {
+                return false;
+            }
+        }
+        
+        function facebook() {
+            return $http.get('/auth/facebook')
+                    .then(success)
+                    .catch(fail);
+           
             function success(response) {
                 console.log(response);
                 return response;
             }
-            //si no ejecuta fail
+           
             function fail() {
                 return false;
             }

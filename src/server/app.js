@@ -28,6 +28,9 @@ require('./contact/contact.router.js')(app);
 require('./menus/menus.router.js')(app);
 require('./users/users.router.js')(app);
 
+  
+  
+  
 //En una aplicación basada en Connect o Express, se requiere el middleware passport.
 //initialize () para inicializar Passport. Si su aplicación utiliza sesiones
 //de inicio de sesión persistentes, se debe utilizar el middleware passport.session ().
@@ -37,6 +40,10 @@ require('./users/users.router.js')(app);
 app.use(session({secret: 'ilovescotchscotchyscotchscotch'})); // session secret
 app.use(passport.initialize());
 app.use(passport.session());
+
+
+
+
 
 console.log('About to crank up node');
 console.log('PORT=' + port);

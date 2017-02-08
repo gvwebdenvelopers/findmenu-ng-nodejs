@@ -22,15 +22,8 @@ app.use(logger('dev'));
 app.use(cookieParser());//esto se debe poner sino da fallo conect.sid
 
 require('./config/passport.js')(passport);
-
-//importo routers de cada modulo
-require('./contact/contact.router.js')(app);
-require('./menus/menus.router.js')(app);
-require('./users/users.router.js')(app);
-
-  
-  
-  
+ require('./config/routes').init(app); 
+   
 //En una aplicación basada en Connect o Express, se requiere el middleware passport.
 //initialize () para inicializar Passport. Si su aplicación utiliza sesiones
 //de inicio de sesión persistentes, se debe utilizar el middleware passport.session ().

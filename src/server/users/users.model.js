@@ -1,4 +1,4 @@
-var mysql = require('../config.db');
+var mysql = require('../config/config.db');
 
 var userModel = {};
 

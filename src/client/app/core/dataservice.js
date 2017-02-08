@@ -5,9 +5,9 @@
             .module('app.core')
             .factory('dataservice', dataservice);
 
-    dataservice.$inject = ['$http', '$q', 'exception'];
+    dataservice.$inject = ['$http', '$q', 'exception', '$window'];
     /* @ngInject */
-    function dataservice($http, $q, exception) {
+    function dataservice($http, $q, exception, $window) {
         var service = {
             sendEmail: sendEmail,
             getMenus: getMenus,

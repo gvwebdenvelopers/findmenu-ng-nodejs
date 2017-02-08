@@ -41,7 +41,8 @@ exports.facebook = function (req, res, next) {
         if (!user) {
             return res.send('errorcredentials');
         }
-        return res.send(user);
+        //return res.send(user);
+        res.redirect('/');
     })(req, res, next);
 
 };

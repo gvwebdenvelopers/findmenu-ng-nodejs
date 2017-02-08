@@ -1,5 +1,5 @@
 <section class="menu-header">
-  <h2>Menus <span>a buen precio </span>cerca de ti</h2>
+  <h2>Menús <span>a buen precio </span>cerca de ti</h2>
 </section>
 <section id="menus">
 
@@ -34,11 +34,16 @@
           <!--<md-icon md-svg-src="img/icons/ic_card_giftcard_24px.svg"></md-icon>-->
           <input ng-model="menuPrice" type="number" step="0.50">
 
-          <div class="hint" >Precio máximo</div>
+          <span class="hint">Precio máximo</span>
         </md-input-container>
       </div>
       <ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom'>
-        <ui-gmap-markers models="testMarkers" coords="'self'" icon="'icon'" options="vm.markersOptions"></ui-gmap-markers>
+        <ui-gmap-markers models="vm.markers" coords="'self'" icon="'icon'" options="vm.markersOptions" events="vm.map.markersEvents">
+        </ui-gmap-markers>
+        <ui-gmap-window show="vm.map.windows.show" coords= "vm.map.windows.model">
+            <div>{{vm.infoWindow.nombre}}</div>
+        </ui-gmap-window>
+
       </ui-gmap-google-map>
   </article>
 

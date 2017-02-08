@@ -39,7 +39,27 @@
       /* Maps variables */
 
       //Map centered on IES l'estació
-      vm.map = { center: { latitude: 38.810543, longitude: -0.604137 }, zoom: 14 };
+      vm.map = {
+        center: {
+          latitude: 38.810543,
+          longitude: -0.604137
+        },
+        zoom: 14,
+        windows: {
+            model: {},
+            show: false,
+            options:{
+              pixelOffset: {width:-1,height:-20}
+            }
+        },
+        markersEvents: {
+            click: function(marker, eventName, model, args) {
+              vm.map.windows.model = model;
+              vm.map.windows.show = true;
+              vm.infoWindow = getMenu( model.id );
+            },
+        }
+      };
       vm.icon = {
         url: "../../images/findmenuGreen.png",
         scaledSize: new google.maps.Size(50, 50),
@@ -47,8 +67,6 @@
       vm.markers = [];
       vm.markersOptions = { animation: window.google.maps.Animation.BOUNCE };
 
-
-      /*para mostar menus en un radio 1 punto latitud = 111km  */
       activate();
 
       function activate() {
@@ -98,13 +116,8 @@
       function getCurrentLocation(){
           return dataservice.getCurrentLocation().then( function( data ){
             //console.log(JSON.stringify(data));
-            vm.map = {
-                id:0,
-                center:{
-                  latitude: data.coords.latitude,
-                  longitude: data.coords.longitude
-                }
-            };
+            vm.map.center.latitude= data.coords.latitude;
+            vm.map.center.longitude= data.coords.longitude;
             return vm.map;
           });
       };
@@ -133,9 +146,7 @@
                 title: menusData[i].nombre,
                 icon: vm.icon
               });
-              //console.log("En getMarkers " + vm.markers[i]);
           }
-          $scope.testMarkers = vm.markers;
           return vm.markers;
       }
 
@@ -150,9 +161,14 @@
       };*/
 
       function advancedSearch(){
+          /*para mostar menus en un radio
+          1 punto latitud = 111km
+          0,1 punto latitud = 11,1km
+          0,01  punto latitud = 1,11km*/
           vm.searchedMenus=[];
           if( $scope.searchRadius){
             console.log("En busqueda avanzada / searchRadius :" + $scope.searchRadius);
+            
           }
           else if( $scope.menuPrice ){
             console.log("En busqueda avanzada / menuPrice :" + $scope.searchRadius);

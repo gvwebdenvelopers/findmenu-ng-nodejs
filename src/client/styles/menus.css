@@ -1,10 +1,32 @@
+
+
 .angular-google-map-container {
-    height: 400px;
+  height: 400px;
+}
+
+.menu-header{
+  font-family: 'Satisfy', sans-serif;
+  font-size: 3em;
+  color: #37a000;
+
+  background-color: #2E2E2E;
+  border:solid 1px rgba(144, 144, 144, 0.25);
+  border-radius: 5px;
+  margin: 0.2em;
+
+}
+
+.menu-header h2{
+  text-align: center !important;
+  width: 100%;
+}
+h2 span{
+  color: #FFB03B;
 }
 
 .container_maps{
-    height: 400px;
-    width: 100%;
+  height: 400px;
+  width: 100%;
 }
 
 .detailmenu{
@@ -23,7 +45,6 @@ section #menu{
 #menus .menus{
   order: 2;
   background-color: rgb(251,173,58);
-  margin: 0.5em;
 }
 
 
@@ -35,6 +56,10 @@ section #menu{
 
 }
 
+#menus address label{
+  display: block !important;
+}
+
 #menus address strong {
     color: #FFB03B;
     padding: 10px 0px;
@@ -42,16 +67,58 @@ section #menu{
     font-size: 1.6em;
 }
 
-.list-menus{
-  border: 1px solid lightgrey;
-  margin: 0.3em;
-  background-color: RGBA(0, 0, 0, 0.61);
+ol {
+    /*border: 1px solid lightgrey;*/
+    background-color: RGBA(0, 0, 0, 0.61);
+
+    height: 500px;
+    width: 100%;
+    border: 2px inset #555;
+
+    /* flexbox setup */
+    display: -webkit-flex;
+    -webkit-flex-direction: row;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+
+ol > li{
+
+  height: 22%;
+
+  width: 100%;
+  -webkit-transition: width 1.7s ease-out;
+  transition: width 1.7s ease-out;
+}
+
+ol > li:hover{
+    height: 40%;
+    background-color: RGBA(255, 176, 59, 0.61);
+}
+
+#filters{
+    display: flex;
+    flex-direction: row;
+    background-color: #FFF;
+    margin-bottom: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+    width: 100%;
+}
+
+.select-ng{
+    background-color: #fff;
+    border: none;
+}
+
+#filters input{
+    border: 1px solid transparent !important;
 }
 
 #pager{
-  width: auto;
-  height: 50px;
-  text-align: center;
+    width: auto;
+    height: 50px;
+    text-align: center;
 }
 
 
@@ -81,15 +148,14 @@ section #menu{
     display: flex;
   }
 
-  #menus .container_maps{
-    order: 1;
+  #menus .container-maps{
     width: 55%;
-    margin: 1em;
+    margin-left: 1em;
   }
 
   #menus .menus{
-    order: 2;
-    margin: 1em;
+    padding: 1em;
+    margin-left: 1em;
     width: 40%;
   }
 }

@@ -43,7 +43,8 @@ CREATE TABLE `restaurantes` (
   `foto_menu_almuerzo` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
   `foto_menu_noche` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
   /*'horario' varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-    'descripcion' varchar(50) COLLATE utf8_spanish_ci NOT NULL,*/
+    'descripcion' varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+    'telefono' varchar(50) COLLATE utf8_spanish_ci NOT NULL,*/
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;

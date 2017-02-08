@@ -1,36 +1,68 @@
-  <section id="menus">
+<section class="menu-header">
+  <h2>Menus <span>a buen precio </span>cerca de ti</h2>
+</section>
+<section id="menus">
 
-    <article class="container_maps">
-        <label>Busca tu menú:</label><input type="text" class="filtrar" ng-model="filtro" />
-        <ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom'>
-          <ui-gmap-markers models="testMarkers" coords="'self'" icon="'icon'" options="vm.markersOptions"></ui-gmap-markers>
-        </ui-gmap-google-map>
-    </article>
+  <article class="container-maps">
 
-    <article class="menus">
-        <h2 class="header-h">Encuentra tu menu</h2>
-        <div class="list-menus" ng-repeat="menu in vm.filteredMenus | filter:{nombre:filtro}" id="{{menu.id}}" style="background-image: url('src/client/images{{menu.foto_menu}}');">
-            <div ng-click="vm.showModalDetails( menu.id )">
-                <div class="detailmenu" ><a href='#/menus'>
-                  <!-- <div class="inline"><img class="list" src="src/client/images{{menu.foto_menu}}" alt="Imagen de menu"/></div>-->
-                  <address>
-                    <strong>{{menu.nombre}}</strong>
-                    <br>
-                    Dirección:
-                    <strong>{{menu.direccion}}</strong>
-                    <br>
-                    Precio:
-                    <strong>{{menu.precio_menu }} €</strong>
-                  </address>
-                  <div class="inline"><img class="stars" src="../../img/estrellas-{{menu.valoracion}}.png" alt="Imagen de valoracion"></div>
-                </a></div>
-            </a>
-        </div>
+      <h2 class="header-h"><span>Algo más concreto<span></h2>
+
+      <div id="filters">
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>El bar se llama...</label>
+          <input md-maxlength="30" name="name" ng-model="filtro" />
+
+          <div class="hint" >Introduzca el nombre del bar para buscar</div>
+          <!--ng-if="showHints" estaba arriba, mostrar este mensaje u otro-->
+          <!--<div ng-messages="userForm.name.$error" ng-if="!showHints">
+            <div ng-message="md-maxlength">The name has to be less than 30 characters long.</div>
+          </div>-->
+        </md-input-container>
+
+        <md-input-container class="select-ng">
+           <label>Distancia:</label>
+           <md-select ng-model="searchRadius">
+             <md-option><em>None</em></md-option>
+             <md-option ng-repeat="distance in vm.radiusDistance" ng-value="distance.km" ng-disabled="$index === 1">
+               {{distance.km}} Km
+             </md-option>
+           </md-select>
+         </md-input-container>
+         <md-input-container class="md-icon-float md-icon-right md-block">
+          <label>Precio €</label>
+
+          <!--<md-icon md-svg-src="img/icons/ic_card_giftcard_24px.svg"></md-icon>-->
+          <input ng-model="menuPrice" type="number" step="0.50">
+
+          <div class="hint" >Precio máximo</div>
+        </md-input-container>
       </div>
-      <div id="pager">
-          <ul uib-pagination total-items="vm.menus.length" num-pages="vm.pagination.numPages" ng-model="vm.pagination.currentPage" class="pagination-sm" max-size="vm.pagination.maxSize" boundary-link-numbers="true" rotate="true" previous-text="&lsaquo;" next-text="&rsaquo;" ></ul>
+      <ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom'>
+        <ui-gmap-markers models="testMarkers" coords="'self'" icon="'icon'" options="vm.markersOptions"></ui-gmap-markers>
+      </ui-gmap-google-map>
+  </article>
 
-      </div>
-    </article>
+  <article class="menus">
+      <h3 class="header-h">Encuentra tu menú</h3>
+      <ol>
+      <li ng-repeat="menu in vm.searchedMenus | filter:{nombre:filtro}" id="{{menu.id}}"
+          style="background-image: url('src/client/images{{menu.foto_menu}}');">
+          <div class="detailmenu" >
+              <address>
+                <label><strong>{{menu.nombre}}</strong></label>
+                <label>Precio: <strong>{{menu.precio_menu }} €</strong></label>
+                <button class="btn btn-imfo btn-read-more" ng-click="vm.showModalDetails( menu.id )">Ver más</button>
+              </address>
+              <div class="inline">
+                <img class="stars" src="../../img/estrellas-{{menu.valoracion}}.png" alt="Imagen de valoracion">
+              </div>
+          </div>
+      </li>
+    </ol>
+    <!--<div id="pager">
+        <ul uib-pagination total-items="vm.menus.length" num-pages="vm.pagination.numPages" ng-model="currentPage" class="pagination-sm" max-size="vm.pagination.maxSize" boundary-link-numbers="true" rotate="true" previous-text="&lsaquo;" next-text="&rsaquo;" ></ul>
 
-  </section>
+    </div>-->
+  </article>
+
+</section>

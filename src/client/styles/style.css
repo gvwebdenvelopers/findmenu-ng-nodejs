@@ -90,7 +90,7 @@ table {
     right: 0;
 		background-color: #fff;
     overflow-x: hidden;
-    
+
     transition: 0.5s;
 	  -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 	  -moz-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
@@ -188,9 +188,7 @@ li.menu_logo:hover {
 
 .header-h {
     color: #37a000;
-    font-size: 46px;
-    font-family: 'Satisfy', sans-serif;
-    font-weight: 300;
+    font-size: 2em;
 }
 .header-p {
     color: #9699a6;

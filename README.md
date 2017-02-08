@@ -43,3 +43,9 @@ OTROS
 .tmp --
 sendgrid.env --
 config.db.js --
+
+#gmaps:
+Comprobar que las API google que quiero usar estan habilitadas
+Misrar si en el enlace script se puede especificar la version
+Plugin jquery para coger geolocalizzacion generica (HTML5 navigator)
+directions, distancematrix

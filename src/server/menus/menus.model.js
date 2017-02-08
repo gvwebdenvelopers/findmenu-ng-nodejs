@@ -9,7 +9,18 @@ menusModel.getMenus = function (callback){
           if(error){
               throw error;
           }else{
-            console.log(rows);
+              callback(null, rows);
+          }
+      });
+  }
+}
+
+menusModel.getMenusMarkers = function (callback){
+  if (mysql.connection) {
+      mysql.connection.query('SELECT id, latitud, longitud, nombre FROM restaurantes ORDER BY id', function(error, rows) {
+          if(error){
+              throw error;
+          }else{
               callback(null, rows);
           }
       });
@@ -23,6 +34,7 @@ menusModel.getMenu = function(id,callback){
             if(error){
                 throw error;
             }else{
+                console.log("En server: row = " + row);
                 callback(null, row);
             }
         });

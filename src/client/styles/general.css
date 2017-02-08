@@ -1,88 +1,107 @@
+@import url('https://fonts.googleapis.com/css?family=Sarina');
+@import url('https://fonts.googleapis.com/css?family=Satisfy');
+/* ==========================================================================
+   CSS general de la aplicacion "mobile first"
+   ========================================================================== */
+   html,
+   body {
+     display: flex;
+     flex-direction: column;
+     height: 100%;
+   }
 
+/* ==========================================================================
+   Css para la barra de navegación principal
+   ========================================================================== */
+   header {
+      flex: 0 0 auto;
+      background-color: #dcdcdc;
+      padding-top: 0.4em;
+    }
 
-/*Css para la barra de navegación principal*/
+    nav {
+      flex-direction: column;
+    }
 
-.logo{
-    padding:10px;
-}
+    nav.menu {
+        background-color: #313b3d;
+        border-color: transparent;
+        width: 100%;
+        float: left; /* Desplazamos el nav hacia la izquierda */
+    }
 
-nav.menu {
-     background-color: #313b3d;
-    border-color: transparent;
-    width: 100%;
-   
-    float: left; /* Desplazamos el nav hacia la izquierda */
-    
-}
+    nav.menu ul {
+        list-style: none;
+        -webkit-margin-before: 0em;
+        -webkit-margin-after: 0em;
+        overflow: hidden; /* Limpiamos errores de float */
+    }
 
-nav.menu ul {
-    list-style: none;
-    overflow: hidden; /* Limpiamos errores de float */
-}
+    nav.menu ul li {
+        float: left;
+        font-size: 2em;
+        padding-right: 0.4em;
+    }
 
-nav.menu ul li.findmenu {
-    float: left;
-    font-size: 30px;
-    padding:5px;
-    padding-top: 0px;
+    nav.menu ul li a {
+        display: block; /* Convertimos los elementos a en elementos bloque para manipular el padding */
+        color: #FFB03B;
+        margin-left: 0.2em;
+    }
 
-}
+    nav.menu ul li a:hover{
+        text-decoration:none;
+        color: #37a000;
+    }
 
-nav.menu ul li.findmenu a {
-    display: block; /* Convertimos los elementos a en elementos bloque para manipular el padding */
-    padding: 5px;
-    color: #FFB03B;
-    text-decoration:none; 
-
-}
-
-nav.menu ul li.findmenu a:hover{
-
-    text-decoration:none;
-    color: #37a000;
-}
-
-li.active a{
-    color: #37a000 !important;
-}
-
-a.profile{
-    color: #37a000 !important;
-}
-
-/*Css footer*/
-
-.footer {
-    width: 100%;
+    li.active a{
+        color: #37a000 !important;
+    }
+/* ==========================================================================
+   Css para el section
+   ========================================================================== */
+  main{
     background-color: #313b3d;
-    position: relative;
-    z-index: 1;
-}
-.footer .footer-top {
-    padding-top: 4rem;
-    padding-bottom: 5rem;
-}
-.footer .widget-title, .footer .widget-title a {
-    font-size: 1.4rem;
-    font-weight: 700;
-    letter-spacing: 0.2rem;
-    color: #999;
-}
-.footer .widget-title{
-    padding-bottom: 20px;
-    font-family: 'Satisfy', sans-serif;
-    font-size: 44px;
-    color: #37a000;
-}
-.footer .widget, .footer address {
-    color: #999;
-    text-transform: none;
-    font-style: normal;
-    padding-bottom: 15px;
-}
-.footer .navigation, .footer .social-list {
-    float: none;
-    margin-bottom: 20px;
-}
+    padding: 0.2em;
+  }
 
+  section{
+      display: block;
+      background-color: #313b3d;
+      padding: 0.5em;
+  }
+/* ==========================================================================
+   Css footer
+   ========================================================================== */
+   footer {
+     flex: 2 1 auto;
+     align-self: flex-end;
+     background-color: #dcdcdc;
+     text-align: center;
+     max-height: 10%;
+   }
+  .footer {
+      width: 100%;
+      background-color: #313b3d;
 
+  }
+  .footer .widget-title, .footer .widget-title a {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.2rem;
+      color: #999;
+  }
+  .footer .widget-title{
+      font-family: 'Satisfy', sans-serif;
+      font-size: 1em;
+      color: #37a000;
+  }
+
+  .footer .widget, .footer address {
+      color: #999;
+      text-transform: none;
+      font-style: normal;
+  }
+  .footer .navigation, .footer .social-list {
+      float: none;
+  }

@@ -24,12 +24,6 @@
 }
 
 /*Contenido del modal emergente*/
-.modal-content{
-    width:50%;
-    margin-left:25%;
-    margin-top:10%;
-}
-
 .contact{
     background: url(../images/slide1.jpg) ;
     margin-left:10%;

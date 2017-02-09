@@ -21,7 +21,7 @@ exports.getMenusMarkers = function(req, res) {
 			res.json(markers); // devuelve todos los menus en JSON
 		}
 	);
-}
+};
 
 exports.getMenu = function(req, res) {
 	console.log("En server_getMenu" + req.param.menu_id);

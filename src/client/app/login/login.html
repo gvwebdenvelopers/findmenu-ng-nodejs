@@ -30,9 +30,7 @@
             <p>¿Eres un nuevo cliente?</p>
             <hr class="login">
             <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="vm.SubmitSignup()">Crea tu cuenta Findmenu</button>
-            <!--<a class="btn btn-block btn-social btn-facebook" ng-click="vm.callFacebookOauth()"><span class="fa fa-twitter"></span> Sign in with Facebook</a>-->
-            <a class="btn btn-block btn-social btn-facebook" ng-href="http://findmenu.nod:3000/auth/facebook"><span class="fa fa-twitter"></span> Sign in with Facebook</a>
-            <a class="btn btn-block btn-social btn-facebook" ng-click="vm.SigninFacebook()"><span class="fa fa-twitter"></span> Sign in with Facebook</a>
+            <a class="btn btn-block btn-social btn-facebook" target="_self" href="/auth/facebook"><span class="fa fa-twitter"></span> Sign in with Facebook</a>
             <a class="btn btn-block btn-social btn-twitter" ng-click="vm.SigninTwitter()"><span class="fa fa-twitter"></span> Sign in with Twitter</a>
             <a class="btn btn-block btn-social btn-odnoklassniki" ng-click="vm.SigninGoogle()"><span class="fa fa-twitter"></span> Sign in with Google</a>
         

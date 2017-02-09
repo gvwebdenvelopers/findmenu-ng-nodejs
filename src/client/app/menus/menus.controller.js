@@ -72,7 +72,7 @@
       function activate() {
           var promises = [getMenus(), getCurrentLocation()];
           return $q.all(promises).then(function() {
-                logger.info('Activated Menus View');
+                //logger.info('Activated Menus View');
             });
       }
 

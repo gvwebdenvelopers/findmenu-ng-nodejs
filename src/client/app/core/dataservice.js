@@ -83,12 +83,12 @@
                     .catch(fail);
 
             function success(response) {
-                console.log('entre a success');
+               
                 return response;
             }
 
             function fail() {
-                console.log('entre a fail');
+        
                 return false;
             }
         }

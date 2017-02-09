@@ -28,30 +28,20 @@ cookies.$inject =['$cookies'];
             //var name = Base64_encode(users.name);
             
             //almacenarlos en la cookie session
-            $cookies.putObject("session", 
+            $cookies.putObject('session', 
             //{user: user, avatar: users.avatar, usertype: usertype, email: email, name:name}, 
             {user: user, avatar: users.avatar, email: email}, 
             {expires: new Date(new Date().getTime() + 24 * 60 * 60 * 1000)});
-            
-            //almacenarlos en localstorage
-            user = GetCredentials_encode(users);
-            /*localstorageService.Create(users).then(function (response) {
-                //console.log(response.success);
-                if (response.success) {
-                    console.log(response.message);
-                } else {
-                    console.log(response.message);
-                }
-            });*/
+           
         }
 
         function ClearCredentials() {
-            $cookies.remove("session");
+            $cookies.remove('session');
         }
         
         function GetCredentials() {
             //al cargarse la pagina por primera vez, user es undefined
-            var user = $cookies.getObject("session");
+            var user = $cookies.getObject('session');
             if (user) { //si no es undefined
                 //console.log(user); //datos encriptados
                 user = GetCredentials_decode();
@@ -70,22 +60,23 @@ cookies.$inject =['$cookies'];
         }
         
         function GetCredentials_decode() {
-            var user = Base64_decode($cookies.getObject("session").user);
+            var user = Base64_decode($cookies.getObject('session').user);
             //var usertype = Base64_decode($cookies.getObject("session").usertype);
-            var email = Base64_decode($cookies.getObject("session").email);
+            var email = Base64_decode($cookies.getObject('session').email);
            // var name = Base64_decode($cookies.getObject("session").name);
-           // return {user: user, avatar: $cookies.getObject("session").avatar, usertype: usertype, email:email,name: name};
-            return {user: user, avatar: $cookies.getObject("session").avatar, email:email};
+           // return {user: user, avatar: $cookies.getObject("session").avatar, 
+           // usertype: usertype, email:email,name: name};
+            return {user: user, avatar: $cookies.getObject('session').avatar, email:email};
         }
         
         function Base64_encode(input) {
             var keyStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
-            var output = "";
-            var chr1, chr2, chr3 = "";
-            var enc1, enc2, enc3, enc4 = "";
+            var output = '';
+            var chr1, chr2, chr3 = '';
+            var enc1, enc2, enc3, enc4 = '';
             var i = 0;
             
-    try{
+    
             do {
                 //En este punto me esta dando un fallo que me bloquea la aplicación pero si codifica
                 
@@ -109,30 +100,28 @@ cookies.$inject =['$cookies'];
                         keyStr.charAt(enc2) +
                         keyStr.charAt(enc3) +
                         keyStr.charAt(enc4);
-                chr1 = chr2 = chr3 = "";
-                enc1 = enc2 = enc3 = enc4 = "";
+                chr1 = chr2 = chr3 = '';
+                enc1 = enc2 = enc3 = enc4 = '';
             } while (i < input.length);
-             }catch(err) {
-                    console.log("error");
-                }
+                
             return output;
         }
         
         function Base64_decode(input) {
             var keyStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
-            var output = "";
-            var chr1, chr2, chr3 = "";
-            var enc1, enc2, enc3, enc4 = "";
+            var output = '';
+            var chr1, chr2, chr3 = '';
+            var enc1, enc2, enc3, enc4 = '';
             var i = 0;
     
             // remove all characters that are not A-Z, a-z, 0-9, +, /, or =
             var base64test = /[^A-Za-z0-9\+\/\=]/g;
             if (base64test.exec(input)) {
-                window.alert("There were invalid base64 characters in the input text.\n" +
-                        "Valid base64 characters are A-Z, a-z, 0-9, '+', '/',and '='\n" +
-                        "Expect errors in decoding.");
+                window.alert('There were invalid base64 characters in the input text.\n' +
+                        'Valid base64 characters are A-Z, a-z, 0-9, "+", "/",and "="\n' +
+                        'Expect errors in decoding.');
             }
-            input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+            input = input.replace(/[^A-Za-z0-9\+\/\=]/g, '');
     
             do {
                 enc1 = keyStr.indexOf(input.charAt(i++));
@@ -146,15 +135,15 @@ cookies.$inject =['$cookies'];
     
                 output = output + String.fromCharCode(chr1);
     
-                if (enc3 != 64) {
+                if (enc3 !== 64) {
                     output = output + String.fromCharCode(chr2);
                 }
-                if (enc4 != 64) {
+                if (enc4 !== 64) {
                     output = output + String.fromCharCode(chr3);
                 }
     
-                chr1 = chr2 = chr3 = "";
-                enc1 = enc2 = enc3 = enc4 = "";
+                chr1 = chr2 = chr3 = '';
+                enc1 = enc2 = enc3 = enc4 = '';
             } while (i < input.length);
             return output;
         }

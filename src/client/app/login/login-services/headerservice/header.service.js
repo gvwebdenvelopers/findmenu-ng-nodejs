@@ -20,7 +20,6 @@
             //al cargarse la pagina por primera vez, user es undefined
             var user = cookiesService.GetCredentials();
             if (user) {
-                console.log(user);
                 //mostramos enlces segun laentrada
                 $rootScope.accederV = false;
                 $rootScope.profileV = true;
@@ -60,7 +59,7 @@
                 size: 'lg'
             });
 
-        };
+        }
 
     }
 

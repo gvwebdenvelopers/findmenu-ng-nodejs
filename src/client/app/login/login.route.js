@@ -20,12 +20,11 @@
                     controller: 'SignupController',
                     controllerAs: 'vm',
                     title: 'Signup'
-
                 }
             }, {
-                state: 'signup',
+                state: 'socialsignin',
                 config: {
-                    url: '/signup',
+                    url: '/socialsignin',
                     controller: 'socialController'
 
                 }
@@ -33,7 +32,5 @@
 
         ];
     }
-
-
 })();
 

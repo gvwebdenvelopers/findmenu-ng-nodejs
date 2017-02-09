@@ -7,6 +7,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var port = process.env.PORT || 8001;
 var four0four = require('./utils/404')();
+var cors = require('cors'); //cal per a signin fb
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var passport = require('passport');
@@ -14,6 +15,7 @@ var session = require('express-session');
 var environment = process.env.NODE_ENV;
 
 app.use(favicon(__dirname + '/favicon.ico'));
+app.use(cors());    
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -30,12 +32,91 @@ require('./config/passport.js')(passport);
 //Asegúrese de usar express.session () antes de passport.session () para asegurarse de
 //que la sesión de inicio de sesión se restaure en el orden correcto.
 
-app.use(session({secret: 'ilovescotchscotchyscotchscotch'})); // session secret
+app.use(session({
+    resave: false,
+    saveUninitialized: false,
+    secret: 'findmenuangularnodejs'
+})); // session secret
 app.use(passport.initialize());
 app.use(passport.session());
 
 
+/*app.get('/auth/facebook',
+    function(req, res, next) {
+        console.log('entro a la primera');
+      var redirect = encodeURIComponent(req.query.redirect || '/');
+      passport.authenticate('facebook',{scope: ['email'],
+      callbackURL: 'http://findmenu.nod:3000/auth/facebook/callback?redirect=' + redirect
+        })(req, res, next);
+    });
 
+  app.get('/auth/facebook/callback',
+    function(req, res, next) {
+        console.log('entro a la segunda');
+      var url = 'http://findmenu.nod:3000/auth/facebook/callback?redirect=' + encodeURIComponent(req.query.redirect);
+      passport.authenticate('facebook', { callbackURL: url })(req, res, next);
+    },
+    function(req, res) {
+      //res.redirect(req.query.redirect);
+        console.log(req.user);
+        res.send(req.user);
+    });*/
+    
+    /*app.get('/auth/facebook', passport.authenticate('facebook', 
+    { session: false, scope : 'email' }));
+
+// handle the callback after facebook has authenticated the user
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', 
+        {session: false, failureRedirect: '/error' }), 
+            function(req, res, next) {
+                //console.log(req);
+                //var token = jwt.encode(req.user.facebook, config.secret);
+                res.redirect("/home/"+req);
+});*/
+
+/*app.route('/auth/facebook').get(facebookOauth());
+app.route('/auth/facebook/callback').get(facebookOauthCallback);
+
+
+function facebookOauth() {
+    return passport.authenticate('facebook', {
+        scope: ['email'],
+        display: 'popup'
+    });
+}
+
+function facebookOauthCallback(req, res, next) {
+    // http://stackoverflow.com/a/2731189/494664
+    var sneakyScript = '<script> var user = ' +  req.user + '; window.handler(user); window.close(); </script>';
+    res.send(sneakyScript);
+}*/
+
+app.get('/auth/facebook', passport.authenticate('facebook'));
+    app.get('/auth/facebook/callback', passport.authenticate('facebook', 
+    { successRedirect: '/signup', failureRedirect: '/auth/failure' }));
+    
+    
+    
+    app.get('/auth/success', function(req, res) {
+        
+        //return res.render('after-auth', { state: 'signup', user: req.user ? req.user : null });
+        //res.req;
+        //return res.send(req.user);
+         //return res.redirect('/');
+         //res.redirect('/');
+         //var string = encodeURIComponent(req.user);
+        //var url = "http://findmenu.nod:3000/?params=";
+        //console.log(url);
+        //res.redirect(url);
+        
+        res.json(req.user); 
+         
+    });
+    app.get('/auth/failure', function(req, res) {
+        console.log('fail');
+        res.render('after-auth', { state: 'failure', user: null });
+    });
 
 
 console.log('About to crank up node');

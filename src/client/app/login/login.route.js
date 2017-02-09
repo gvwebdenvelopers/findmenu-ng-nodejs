@@ -1,29 +1,39 @@
-(function() {
-  'use strict';
+(function () {
+    'use strict';
 
-  angular
-    .module('app.login')
-    .run(appRun);
+    angular
+            .module('app.login')
+            .run(appRun);
 
-  appRun.$inject = ['routerHelper'];
+    appRun.$inject = ['routerHelper'];
 
-  function appRun(routerHelper) {
-    routerHelper.configureStates(getStates());
-  }
+    function appRun(routerHelper) {
+        routerHelper.configureStates(getStates());
+    }
 
-  function getStates() {
-    return [{
-      state: 'signup',
-      config: {
-        url: '/signup',
-        templateUrl: 'app/login/signup.html',
-        controller: 'SignupController',
-        controllerAs: 'vm',
-        title: 'Signup'
-        
-      }
-    }];
-  }
-  
+    function getStates() {
+        return [{
+                state: 'signup',
+                config: {
+                    url: '/signup',
+                    templateUrl: 'app/login/signup.html',
+                    controller: 'SignupController',
+                    controllerAs: 'vm',
+                    title: 'Signup'
+
+                }
+            }, {
+                state: 'signup',
+                config: {
+                    url: '/signup',
+                    controller: 'socialController'
+
+                }
+            }
+
+        ];
+    }
+
+
 })();
 

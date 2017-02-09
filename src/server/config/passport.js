@@ -3,6 +3,8 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var bcrypt = require('bcrypt-nodejs');
 var Mysql = require('../users/users.model');
 var configAuth = require('./auth'); // use this one for testing
+var OAuthStrategy = require('passport-oauth').OAuthStrategy; //encara que no es gaste, fa falta
+var OAuth2Strategy = require('passport-oauth').OAuth2Strategy; //encara que no es gaste, fa falta
 
 //exportamos lalibreria de funciones
 module.exports = function (passport) {
@@ -189,7 +191,7 @@ passport.deserializeUser(function(user, done) {
 
             }));*/
             
-            
+      
             
             
             
@@ -204,10 +206,6 @@ passport.deserializeUser(function(user, done) {
         profileFields: ['name', 'email', 'link', 'locale', 'timezone'],
         passReqToCallback: true
     }, function (req, accessToken, refreshToken, profile, done) {
-        //if (req.user) {
-        console.log(req.user);
-        console.log('hay req.user');
-        console.log(profile);
 
         Mysql.countUser(profile.id, function (rows) {
             if (rows[0].userCount === 0) {

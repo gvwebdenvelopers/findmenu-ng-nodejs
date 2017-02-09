@@ -78,16 +78,17 @@
         }
 
         function facebook() {
-            return $http.get('/auth/facebook')
+            return $http.get('/auth/success')
                     .then(success)
                     .catch(fail);
 
             function success(response) {
-                console.log(response);
+                console.log('entre a success');
                 return response;
             }
 
             function fail() {
+                console.log('entre a fail');
                 return false;
             }
         }

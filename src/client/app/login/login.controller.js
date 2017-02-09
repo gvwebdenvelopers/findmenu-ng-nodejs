@@ -5,9 +5,9 @@
             .module('app.login')
             .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['dataservice', '$state', '$uibModalInstance', 'cookiesService', 'logger','headerService'];
+    LoginController.$inject = ['dataservice', '$state', '$uibModalInstance', 'cookiesService', 'logger','headerService','$window'];
 
-    function LoginController(dataservice, $state, $uibModalInstance, cookiesService, logger,headerService) {
+    function LoginController(dataservice, $state, $uibModalInstance, cookiesService, logger,headerService,$window) {
         var vm = this;
         vm.inputUser = '';
         vm.inputPass = '';
@@ -16,6 +16,17 @@
         vm.SigninFacebook=SigninFacebook;
         vm.SigninTwitter=SigninTwitter;
         vm.SigninGoogle=SigninGoogle;
+        var facebookPopup;
+
+    vm.callFacebookOauth = function() {
+       var url = '/auth/facebook',
+                width = 1000,
+                height = 650,
+                top = (window.outerHeight - height) / 2,
+                left = (window.outerWidth - width) / 2;
+            $window.open(url, 'facebook_login', 'width=' + width + ',height=' + height + ',scrollbars=0,top=' + top + ',left=' + left);
+        
+    };
 
 
         function CloseModal() {
@@ -57,9 +68,10 @@
         
         function SigninFacebook(){
             
-            dataservice.facebook().then(function (response) {
+            //dataservice.facebook().then(function (response) {
                 
-            });
+           // });
+           
         }
         function SigninTwitter(){
            

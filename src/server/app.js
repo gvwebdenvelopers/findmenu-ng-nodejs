@@ -24,7 +24,7 @@ app.use(logger('dev'));
 app.use(cookieParser());//esto se debe poner sino da fallo conect.sid
 
 require('./config/passport.js')(passport);
-require('./config/routes').init(app);
+
 
 app.use(session({
     resave: false,
@@ -34,28 +34,22 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-/*app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
-app.get('/auth/facebook/callback', passport.authenticate('facebook',
-        {successRedirect: '/socialsignin', failureRedirect: '/'}));*/
+require('./config/routes').init(app,passport);
 
-
-app.get('/auth/twitter', passport.authenticate('twitter'));
-app.get('/auth/twitter/callback', passport.authenticate('twitter', {
-    successRedirect: '/socialsignin',
-    failureRedirect: '/'
-}));
 app.get('/auth/google', passport.authenticate('google', { scope: 'https://www.google.com/m8/feeds' }));
 app.get('/auth/google/callback', passport.authenticate('google', {
     successRedirect: '/socialsignin',
     failureRedirect: '/'
 }));
 
-//retorno del cliente para recoger los datos
-    /*app.get('/auth/success', function (req, res) {
+    //retorno del cliente para recoger los datos
+   
+    app.get('/auth/success', function (req, res) {
         console.log('entro a success');
+        console.log('sesion: '+ JSON.stringify(req.session));
+        console.log('user: '+ JSON.stringify(req.user));
         res.json(req.user);
-    });*/
-    
+    });
 app.get('/social/failure', function (req, res) {
     console.log('fail');
     res.render('after-auth', {state: 'failure', user: null});

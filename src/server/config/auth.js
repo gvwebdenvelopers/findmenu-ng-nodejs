@@ -9,15 +9,15 @@ module.exports = {
     },
 
     'twitterAuth' : {
-        'consumerKey'        : 'Z4nqoDjg7krYLL7Sb3rGMm1Pr',
-        'consumerSecret'     : 'iTBPy09lsMyQyCZ9qEiffoUsP3Z7CY82GDi6lOqIn5BVqaUTR2',
-        'callbackURL'        : 'https://nodejs-angular1-yomogan.c9users.io/auth/twitter/callback'
+        'consumerKey'        : 'DD491DZAVm7RBQBpsSri6q3Re',
+        'consumerSecret'     : 'ZpRtjdj2nJTxWCyWECPWzz9Z65xCkkLpYEDK0JXiHkZzVDDocQ',
+        'callbackURL'        : 'http://localhost:3000/auth/twitter/callback'
     },
 
     'googleAuth' : {
-        'clientID'         : 'your-secret-clientID-here',
-        'clientSecret'     : 'your-client-secret-here',
-        'callbackURL'      : 'http://localhost:8080/auth/google/callback'
+        'consumerKey'      : '1009379597815-nli89nprm6iat5cmfdmplhse321uop7j.apps.googleusercontent.com',
+        'consumerSecret'   : 'H0djqkOgkjgYN-toq-ksGdBR',
+        'callbackURL'      : 'http://localhost:3000/auth/google/callback'
     }
 };
 

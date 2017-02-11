@@ -39,7 +39,8 @@
     "angular-resource": "~1.4.0"
   },
   "resolutions": {
-    "angular": "1.5.3"
+    "angular": "1.5.3",
+    "font-awesome": "~4.6.0"
   },
   "overrides": {
     "bootstrap": {
@@ -49,6 +50,7 @@
         "angular-material.js",
         "angular-material.css"
       ]
-    }
+    },
+    "font-awesome": { "main": "css/font-awesome.css" }
   }
 }

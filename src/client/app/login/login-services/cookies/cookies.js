@@ -76,7 +76,7 @@ cookies.$inject =['$cookies'];
             var enc1, enc2, enc3, enc4 = '';
             var i = 0;
             
-    
+    try{
             do {
                 //En este punto me esta dando un fallo que me bloquea la aplicación pero si codifica
                 
@@ -103,9 +103,12 @@ cookies.$inject =['$cookies'];
                 chr1 = chr2 = chr3 = '';
                 enc1 = enc2 = enc3 = enc4 = '';
             } while (i < input.length);
-                
+                }catch(err) {
+    console.log('error char');
+}
             return output;
         }
+    
         
         function Base64_decode(input) {
             var keyStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';

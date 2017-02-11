@@ -208,19 +208,20 @@ textarea.ng-valid.ng-dirty{
   width: 100%; }
 
 md-input-container .md-input{
-    background-color: white !important ;
+    background-color: white !important ;    
+    width: 90%;   
+}
+
+md-block{
     margin: 2% !important;
-    width: 90%;
-   
 }
 
 label{
-     font-size:  1.4em;
-     margin-left: 2% !important;
+    font-size:  1.4em;
+     margin-left: 2% !important;   
 }
 
 hr.login {border: 3px solid #666; border-radius: 300px/10px; height: 0px; text-align: center;}
-
 
 md-select{
     background-color: white;

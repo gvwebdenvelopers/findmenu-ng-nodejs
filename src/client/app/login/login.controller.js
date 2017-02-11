@@ -31,9 +31,6 @@
 
                     logger.success('Usuario autentificado');
                     cookiesService.SetCredentials(response.data);
-                    $cookies.put('myFavorite', response.data.user);
-                    var favoriteCookie = $cookies.get('myFavorite');
-                    console.log(favoriteCookie);
                     $uibModalInstance.dismiss('cancel');
                     CloseModal();
                     headerService.login();

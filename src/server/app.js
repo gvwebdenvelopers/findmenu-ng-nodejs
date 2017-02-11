@@ -15,7 +15,7 @@ var session = require('express-session');
 var environment = process.env.NODE_ENV;
 
 app.use(favicon(__dirname + '/favicon.ico'));
-app.use(cors());    
+app.use(cors());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -24,8 +24,8 @@ app.use(logger('dev'));
 app.use(cookieParser());//esto se debe poner sino da fallo conect.sid
 
 require('./config/passport.js')(passport);
- require('./config/routes').init(app); 
-   
+require('./config/routes').init(app);
+
 app.use(session({
     resave: false,
     saveUninitialized: false,
@@ -34,19 +34,31 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/auth/facebook', passport.authenticate('facebook'));
-    app.get('/auth/facebook/callback', passport.authenticate('facebook', 
-    { successRedirect: '/socialsignin', failureRedirect: '/social/failure' }));
-      
-    app.get('/auth/success', function(req, res) {
-        
-        res.json(req.user); 
-         
-    });
-    app.get('/social/failure', function(req, res) {
-        console.log('fail');
-        res.render('after-auth', { state: 'failure', user: null });
-    });
+app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
+app.get('/auth/facebook/callback', passport.authenticate('facebook',
+        {successRedirect: '/socialsignin', failureRedirect: '/'}));
+
+
+app.get('/auth/twitter', passport.authenticate('twitter'));
+app.get('/auth/twitter/callback', passport.authenticate('twitter', {
+    successRedirect: '/socialsignin',
+    failureRedirect: '/'
+}));
+app.get('/auth/google', passport.authenticate('google', { scope: 'https://www.google.com/m8/feeds' }));
+app.get('/auth/google/callback', passport.authenticate('google', {
+    successRedirect: '/socialsignin',
+    failureRedirect: '/'
+}));
+
+app.get('/auth/success', function (req, res) {
+
+    res.json(req.user);
+
+});
+app.get('/social/failure', function (req, res) {
+    console.log('fail');
+    res.render('after-auth', {state: 'failure', user: null});
+});
 
 
 console.log('About to crank up node');

@@ -34,9 +34,9 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
+/*app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
 app.get('/auth/facebook/callback', passport.authenticate('facebook',
-        {successRedirect: '/socialsignin', failureRedirect: '/'}));
+        {successRedirect: '/socialsignin', failureRedirect: '/'}));*/
 
 
 app.get('/auth/twitter', passport.authenticate('twitter'));
@@ -50,11 +50,12 @@ app.get('/auth/google/callback', passport.authenticate('google', {
     failureRedirect: '/'
 }));
 
-app.get('/auth/success', function (req, res) {
-
-    res.json(req.user);
-
-});
+//retorno del cliente para recoger los datos
+    /*app.get('/auth/success', function (req, res) {
+        console.log('entro a success');
+        res.json(req.user);
+    });*/
+    
 app.get('/social/failure', function (req, res) {
     console.log('fail');
     res.render('after-auth', {state: 'failure', user: null});

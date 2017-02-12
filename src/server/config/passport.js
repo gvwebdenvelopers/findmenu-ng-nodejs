@@ -1,7 +1,8 @@
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var TwitterStrategy = require('passport-twitter').Strategy;
-var GoogleStrategy = require('passport-google-oauth').OAuthStrategy;
+//var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var bcrypt = require('bcrypt-nodejs');
 var Mysql = require('../users/users.model');
 var configAuth = require('./auth'); // use this one for testing
@@ -166,19 +167,19 @@ passport.deserializeUser(function(user, done) {
   }));
   
   passport.use(new GoogleStrategy({
-        consumerKey       : configAuth.googleAuth.consumerKey,
-        consumerSecret    : configAuth.googleAuth.consumerSecret,
+        clientID       : configAuth.googleAuth.GOOGLE_ID,
+        clientSecret    : configAuth.googleAuth.GOOGLE_SECRET,
         callbackURL     : configAuth.googleAuth.callbackURL,
         passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
     },
     function(req, token, refreshToken, profile, done) {
        Mysql.countUser(profile.id, function (rows) {
             if (rows[0].userCount === 0) {
-                console.log(profile);
+                //console.log(profile);
                 console.log('no existe e inserto google');
                 var newUser = {
                     user: profile.id,
-                    email: profile._json.email,
+                    email: profile.id,
                     usertype: 'client',
                     password:''
                 };

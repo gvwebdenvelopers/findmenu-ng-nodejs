@@ -1,3 +1,5 @@
+'use strict';
+
 var mysql = require('../config/config.db');
 
 var userModel = {};

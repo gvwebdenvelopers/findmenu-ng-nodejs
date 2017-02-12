@@ -7,7 +7,6 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var port = process.env.PORT || 8001;
 var four0four = require('./utils/404')();
-var cors = require('cors'); //cal per a signin fb
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var passport = require('passport');
@@ -15,7 +14,6 @@ var session = require('express-session');
 var environment = process.env.NODE_ENV;
 
 app.use(favicon(__dirname + '/favicon.ico'));
-app.use(cors());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -25,7 +23,7 @@ app.use(cookieParser());//esto se debe poner sino da fallo conect.sid
 
 require('./config/passport.js')(passport);
 
-
+//Configuración de la sesión para Passport
 app.use(session({
     resave: false,
     saveUninitialized: false,
@@ -34,28 +32,9 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./config/routes').init(app,passport);
-
-app.get('/auth/google', passport.authenticate('google', { scope: 'https://www.google.com/m8/feeds' }));
-app.get('/auth/google/callback', passport.authenticate('google', {
-    successRedirect: '/socialsignin',
-    failureRedirect: '/'
-}));
-
-    //retorno del cliente para recoger los datos
-   
-    app.get('/auth/success', function (req, res) {
-        console.log('entro a success');
-        console.log('sesion: '+ JSON.stringify(req.session));
-        console.log('user: '+ JSON.stringify(req.user));
-        res.json(req.user);
-    });
-app.get('/social/failure', function (req, res) {
-    console.log('fail');
-    res.render('after-auth', {state: 'failure', user: null});
-});
-
-
+//importamos routes general
+require('./config/routes').init(app,passport); 
+  
 console.log('About to crank up node');
 console.log('PORT=' + port);
 console.log('NODE_ENV=' + environment);

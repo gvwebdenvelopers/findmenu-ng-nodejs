@@ -1,3 +1,4 @@
+    'use strict';
     
 var Controller = require('./users.controller');
 //var passport = require('passport');
@@ -13,7 +14,24 @@ module.exports = function (app, passport) {
 
     app.get('/auth/twitter', passport.authenticate('twitter'));
     app.get('/auth/twitter/callback', passport.authenticate('twitter',
-            {successRedirect: '/socialsignin', failureRedirect: '/'}));
+            {successRedirect: '/socialsignin', failureRedirect: '/home'}));
+
+    app.get('/auth/google', passport.authenticate('google', { scope: 'profile email' }));
+    app.get('/auth/google/callback', passport.authenticate('google', {
+        successRedirect: '/socialsignin',
+        failureRedirect: '/home'
+    }));
+
+    //retorno del cliente para recoger los datos
+    app.get('/auth/success', function (req, res) {
+        console.log(req.user);
+        res.json(req.user);
+    });
+
+    /*app.get('/social/failure', function (req, res) {
+        console.log('fail');
+        res.render('after-auth', {state: 'failure', user: null});
+    });*/
 
 };
 

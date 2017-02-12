@@ -15,16 +15,11 @@ module.exports = {
     },
 
     'googleAuth' : {
-        'consumerKey'      : '1009379597815-nli89nprm6iat5cmfdmplhse321uop7j.apps.googleusercontent.com',
-        'consumerSecret'   : 'H0djqkOgkjgYN-toq-ksGdBR',
+        'GOOGLE_ID'        : '1009379597815-h0g2sjbir9ea7cn6k145am410afuv7qv.apps.googleusercontent.com',
+        'GOOGLE_SECRET'   : 'Fbujmj2wmdk_sSUELecomKRq',
         'callbackURL'      : 'http://localhost:3000/auth/google/callback'
     }
 };
 
-//test2_nodejs
-//En Facebook, Dominios de aplicaciones y URL del sitio -> https://nodejs-angular1-yomogan.c9users.io/
-
-//test1_nodejs
-//En Twitter, Website y Callback URL -> https://nodejs-angular1-yomogan.c9users.io/
 
 

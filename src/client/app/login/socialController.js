@@ -3,18 +3,18 @@
 
     angular
             .module('app.login')
-            .controller('socialController', SignupController);
+            .controller('socialController', socialController);
 
-    SignupController.$inject = ['dataservice', '$state', '$timeout', 'cookiesService', 'logger', 'headerService'];
+    socialController.$inject = ['dataservice', '$state', 'cookiesService', 'logger', 'headerService'];
 
-    function SignupController(dataservice, $state, $timeout, cookiesService, logger, headerService) {
+    function socialController(dataservice, $state, cookiesService, logger, headerService) {
         var vm = this;
 
         social();
 
         function social() {
 
-            dataservice.facebook().then(function (response) {
+            dataservice.socialLogin().then(function (response) {
                 console.log(response);
                 logger.success('Usuario autentificado');
                 cookiesService.SetCredentials(response.data);

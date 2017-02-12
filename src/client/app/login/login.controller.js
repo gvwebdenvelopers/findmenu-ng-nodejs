@@ -6,15 +6,15 @@
             .controller('LoginController', LoginController);
 
     LoginController.$inject = ['dataservice', '$state', '$uibModalInstance', 
-        'cookiesService', 'logger', 'headerService','$cookies'];
+        'cookiesService', 'logger', 'headerService'];
 
-    function LoginController(dataservice, $state, $uibModalInstance, cookiesService, logger, headerService,$cookies) {
+    function LoginController(dataservice, $state, $uibModalInstance, cookiesService, logger, headerService) {
         var vm = this;
         vm.inputUser = '';
         vm.inputPass = '';
         vm.SubmitLogin = SubmitLogin;
         vm.SubmitSignup = SubmitSignup;
-
+       
         function CloseModal() {
             $uibModalInstance.dismiss('cancel');
         }
@@ -50,5 +50,7 @@
             CloseModal();
             $state.go('signup');           
         }
+        
+        
     }
 })();

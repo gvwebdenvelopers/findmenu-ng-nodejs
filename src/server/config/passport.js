@@ -103,10 +103,10 @@ passport.deserializeUser(function(user, done) {
 
                 Mysql.insertUser(newUser, function (rows) {
                     if (rows) {
-                        return done(null, rows);
+                        return done(null, newUser);
                     }
                 });//fin de consulta
-                return done(null, rows);
+                //return done(null, rows[0]);
             } else {
                 console.log('si existe y devuelvo datos');
                 Mysql.getUser(profile.id, function (error, rows) {
@@ -134,7 +134,7 @@ passport.deserializeUser(function(user, done) {
   function(req, token, tokenSecret, profile, done) {
      Mysql.countUser(profile.id, function (rows) {
             if (rows[0].userCount === 0) {
-                console.log(profile);
+                
                 console.log('no existe e inserto twitter');
                 var newUser = {
                     user: profile.id,
@@ -145,10 +145,10 @@ passport.deserializeUser(function(user, done) {
 
                 Mysql.insertUser(newUser, function (rows) {
                     if (rows) {
-                        return done(null, rows);
+                        return done(null, newUser);
                     }
                 });//fin de consulta
-                return done(null, rows);
+                //return done(null, rows);
             } else {
                 console.log('si existe y devuelvo datos twitter');
                 Mysql.getUser(profile.id, function (error, rows) {
@@ -186,10 +186,11 @@ passport.deserializeUser(function(user, done) {
 
                 Mysql.insertUser(newUser, function (rows) {
                     if (rows) {
-                        return done(null, rows);
+                        
+                        return done(null,newUser );
                     }
                 });//fin de consulta
-                return done(null, rows);
+                //return done(null, rows);
             } else {
                 console.log('si existe y devuelvo datos google');
                 Mysql.getUser(profile.id, function (error, rows) {

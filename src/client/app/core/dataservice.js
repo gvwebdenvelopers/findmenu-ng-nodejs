@@ -13,7 +13,7 @@
             getMenus: getMenus,
             signup: signup,
             localSignin:localSignin ,
-            facebook:facebook,
+            socialLogin:socialLogin,
             //getMenu: getMenu,
             //getMenusMarkers: getMenusMarkers,
             getCurrentLocation: getCurrenLocation
@@ -58,8 +58,8 @@
                 return response;
             }
             //si no ejecuta fail
-            function fail() {
-                return false;
+            function fail(e) {
+                return exception.catcher('XHR Failed for signup')(e);
             }
         }
         function localSignin(data) {
@@ -72,12 +72,12 @@
                 return response;
             }
 
-            function fail() {
-                return false;
+            function fail(e) {
+                return exception.catcher('XHR Failed for localSignin')(e);
             }
         }
 
-        function facebook() {
+        function socialLogin() {
             return $http.get('/auth/success')
                     .then(success)
                     .catch(fail);
@@ -87,9 +87,9 @@
                 return response;
             }
 
-            function fail() {
+            function fail(e) {
         
-                return false;
+                return exception.catcher('XHR Failed for socialSignin')(e);
             }
         }
       /*Call /api/menu sending a menu id and get menu from DB

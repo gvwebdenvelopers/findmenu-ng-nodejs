@@ -1,8 +1,6 @@
     'use strict';
     
 var Controller = require('./users.controller');
-//var passport = require('passport');
-//require('./users.controller');
 
 module.exports = function (app, passport) {
     app.post('/api/signup', Controller.signup);
@@ -14,17 +12,17 @@ module.exports = function (app, passport) {
 
     app.get('/auth/twitter', passport.authenticate('twitter'));
     app.get('/auth/twitter/callback', passport.authenticate('twitter',
-            {successRedirect: '/socialsignin', failureRedirect: '/home'}));
+            {successRedirect: '/socialsignin', failureRedirect: '/'}));
 
     app.get('/auth/google', passport.authenticate('google', { scope: 'profile email' }));
     app.get('/auth/google/callback', passport.authenticate('google', {
         successRedirect: '/socialsignin',
-        failureRedirect: '/home'
+        failureRedirect: '/'
     }));
 
     //retorno del cliente para recoger los datos
     app.get('/auth/success', function (req, res) {
-        console.log(req.user);
+       // console.log(req.user);
         res.json(req.user);
     });
 

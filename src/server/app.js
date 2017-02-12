@@ -3,6 +3,7 @@
 
 var express = require('express');
 var app = express();
+var cors = require('cors');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var port = process.env.PORT || 8001;
@@ -20,6 +21,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(logger('dev'));
 app.use(cookieParser());//esto se debe poner sino da fallo conect.sid
+app.use(cors());
 
 require('./config/passport.js')(passport);
 

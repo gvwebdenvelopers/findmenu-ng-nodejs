@@ -17,7 +17,7 @@
         state: 'menus',
         config: {
           url: '/menus',
-          templateUrl: 'app/menus/menus.view.html',
+          templateUrl: 'app/menus/menus.html',
           controller: 'MenusController',
           controllerAs: 'vm',
           title: 'Menus',

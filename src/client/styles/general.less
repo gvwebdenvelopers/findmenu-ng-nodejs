@@ -1,0 +1,151 @@
+/* Imports */
+@import = "general-min456.css";
+@import = "general-min1080.css";
+/* Colores */
+@color_amarillo = "#FFB03B";
+@color_blanco = "#FFFFFF";
+@color_gris = "#999999";
+@color_gris_claro = "#dcdcdc";
+@color_gris_oscuro = "#313b3d";
+@color_verde = "#37a000";
+/* sizes */
+@border_size = 2px;
+@padding_size = 0.5em;
+
+
+@import url('https://fonts.googleapis.com/css?family=Sarina');
+@import url('https://fonts.googleapis.com/css?family=Satisfy');
+/* ==========================================================================
+   CSS general de la aplicacion "mobile first"
+   ========================================================================== */
+   html,
+   body {
+     display: flex;
+     flex-direction: column;
+     height: 100%;
+   }
+
+/* ==========================================================================
+   Css para la barra de navegación principal
+   ========================================================================== */
+   header {
+      flex: 0 0 auto;
+      background-color: @color_gris_claro;
+      padding-top: @padding_size;
+    }
+
+    nav {
+      flex-direction: column;
+    }
+
+    nav.menu {
+        background-color: @color_gris_oscuro;
+        border-color: transparent;
+        border-bottom: @border_size solid @color_verde;
+        width: 100%;
+        float: left; /* Desplazamos el nav hacia la izquierda */
+    }
+
+    nav.menu ul {
+        list-style: none;
+        -webkit-margin-before: 0em;
+        -webkit-margin-after: 0em;
+        overflow: hidden; /* Limpiamos errores de float */
+    }
+
+    nav.menu ul li {
+        float: left;
+        font-size: 2em;
+        padding-right: @padding_size;
+    }
+
+    .nav-button {
+        display: block; /* Convertimos los elementos a en elementos bloque para manipular el padding */
+        color: #FFB03B;
+        margin-left: 0.2em;
+        background-color: @color_gris_oscuro;
+        border: @border_size solid @color_gris_oscuro;
+    }
+
+    .nav-button:hover{
+        text-decoration:none;
+        color: @color_verde;
+        border-bottom: @border_size solid @color_verde;
+    }
+
+    li.active a{
+        color: @color_verde !important;
+    }
+
+    .profile{
+        font-size: 50%;
+    }
+
+/* ==========================================================================
+   Css para slideshow
+   ========================================================================== */
+
+/* ==========================================================================
+   Css para el section
+   ========================================================================== */
+  main{
+    background-color: @color_gris_oscuro;
+    padding: 0.2em;
+  }
+
+  .findmenu-container{
+    width: 100%;
+  }
+
+  section{
+      display: block;
+      background-color: @color_gris_oscuro;
+      padding: @padding_size;
+  }
+/* ==========================================================================
+   Css footer
+   ========================================================================== */
+   footer {
+     color: @color_blanco;
+     flex: 2 1 auto;
+     align-self: flex-end;
+     background-color: @color_gris_claro;
+     text-align: center;
+     max-height: 10%;
+   }
+  .footer {
+      width: 100%;
+      background-color: @color_gris_oscuro;
+      border-top: @border_size solid @color_verde;
+  }
+  .footer .widget-title, .footer .widget-title a {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.2rem;
+      color: #999;
+  }
+  .footer .widget-title{
+      font-family: 'Satisfy', sans-serif;
+      font-size: 1em;
+      color: @color_verde;
+  }
+
+  .footer .widget, .footer address {
+      color: @color_gris;
+      text-transform: none;
+      font-style: normal;
+  }
+  .footer .navigation, .footer .social-list {
+      float: none;
+  }
+
+  .box_logos *, *:before, *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  .box_logos .column {
+      display: inline-flex;
+      width: 24%;
+  }

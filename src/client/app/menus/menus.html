@@ -56,11 +56,10 @@
               <address>
                 <label><strong>{{menu.nombre}}</strong></label>
                 <label>Precio: <strong>{{menu.precio_menu }} €</strong></label>
-                <button class="btn btn-imfo btn-read-more" ng-click="vm.showModalDetails( menu.id )">Ver más</button>
+                <div stars-menus-rating rating="{{menu.valoracion}}"></div>
+                <button class="btn btn-imfo btn-read-more" ng-click="vm.showModalDetails( menu.id )">+</button>
+                <button class="btn btn-imfo btn-read-more" ng-click="">Ver</button>
               </address>
-              <div class="inline">
-                <img class="stars" src="../../img/estrellas-{{menu.valoracion}}.png" alt="Imagen de valoracion">
-              </div>
           </div>
       </li>
     </ol>

@@ -49,11 +49,11 @@ section #menu{
 
 
 #menus address{
-    background-color: RGBA(0, 0, 0, 0.61);
+    background-color: RGBA(0, 0, 0, 0.91);
     color: #FFF;
     align-self: flex-end;
-    padding: 1em;
-
+    size: 100%;
+    text-align: center;
 }
 
 #menus address label{
@@ -65,6 +65,32 @@ section #menu{
     padding: 10px 0px;
     font-weight: bold;
     font-size: 1.6em;
+}
+
+#menus address button{
+    font-size: 1.3em;
+    width: 45%;
+    background-color: #000000;
+    border-top: 2px solid lightgrey;
+    border-left: 2px solid lightgrey;
+}
+
+#menus address button:hover{
+    background-color: #FFB03B;
+    border-top: 2px solid #FFB03B;
+    border-left: 2px solid #FFB03B;
+}
+
+.star{
+    height: 2em;
+    width: 2em;
+}
+
+
+.rating-menus{
+    height: 40px;
+    width: 100%;
+    margin-bottom: 1em;
 }
 
 ol {
@@ -83,17 +109,18 @@ ol {
 }
 
 ol > li{
-
-  height: 19%;
-
+  border: 2px inset #FFB03B;
+  height: 7em;
   width: 100%;
   -webkit-transition: width 1.7s ease-out;
   transition: width 1.7s ease-out;
+  background-size: cover;
 }
 
 ol > li:hover{
-    height: 40%;
+    height: 80%;
     background-color: RGBA(255, 176, 59, 0.61);
+    background-size: cover;
 }
 
 #filters{
@@ -113,6 +140,7 @@ ol > li:hover{
 
 #filters input{
     border: 1px solid transparent !important;
+    width: auto;
 }
 
 #pager{

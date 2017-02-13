@@ -31,11 +31,11 @@
     return directive;
 
     function link(scope, element, iAttrs) {
-        scope.stars=["silver", "silver","silver","silver","silver"];
+        scope.stars=['silver', 'silver','silver','silver','silver'];
         var rating = iAttrs.rating;
 
         for(var i=0; i< rating; i++ ){
-          scope.stars[i] = "gold";
+          scope.stars[i] = 'gold';
         }
     }
   }

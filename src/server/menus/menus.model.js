@@ -13,11 +13,12 @@ menusModel.getMenus = function (callback){
           }
       });
   }
-}
+};
 
 menusModel.getMenusMarkers = function (callback){
   if (mysql.connection) {
-      mysql.connection.query('SELECT id, latitud, longitud, nombre FROM restaurantes ORDER BY id', function(error, rows) {
+      var sql = 'SELECT id, latitud, longitud, nombre FROM restaurantes ORDER BY id';
+      mysql.connection.query(sql , function(error, rows) {
           if(error){
               throw error;
           }else{
@@ -27,14 +28,13 @@ menusModel.getMenusMarkers = function (callback){
   }
 };
 
-menusModel.getMenu = function(id,callback){
+menusModel.getMenu = function(id, callback){
     if (mysql.connection) {
-        var sql = 'SELECT * FROM restaurantes WHERE id = ' + mysql.connection.escape(id);
+        var sql = 'SELECT * FROM restaurantes WHERE id = ' + id ;
         mysql.connection.query(sql, function(error, row) {
             if(error){
                 throw error;
             }else{
-                console.log("En server: row = " + row);
                 callback(null, row);
             }
         });

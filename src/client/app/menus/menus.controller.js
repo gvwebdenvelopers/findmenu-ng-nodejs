@@ -25,20 +25,19 @@
       $scope.$watch('currentPage + numPerPage', update);
       */
 
-      $scope.$watch('searchRadius + menuPrice', advancedSearch);
-
-      vm.radiusDistance = ('1 2 5 20 50 100').split(' ').map(function (distance) { return { km: distance }; });
-      /* Funcitions modal */
-      vm.modalInstance = "";
       vm.showModalDetails = showModalDetails;
+      vm.centerOnMap = centerOnMap;
+      $scope.viewOnMap = viewOnMap;
+      $scope.menuDetail = [];
       vm.menus = [];//Todos los menús cargados de DB
       vm.searchedMenus =[];//Menús que pasan los criterios de búsqueda
-      $scope.menuDetail = [];
-      $scope.viewOnMap = viewOnMap;
-      vm.centerOnMap = centerOnMap;
-      vm.selectedMenu = "";
-      /* Maps variables */
 
+      vm.selectedMenu = '';
+      vm.modalInstance = '';
+      vm.radiusDistance = ('1 2 5 20 50 100').split(' ').map(function (distance) { return { km: distance }; });
+
+      /* Maps variables */
+      $scope.$watch('searchRadius + menuPrice', advancedSearch);
       //Map centered on IES l'estació
       vm.map = {
         center: {
@@ -62,9 +61,9 @@
         }
       };
       vm.icon = {
-        url: "../../images/findmenuGreen.png",
+        url: '../../images/findmenuGreen.png',
         scaledSize: new google.maps.Size(50, 50),
-      }
+      };
       vm.markers = [];
       vm.markersOptions = { animation: window.google.maps.Animation.BOUNCE };
 
@@ -94,11 +93,11 @@
 
       function getMenu(idMenu){
           for( var i=0; i< vm.menus.length; i++){
-            if( vm.menus[i].id == idMenu ){
+            if( vm.menus[i].id === idMenu ){
               return vm.menus[i];
             }
           }
-          return "Menu not found";
+          return 'Menu not found';
       }
 
       /* Muestra el menú seleccionado en un modal que utiliza la variable $scope.menuDetail */
@@ -121,7 +120,7 @@
             vm.map.center.longitude= data.coords.longitude;
             return vm.map;
           });
-      };
+      }
       /* Centra el mapa en el menú que se esta visualizando en details modal */
       function viewOnMap(){
           vm.map.id= $scope.menuDetail.id;
@@ -130,7 +129,7 @@
           vm.map.zoom= 18;
 
           //console.log(JSON.stringify(vm.map) );
-          vm.modalInstance.dismiss("cancel");
+          vm.modalInstance.dismiss('cancel');
           return vm.map;
       }
 
@@ -176,45 +175,42 @@
           0,1 punto latitud = 11,1km
           0,01  punto latitud = 1,11km
           1 km = 0,009 punto latitud*/
+          var radius = 0;
+          var i=0;
           vm.searchedMenus=[];
           if( $scope.searchRadius && $scope.menuPrice ){
-
-            console.log("En busqueda avanzada / searchRadius : " + $scope.searchRadius);
-            var radius = parseInt( $scope.searchRadius ) * 0.009;
-            for( var i=0; i< vm.menus.length; i++){
+            radius = parseInt( $scope.searchRadius ) * 0.009;
+            /*Calculamos que la localización del menu no esta mas al norte,
+            al sur, al este o al oeste que lo que permite la distancia de busqueda*/
+            for( i=0; i< vm.menus.length; i++){
               if( (vm.menus[i].latitud <= (vm.map.center.latitude + radius))
                   && (vm.menus[i].latitud >= (vm.map.center.latitude - radius))
                   && (vm.menus[i].longitud <= (vm.map.center.longitude + radius))
                   && (vm.menus[i].longitud >= (vm.map.center.longitude - radius))
                   && (vm.menus[i].precio_menu <= $scope.menuPrice)){
                 vm.searchedMenus.push(vm.menus[i]);
-                console.log("advancedSearch " + JSON.stringify(vm.menus[i]));
               }
             }
           }else if( $scope.searchRadius ){
-            console.log("En busqueda avanzada / searchRadius :" + $scope.searchRadius);
-            var radius = parseInt( $scope.searchRadius ) * 0.009;
-            for( var i=0; i< vm.menus.length; i++){
+            radius = parseInt( $scope.searchRadius ) * 0.009;
+            for( i=0; i< vm.menus.length; i++){
               if( (vm.menus[i].latitud <= (vm.map.center.latitude + radius))
                   && (vm.menus[i].latitud >= (vm.map.center.latitude - radius))
                   && (vm.menus[i].longitud <= (vm.map.center.longitude + radius))
                   && (vm.menus[i].longitud >= (vm.map.center.longitude - radius))){
                 vm.searchedMenus.push(vm.menus[i]);
-                console.log("advancedSearch " + JSON.stringify(vm.menus[i]));
               }
             }
           }
           else if( $scope.menuPrice ){
-            console.log("En busqueda avanzada / menuPrice :" + $scope.searchRadius);
-            for( var i=0; i< vm.menus.length; i++){
+            for( i=0; i< vm.menus.length; i++){
               if( vm.menus[i].precio_menu <= $scope.menuPrice ){
                 vm.searchedMenus.push(vm.menus[i]);
-                console.log("advancedSearch " + JSON.stringify(vm.menus[i]));
+
               }
             }
           }
           else {
-            console.log("En busqueda avanzada / else :" + $scope.searchRadius);
             vm.searchedMenus=vm.menus;
           }
           //update();

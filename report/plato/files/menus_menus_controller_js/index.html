@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">66.55</p>
+      <p class="stat">63.48</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">191</p>
+      <p class="stat">219</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">26.21</p>
+      <p class="stat">44.08</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">1.46</p>
+      <p class="stat">2.08</p>
     </div>
   </div>
 </div>
@@ -116,19 +116,19 @@
       $scope.$watch(&#039;currentPage + numPerPage&#039;, update);
       */
 
-      $scope.$watch(&#039;searchRadius + menuPrice&#039;, advancedSearch);
-
-      vm.radiusDistance = (&#039;1 2 5 20 50 100&#039;).split(&#039; &#039;).map(function (distance) { return { km: distance }; });
-      /* Funcitions modal */
-      vm.modalInstance = &quot;&quot;;
       vm.showModalDetails = showModalDetails;
+      vm.centerOnMap = centerOnMap;
+      $scope.viewOnMap = viewOnMap;
+      $scope.menuDetail = [];
       vm.menus = [];//Todos los menús cargados de DB
       vm.searchedMenus =[];//Menús que pasan los criterios de búsqueda
-      $scope.menuDetail = [];
-      $scope.viewOnMap = viewOnMap;
-      vm.selectedMenu = &quot;&quot;;
-      /* Maps variables */
 
+      vm.selectedMenu = &#039;&#039;;
+      vm.modalInstance = &#039;&#039;;
+      vm.radiusDistance = (&#039;1 2 5 20 50 100&#039;).split(&#039; &#039;).map(function (distance) { return { km: distance }; });
+
+      /* Maps variables */
+      $scope.$watch(&#039;searchRadius + menuPrice&#039;, advancedSearch);
       //Map centered on IES l&#039;estació
       vm.map = {
         center: {
@@ -152,9 +152,9 @@
         }
       };
       vm.icon = {
-        url: &quot;../../images/findmenuGreen.png&quot;,
+        url: &#039;../../images/findmenuGreen.png&#039;,
         scaledSize: new google.maps.Size(50, 50),
-      }
+      };
       vm.markers = [];
       vm.markersOptions = { animation: window.google.maps.Animation.BOUNCE };
 
@@ -184,11 +184,11 @@
 
       function getMenu(idMenu){
           for( var i=0; i&lt; vm.menus.length; i++){
-            if( vm.menus[i].id == idMenu ){
+            if( vm.menus[i].id === idMenu ){
               return vm.menus[i];
             }
           }
-          return &quot;Menu not found&quot;;
+          return &#039;Menu not found&#039;;
       }
 
       /* Muestra el menú seleccionado en un modal que utiliza la variable $scope.menuDetail */
@@ -211,19 +211,28 @@
             vm.map.center.longitude= data.coords.longitude;
             return vm.map;
           });
-      };
+      }
       /* Centra el mapa en el menú que se esta visualizando en details modal */
       function viewOnMap(){
-          vm.map = {
-              id: $scope.menuDetail.id,
-              center:{
-                latitude: $scope.menuDetail.latitud,
-                longitude: $scope.menuDetail.longitud
-              },
-              zoom: 18
-          };
+          vm.map.id= $scope.menuDetail.id;
+          vm.map.center.latitude= $scope.menuDetail.latitud;
+          vm.map.center.longitude= $scope.menuDetail.longitud;
+          vm.map.zoom= 18;
+
           //console.log(JSON.stringify(vm.map) );
-          vm.modalInstance.dismiss(&quot;cancel&quot;);
+          vm.modalInstance.dismiss(&#039;cancel&#039;);
+          return vm.map;
+      }
+
+      /* Centra el mapa en el menú que se esta visualizando en details modal */
+      function centerOnMap( idmenu ){
+          $scope.menuDetail = getMenu( idmenu );
+
+          vm.map.id= $scope.menuDetail.id;
+          vm.map.center.latitude= $scope.menuDetail.latitud;
+          vm.map.center.longitude= $scope.menuDetail.longitud;
+          vm.map.zoom= 18;
+          //console.log($scope.menuDetail + idmenu);
           return vm.map;
       }
 
@@ -255,28 +264,47 @@
           /*para mostar menus en un radio
           1 punto latitud = 111km
           0,1 punto latitud = 11,1km
-          0,01  punto latitud = 1,11km*/
+          0,01  punto latitud = 1,11km
+          1 km = 0,009 punto latitud*/
+          var radius = 0;
+          var i=0;
           vm.searchedMenus=[];
-          if( $scope.searchRadius){
-            console.log(&quot;En busqueda avanzada / searchRadius :&quot; + $scope.searchRadius);
-            
-          }
-          else if( $scope.menuPrice ){
-            console.log(&quot;En busqueda avanzada / menuPrice :&quot; + $scope.searchRadius);
-            for( var i=0; i&lt; vm.menus.length; i++){
-              if( vm.menus[i].precio_menu &lt;= $scope.menuPrice ){
+          if( $scope.searchRadius &amp;&amp; $scope.menuPrice ){
+            radius = parseInt( $scope.searchRadius ) * 0.009;
+            /*Calculamos que la localización del menu no esta mas al norte,
+            al sur, al este o al oeste que lo que permite la distancia de busqueda*/
+            for( i=0; i&lt; vm.menus.length; i++){
+              if( (vm.menus[i].latitud &lt;= (vm.map.center.latitude + radius))
+                  &amp;&amp; (vm.menus[i].latitud &gt;= (vm.map.center.latitude - radius))
+                  &amp;&amp; (vm.menus[i].longitud &lt;= (vm.map.center.longitude + radius))
+                  &amp;&amp; (vm.menus[i].longitud &gt;= (vm.map.center.longitude - radius))
+                  &amp;&amp; (vm.menus[i].precio_menu &lt;= $scope.menuPrice)){
                 vm.searchedMenus.push(vm.menus[i]);
-                console.log(&quot;advancedSearch &quot; + JSON.stringify(vm.menus[i]));
+              }
+            }
+          }else if( $scope.searchRadius ){
+            radius = parseInt( $scope.searchRadius ) * 0.009;
+            for( i=0; i&lt; vm.menus.length; i++){
+              if( (vm.menus[i].latitud &lt;= (vm.map.center.latitude + radius))
+                  &amp;&amp; (vm.menus[i].latitud &gt;= (vm.map.center.latitude - radius))
+                  &amp;&amp; (vm.menus[i].longitud &lt;= (vm.map.center.longitude + radius))
+                  &amp;&amp; (vm.menus[i].longitud &gt;= (vm.map.center.longitude - radius))){
+                vm.searchedMenus.push(vm.menus[i]);
               }
             }
           }
-          else if( $scope.searchRadius &amp;&amp; $scope.menuPrice){
-            console.log(&quot;En busqueda avanzada / searchRadius &amp;&amp; menuPrice:&quot; + $scope.searchRadius);
-          }else{
-            console.log(&quot;En busqueda avanzada / else :&quot; + $scope.searchRadius);
+          else if( $scope.menuPrice ){
+            for( i=0; i&lt; vm.menus.length; i++){
+              if( vm.menus[i].precio_menu &lt;= $scope.menuPrice ){
+                vm.searchedMenus.push(vm.menus[i]);
+              }
+            }
+          }
+          else {
             vm.searchedMenus=vm.menus;
           }
           //update();
+          getMarkers( vm.searchedMenus );
       }
   }
 })();</textarea>

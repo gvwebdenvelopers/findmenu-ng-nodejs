@@ -22,6 +22,7 @@
                     title: 'Signup'
                 }
             }, {
+                //Devuelve al usuario que está en sesión
                 state: 'socialsignin',
                 config: {
                     url: '/socialsignin',

@@ -48,7 +48,7 @@
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">35</p>
+      <p class="stat">39</p>
     </div>
   </div>
   <div class="row historical">
@@ -89,40 +89,44 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="col-md-12">(function() {
-  &#039;use strict&#039;;
+    <textarea id="file-source" class="col-md-12">(function () {
+    &#039;use strict&#039;;
 
-  angular
-    .module(&#039;app.layout&#039;)
-    .controller(&#039;MenuController&#039;, MenuController);
+    angular
+            .module(&#039;app.layout&#039;)
+            .controller(&#039;MenuController&#039;, MenuController);
 
-  MenuController.$inject = [&#039;$state&#039;, &#039;routerHelper&#039;];
-  /* @ngInject */
-  function MenuController($state, routerHelper) {
-    var vm = this;
-    var states = routerHelper.getStates();
-    vm.isCurrent = isCurrent;
+    MenuController.$inject = [&#039;$state&#039;, &#039;routerHelper&#039;];
+    /* @ngInject */
+    function MenuController($state, routerHelper) {
+        var vm = this;
+        var states = routerHelper.getStates();
+        vm.isCurrent = isCurrent;
 
-    activate();
+        activate();
 
-    function activate() { getNavRoutes(); }
+        function activate() {
+            getNavRoutes();
 
-    function getNavRoutes() {
-      vm.navRoutes = states.filter(function(r) {
-        return r.settings &amp;&amp; r.settings.nav;
-      }).sort(function(r1, r2) {
-        return r1.settings.nav - r2.settings.nav;
-      });
+        }
+
+        function getNavRoutes() {
+            vm.navRoutes = states.filter(function (r) {
+                return r.settings &amp;&amp; r.settings.nav;
+            }).sort(function (r1, r2) {
+                return r1.settings.nav - r2.settings.nav;
+            });
+        }
+
+        function isCurrent(route) {
+            if (!route.title || !$state.current || !$state.current.title) {
+                return &#039;&#039;;
+            }
+            var menuName = route.title;
+            return $state.current.title.substr(0, menuName.length) === menuName ? &#039;current&#039; : &#039;&#039;;
+        }
+
     }
-
-    function isCurrent(route) {
-      if (!route.title || !$state.current || !$state.current.title) {
-        return &#039;&#039;;
-      }
-      var menuName = route.title;
-      return $state.current.title.substr(0, menuName.length) === menuName ? &#039;current&#039; : &#039;&#039;;
-    }
-  }
 })();</textarea>
   </div>
 </div>

@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">69.89</p>
+      <p class="stat">74.16</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">45</p>
+      <p class="stat">64</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">10.76</p>
+      <p class="stat">11.59</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">0.23</p>
+      <p class="stat">0.34</p>
     </div>
   </div>
 </div>
@@ -89,50 +89,69 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="col-md-12">(function() {
-  &#039;use strict&#039;;
+    <textarea id="file-source" class="col-md-12">(function () {
+    &#039;use strict&#039;;
 
-  angular
-    .module(&#039;app.contact&#039;)
-    .controller(&#039;ContactController&#039;, ContactController);
+    angular
+            .module(&#039;app.contact&#039;)
+            .controller(&#039;ContactController&#039;, ContactController);
 
-  //inyecto funcionalidad y servicio dataservice
-  ContactController.$inject = [&#039;dataservice&#039;];
+    //inyecto funcionalidad y servicio dataservice
+    ContactController.$inject = [&#039;dataservice&#039;, &#039;$state&#039;, &#039;$timeout&#039;];
 
-  //lo añadimos al controlador
-  function ContactController(dataservice) {
-    var vm = this;
-    //variables del formulario
-    vm.title = &#039;Contact&#039;;
-    vm.InputName = &#039;&#039;;
-    vm.inputEmail = &#039;&#039;;
-    vm.inputSubject = &#039;&#039;;
-    vm.inputMessage = &#039;&#039;;
-    vm.SubmitContact = SubmitContact;
+    //lo añadimos al controlador
+    function ContactController(dataservice, $state, $timeout) {
+        var vm = this;
+        //variables del formulario
+        vm.title = &#039;Contact&#039;;
+        vm.inputName = &#039;&#039;;
+        vm.inputEmail = &#039;&#039;;
+        vm.inputSubject = &#039;&#039;;
+        vm.inputMessage = &#039;&#039;;
+        vm.SubmitContact = SubmitContact;
 
-    function SubmitContact() {
-      var data = {
-        from: vm.inputEmail,
-        to: &#039;gv.web.denvelopers@gmail.com&#039;,
-        subject: vm.inputSubject,
-        text: vm.inputMessage
-      };
-      dataservice.sendEmail(data).then(function(response) {
+        function SubmitContact() {
+            var data = {
+                name: vm.inputName,
+                from: vm.inputEmail,
+                to: &#039;&#039;,
+                subject: vm.inputSubject,
+                text: vm.inputMessage,
+                type: &#039;admin&#039;
+            };
+            dataservice.sendEmail(data).then(function (response) {
 
-        if (response) {
-          vm.resultMessage = &#039;Su email ha sido enviado correctamente&#039;;
-          vm.InputName = &#039;&#039;;
-          vm.inputEmail = &#039;&#039;;
-          vm.inputSubject = &#039;&#039;;
-          vm.inputMessage = &#039;&#039;;
-        } else {
-          vm.resultMessage =
-            &#039;Ha habido un error al enviar el email, intentelo mas tarde&#039;;
+                if (response) {
+                    data.type=&#039;user&#039;;
+                    //console.log(data);
+                    dataservice.sendEmail(data).then(function (response) {
+
+                        if (response) {
+                            vm.resultMessageOk = &#039;Su email ha sido enviado correctamente&#039;;
+                            $timeout(function () {
+                                vm.resultMessageOk = &#039;&#039;;
+                                $state.go(&#039;home&#039;);
+                            }, 3000);
+                        } else {
+                            vm.resultMessageFail =
+                                    &#039;Ha habido un error al enviar el email, intentelo mas tarde&#039;;
+                            $timeout(function () {
+                                vm.resultMessageFail = &#039;&#039;;
+                            }, 3000);
+                        }
+                    });
+                } else {
+                    vm.resultMessageFail =
+                            &#039;Ha habido un error al enviar el email, intentelo mas tarde&#039;;
+                    $timeout(function () {
+                        vm.resultMessageFail = &#039;&#039;;
+                    }, 3000);
+                }
+            });
+
         }
-      });
-    }
 
-  }
+    }
 })();</textarea>
   </div>
 </div>

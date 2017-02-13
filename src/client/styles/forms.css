@@ -109,7 +109,7 @@
 }
 
 /*Efecto al pasar por encima el ratón*/
-.btn-read-more:hover{
+.send:hover{
 
     animation-name: floating;/*aplicamos al animacion*/
     -webkit-animation-name: floating;/*compatibilidad con safari*/
@@ -144,7 +144,7 @@ ul.icons{
 
 }
 /*Efecto al pasar por encima el ratón*/
-.icons li:hover{
+a.float:hover{
     animation-name: pulse;/*aplicamos al animacion*/
     -webkit-animation-name: pulse;/*compatibilidad con safari*/
 

@@ -8,7 +8,6 @@
     socialController.$inject = ['dataservice', '$state', 'cookiesService', 'logger', 'headerService'];
 
     function socialController(dataservice, $state, cookiesService, logger, headerService) {
-        var vm = this;
 
         social();
 

@@ -40,7 +40,9 @@ passport.deserializeUser(function(user, done) {
                                     user: user,
                                     password: bcrypt.hashSync(password, null, null),
                                     email: req.body.email,
-                                    usertype: req.body.usertype
+                                    usertype: req.body.usertype,
+                                    name: user,
+                                    avatar: ''   
                                 };
 
                                 Mysql.insertUser(newUser, function (rows) {
@@ -93,12 +95,13 @@ passport.deserializeUser(function(user, done) {
         Mysql.countUser(profile.id, function (rows) {
             if (rows[0].userCount === 0) {
 
-                console.log('no existe e inserto');
                 var newUser = {
                     user: profile.id,
                     email: profile._json.email,
                     usertype: 'client',
-                    password:''
+                    password:'',
+                    name: profile.name.givenName,
+                    avatar: 'https://graph.facebook.com/' + profile.id + '/picture'                    
                 };
 
                 Mysql.insertUser(newUser, function (rows) {
@@ -108,7 +111,7 @@ passport.deserializeUser(function(user, done) {
                 });//fin de consulta
                 //return done(null, rows[0]);
             } else {
-                console.log('si existe y devuelvo datos');
+                 console.log(profile);
                 Mysql.getUser(profile.id, function (error, rows) {
                     if (!rows.length) {
 
@@ -129,18 +132,19 @@ passport.deserializeUser(function(user, done) {
     consumerKey: configAuth.twitterAuth.consumerKey,
     consumerSecret: configAuth.twitterAuth.consumerSecret,
     callbackURL: configAuth.twitterAuth.callbackURL,
+    includeEmail: true,
     passReqToCallback : true
   },
   function(req, token, tokenSecret, profile, done) {
      Mysql.countUser(profile.id, function (rows) {
             if (rows[0].userCount === 0) {
-                
-                console.log('no existe e inserto twitter');
                 var newUser = {
                     user: profile.id,
-                    email: 'default',
+                    email: profile.emails[0].value,
                     usertype: 'client',
-                    password:''
+                    password:'',
+                    name: profile.displayName,
+                    avatar: profile.photos[0].value
                 };
 
                 Mysql.insertUser(newUser, function (rows) {
@@ -149,8 +153,7 @@ passport.deserializeUser(function(user, done) {
                     }
                 });//fin de consulta
                 //return done(null, rows);
-            } else {
-                console.log('si existe y devuelvo datos twitter');
+            } else {              
                 Mysql.getUser(profile.id, function (error, rows) {
                     if (!rows.length) {
 
@@ -170,18 +173,20 @@ passport.deserializeUser(function(user, done) {
         clientID       : configAuth.googleAuth.GOOGLE_ID,
         clientSecret    : configAuth.googleAuth.GOOGLE_SECRET,
         callbackURL     : configAuth.googleAuth.callbackURL,
-        passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
+        passReqToCallback : true 
     },
     function(req, token, refreshToken, profile, done) {
        Mysql.countUser(profile.id, function (rows) {
             if (rows[0].userCount === 0) {
-                //console.log(profile);
+                console.log(profile);
                 console.log('no existe e inserto google');
                 var newUser = {
                     user: profile.id,
-                    email: profile.id,
+                    email: profile.emails[0].value,
                     usertype: 'client',
-                    password:''
+                    password:'',
+                    name: profile.displayName,
+                    avatar: profile.photos[0].value
                 };
 
                 Mysql.insertUser(newUser, function (rows) {

@@ -11,15 +11,12 @@
         var vm = this;
         var states = routerHelper.getStates();
         vm.isCurrent = isCurrent;
-        //vm.showModalSignup = showModalSignup;
-        //vm.logout = logout;
 
         activate();
 
         function activate() {
             getNavRoutes();
-            //La dependencia headerService debe estar en el core para funcionar
-            //headerService.login();
+
         }
 
         function getNavRoutes() {
@@ -37,18 +34,6 @@
             var menuName = route.title;
             return $state.current.title.substr(0, menuName.length) === menuName ? 'current' : '';
         }
-
-        //Funciones que dependen de header Service y si no esta no funcionaran
-        /*function showModalSignup() {
-          
-            headerService.openLoginModal();
-
-        }
-
-        function logout() {
-            headerService.logout();
-        }*/
-
 
     }
 })();

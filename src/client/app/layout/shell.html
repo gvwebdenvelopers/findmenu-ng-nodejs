@@ -1,15 +1,15 @@
 <div ng-controller="ShellController as vm">
-    <header class="clearfix">
+    <header class="clearfix" role="banner">
         <div ng-include="'app/layout/menu.html'"></div>
        
     </header>
 
-    <main>
+    <main role="main">
         <div ui-view class="shuffle-animation"></div>
         <div ngplus-overlay ngplus-overlay-delay-in="50" ngplus-overlay-delay-out="700" ngplus-overlay-animation="dissolve-animation">
-            <img src="images/busy.gif" />
+            <img src="images/busy.gif" alt="imagen de espera de consulta"/>
             <div class="page-spinner-message overlay-message">{{vm.busyMessage}}</div>
         </div>
     </main>
-    <footer class="footer text-center" ng-include="'app/layout/footer.html'"></footer>
+    <footer class="footer text-center" ng-include="'app/layout/footer.html'" role="contentinfo"></footer>
 </div>

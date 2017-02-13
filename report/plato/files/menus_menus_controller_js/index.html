@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - menus/menus.controller.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>menus/menus.controller.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">66.55</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">191</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">26.21</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">1.46</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">(function() {
+  &#039;use strict&#039;;
+
+  angular
+  .module(&#039;app.menus&#039;)
+  .controller(&#039;MenusController&#039;, MenusController);
+
+  MenusController.$inject = [&#039;$q&#039;, &#039;$location&#039;, &#039;dataservice&#039;, &#039;logger&#039;, &#039;$uibModal&#039;, &#039;$scope&#039;];
+  /* @ngInject */
+  function MenusController($q, $location, dataservice, logger, $uibModal, $scope) {
+      var vm = this;
+      vm.title = &#039;Menus&#039;;
+      /* Menus funcionality */
+      /*
+      vm.filteredMenus = [];
+      vm.pagination = {
+          menusPerPage: 4,
+          maxSize: 5,
+          currentPage: 1,
+          totalItems: 5,
+      };
+      $scope.setPage = function (pageNo) {
+          $scope.currentPage = pageNo;
+      };
+      $scope.$watch(&#039;currentPage + numPerPage&#039;, update);
+      */
+
+      $scope.$watch(&#039;searchRadius + menuPrice&#039;, advancedSearch);
+
+      vm.radiusDistance = (&#039;1 2 5 20 50 100&#039;).split(&#039; &#039;).map(function (distance) { return { km: distance }; });
+      /* Funcitions modal */
+      vm.modalInstance = &quot;&quot;;
+      vm.showModalDetails = showModalDetails;
+      vm.menus = [];//Todos los menús cargados de DB
+      vm.searchedMenus =[];//Menús que pasan los criterios de búsqueda
+      $scope.menuDetail = [];
+      $scope.viewOnMap = viewOnMap;
+      vm.selectedMenu = &quot;&quot;;
+      /* Maps variables */
+
+      //Map centered on IES l&#039;estació
+      vm.map = {
+        center: {
+          latitude: 38.810543,
+          longitude: -0.604137
+        },
+        zoom: 14,
+        windows: {
+            model: {},
+            show: false,
+            options:{
+              pixelOffset: {width:-1,height:-20}
+            }
+        },
+        markersEvents: {
+            click: function(marker, eventName, model, args) {
+              vm.map.windows.model = model;
+              vm.map.windows.show = true;
+              vm.infoWindow = getMenu( model.id );
+            },
+        }
+      };
+      vm.icon = {
+        url: &quot;../../images/findmenuGreen.png&quot;,
+        scaledSize: new google.maps.Size(50, 50),
+      }
+      vm.markers = [];
+      vm.markersOptions = { animation: window.google.maps.Animation.BOUNCE };
+
+      activate();
+
+      function activate() {
+          var promises = [getMenus(), getCurrentLocation()];
+          return $q.all(promises).then(function() {
+                //logger.info(&#039;Activated Menus View&#039;);
+            });
+      }
+
+      /* menus functions */
+      /* Obtiene los menus a través del servicio dataservice.getMenus()
+      copia los menús en la variable utilizada para visualización vm.searchedMenus
+      */
+      function getMenus(){
+          return dataservice.getMenus().then(function(data) {
+            vm.menus = data;
+            vm.searchedMenus = vm.menus;
+            //update();
+            //console.log(&quot;Total menus: &quot; + vm.pagination.totalItems);
+            getMarkers( vm.menus );
+            return vm.menus;
+          });
+      }
+
+      function getMenu(idMenu){
+          for( var i=0; i&lt; vm.menus.length; i++){
+            if( vm.menus[i].id == idMenu ){
+              return vm.menus[i];
+            }
+          }
+          return &quot;Menu not found&quot;;
+      }
+
+      /* Muestra el menú seleccionado en un modal que utiliza la variable $scope.menuDetail */
+      function showModalDetails( idMenu ) {
+          $scope.menuDetail = getMenu(idMenu);
+          //console.log(&quot;En showModalDetails&quot; + $scope.menuDetail.nombre);
+          vm.modalInstance = $uibModal.open({
+              animation: &#039;true&#039;,
+              scope: $scope,
+              size: &#039;lg&#039;,
+              templateUrl: &#039;app/menus/menu-details.html&#039;,
+          });
+      }
+
+      /* maps functions */
+      function getCurrentLocation(){
+          return dataservice.getCurrentLocation().then( function( data ){
+            //console.log(JSON.stringify(data));
+            vm.map.center.latitude= data.coords.latitude;
+            vm.map.center.longitude= data.coords.longitude;
+            return vm.map;
+          });
+      };
+      /* Centra el mapa en el menú que se esta visualizando en details modal */
+      function viewOnMap(){
+          vm.map = {
+              id: $scope.menuDetail.id,
+              center:{
+                latitude: $scope.menuDetail.latitud,
+                longitude: $scope.menuDetail.longitud
+              },
+              zoom: 18
+          };
+          //console.log(JSON.stringify(vm.map) );
+          vm.modalInstance.dismiss(&quot;cancel&quot;);
+          return vm.map;
+      }
+
+      function getMarkers( menusData ){
+          //console.log(vm.markers);
+          for (var i=0; i&lt;menusData.length; i++){
+              vm.markers.push({
+                id: menusData[i].id,
+                latitude: menusData[i].latitud,
+                longitude: menusData[i].longitud,
+                title: menusData[i].nombre,
+                icon: vm.icon
+              });
+          }
+          return vm.markers;
+      }
+
+      /*function update() {
+          //var begin = ((vm.pagination.currentPage - 1) * vm.pagination.menusPerPage);
+          //var end = begin + (vm.pagination.menusPerPage-1);
+          vm.pagination.totalItems = vm.searchedMenus.length;
+          //console.log(&quot;Total Items &quot; + vm.pagination.totalItems + &quot; END &quot; + end + &quot; BEGIN &quot; + begin );
+          vm.filteredMenus = vm.searchedMenus.slice(0, vm.pagination.totalItems);
+          console.log(&quot;EN UPDATE &quot; + JSON.stringify(vm.filteredMenus))
+          return vm.filteredMenus;
+      };*/
+
+      function advancedSearch(){
+          /*para mostar menus en un radio
+          1 punto latitud = 111km
+          0,1 punto latitud = 11,1km
+          0,01  punto latitud = 1,11km*/
+          vm.searchedMenus=[];
+          if( $scope.searchRadius){
+            console.log(&quot;En busqueda avanzada / searchRadius :&quot; + $scope.searchRadius);
+            
+          }
+          else if( $scope.menuPrice ){
+            console.log(&quot;En busqueda avanzada / menuPrice :&quot; + $scope.searchRadius);
+            for( var i=0; i&lt; vm.menus.length; i++){
+              if( vm.menus[i].precio_menu &lt;= $scope.menuPrice ){
+                vm.searchedMenus.push(vm.menus[i]);
+                console.log(&quot;advancedSearch &quot; + JSON.stringify(vm.menus[i]));
+              }
+            }
+          }
+          else if( $scope.searchRadius &amp;&amp; $scope.menuPrice){
+            console.log(&quot;En busqueda avanzada / searchRadius &amp;&amp; menuPrice:&quot; + $scope.searchRadius);
+          }else{
+            console.log(&quot;En busqueda avanzada / else :&quot; + $scope.searchRadius);
+            vm.searchedMenus=vm.menus;
+          }
+          //update();
+      }
+  }
+})();</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ cyclomatic }} <br>
+    Length : {{ halstead.length }} <br>
+    Difficulty : {{ halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

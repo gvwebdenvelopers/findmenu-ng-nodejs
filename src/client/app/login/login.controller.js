@@ -50,7 +50,6 @@
             CloseModal();
             $state.go('signup');           
         }
-        
-        
+               
     }
 })();

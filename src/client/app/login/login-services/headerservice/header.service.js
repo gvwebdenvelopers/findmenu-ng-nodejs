@@ -24,9 +24,14 @@
                 $rootScope.accederV = false;
                 $rootScope.profileV = true;
                 $rootScope.logoutV = true;
-                $rootScope.profile = user.user;
+                $rootScope.avatar = user.avatar;
                 
-
+                if (user.name.length === 1) {  
+                    $rootScope.name = user.email;
+                } else {
+                       $rootScope.name = user.name;     
+                }
+                
                 //redirigimos al home si nos logueamos
                 $state.go('home');
 
@@ -43,7 +48,8 @@
             $rootScope.accederV = true;
             $rootScope.profileV = false;
             //limpiamos los valores         
-            $rootScope.profile = '';
+            $rootScope.name = '';
+            $rootScope.avatar = '';
             $rootScope.logoutV = false;
             //redirigimos al home
             $state.go('home');

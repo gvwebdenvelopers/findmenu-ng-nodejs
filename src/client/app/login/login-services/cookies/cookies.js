@@ -13,24 +13,22 @@ cookies.$inject =['$cookies'];
         SetCredentials : SetCredentials,
         ClearCredentials : ClearCredentials,
         GetCredentials : GetCredentials,
-        Base64_encode : Base64_encode,
-        Base64_decode : Base64_decode,
-        GetCredentials_decode : GetCredentials_decode,
-        GetCredentials_encode : GetCredentials_encode
+        Base64encode : Base64encode,
+        Base64decode : Base64decode,
+        GetCredentialsdecode : GetCredentialsdecode,
+        GetCredentialsencode : GetCredentialsencode
         };
 //////////////////////////////////////////////////////////////////////
         function SetCredentials(users) {
             //encriptar data
             
-            var user = Base64_encode(users.user);
-            //var usertype = Base64_encode(users.usertype);
-            var email = Base64_encode(users.email);
-            //var name = Base64_encode(users.name);
+            var user = Base64encode(users.user);
+            var email = Base64encode(users.email);
+            var name = Base64encode(users.name);
             
             //almacenarlos en la cookie session
             $cookies.putObject('session', 
-            //{user: user, avatar: users.avatar, usertype: usertype, email: email, name:name}, 
-            {user: user, avatar: users.avatar, email: email}, 
+            {user: user, avatar: users.avatar, email: email, name:name}, 
             {expires: new Date(new Date().getTime() + 24 * 60 * 60 * 1000)});
            
         }
@@ -44,32 +42,27 @@ cookies.$inject =['$cookies'];
             var user = $cookies.getObject('session');
             if (user) { //si no es undefined
                 //console.log(user); //datos encriptados
-                user = GetCredentials_decode();
+                user = GetCredentialsdecode();
                 //console.log(user); //datos no encriptados
             }
             return user;
         }
         
-        function GetCredentials_encode(users) {
-             var user = Base64_encode(users.user);
-            //var usertype = Base64_encode(users.usertype);
-            var email = Base64_encode(users.email);
-            //var name = Base64_encode(users.name);
-            //return {user: user, avatar: users.avatar, usertype: usertype, email: email, name: name};
-            return {user: user, avatar: users.avatar, email: email};
+        function GetCredentialsencode(users) {
+             var user = Base64encode(users.user);
+            var email = Base64encode(users.email);
+            var name = Base64encode(users.name);
+            return {user: user, avatar: users.avatar, email: email, name: name};
         }
         
-        function GetCredentials_decode() {
-            var user = Base64_decode($cookies.getObject('session').user);
-            //var usertype = Base64_decode($cookies.getObject("session").usertype);
-            var email = Base64_decode($cookies.getObject('session').email);
-           // var name = Base64_decode($cookies.getObject("session").name);
-           // return {user: user, avatar: $cookies.getObject("session").avatar, 
-           // usertype: usertype, email:email,name: name};
-            return {user: user, avatar: $cookies.getObject('session').avatar, email:email};
+        function GetCredentialsdecode() {
+            var user = Base64decode($cookies.getObject('session').user);
+            var email = Base64decode($cookies.getObject('session').email);
+            var name = Base64decode($cookies.getObject('session').name);
+            return {user: user, avatar: $cookies.getObject('session').avatar, email:email,name: name};
         }
         
-        function Base64_encode(input) {
+        function Base64encode(input) {
             var keyStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
             var output = '';
             var chr1, chr2, chr3 = '';
@@ -78,7 +71,6 @@ cookies.$inject =['$cookies'];
             
     try{
             do {
-                //En este punto me esta dando un fallo que me bloquea la aplicación pero si codifica
                 
                 chr1 = input.charCodeAt(i++);
                 chr2 = input.charCodeAt(i++);
@@ -104,13 +96,13 @@ cookies.$inject =['$cookies'];
                 enc1 = enc2 = enc3 = enc4 = '';
             } while (i < input.length);
                 }catch(err) {
-    console.log('error char');
-}
+                    console.log('error char');
+                    }
             return output;
         }
     
         
-        function Base64_decode(input) {
+        function Base64decode(input) {
             var keyStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
             var output = '';
             var chr1, chr2, chr3 = '';

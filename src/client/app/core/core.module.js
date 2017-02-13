@@ -6,7 +6,6 @@
       'ngAnimate', 'ngSanitize',
       'blocks.exception', 'blocks.logger', 'blocks.router',
       'ui.router', 'ngplus','ngMaterial', 'ngMessages','ngAria',
-      'ui.bootstrap','ngCookies','cookiesService',
-      'headerService'
+      'ui.bootstrap','ngCookies'
     ]);
 })();

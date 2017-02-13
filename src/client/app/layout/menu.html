@@ -2,19 +2,19 @@
     <!--idea a la derecha del logo colocamos acceder que cambiara por la foto al estar logueado-->
     <a href="/" ><img class="logo" src="/images/findmenu_2.png"</a>
     <div class="pull-right navbar-logo">
-    <ul class="nav navbar-nav pull-right">
-        
-        <li><button id='logout' ng-show="logoutV" class="btn btn-primary" ng-click='vm.logout()'>Log Out</button></li>
-        <li><button id='acceder' ng-show="accederV" class="btn btn-primary" ng-click="vm.showModalSignup()">Acceder</button></li>
-        <li><a id='profile' ng-show="profileV" href='' class="profile"> Bienvenido: {{profile}}</a></li>
-           
-    </ul>
-    </div>
     <ul >
         <!--anulo el css-->
         <li class='findmenu' ng-class="vm.isCurrent(r)" ng-repeat="r in vm.navRoutes">
-            <a ui-sref="{{r.name}}" ng-bind-html="r.settings.content"></a>
+            <a ui-sref="{{r.name}}" class="nav-button" ng-bind-html="r.settings.content"></a>
         </li>
     </ul>
-</nav> 
+    <ul>
 
+        <li><button id='logout' ng-show="logoutV" class="btn btn-primary" ng-click='vm.logout()'>Log Out</button></li>
+        <li><button id='acceder' ng-show="accederV" class="nav-button" ng-click="vm.showModalSignup()">Acceder</button></li>
+        <li><a id='profile' ng-show="profileV" href='' class="profile"> Bienvenido: {{profile}}</a></li>
+
+    </ul>
+    </div>
+
+</nav>

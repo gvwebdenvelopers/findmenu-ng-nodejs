@@ -15,19 +15,18 @@
       flex-flow: row wrap;
       justify-content: space-around;
   }
+  nav ul{
+      display: inline-flex;
+  }
+
   nav li{
       display: inline-flex;
-      padding: 0.25em;
+      padding-right: 0.25em;
   }
   nav.menu ul li {
       float: left;
       font-size: 2em;
       padding-top: 0.5em;
   }
-/* ==========================================================================
-   Css para el section
-   ========================================================================== */
-   section {
-       display: flex;
-    }
+
 }

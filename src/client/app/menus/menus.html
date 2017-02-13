@@ -5,7 +5,7 @@
 
   <article class="container-maps">
 
-      <h2 class="header-h"><span>Algo más concreto<span></h2>
+      <h2 class="sub-menu-header">Algo más concreto</h2>
 
       <div id="filters">
         <md-input-container class="md-block" flex-gt-sm>
@@ -48,7 +48,7 @@
   </article>
 
   <article class="menus">
-      <h3 class="header-h">Encuentra tu menú</h3>
+      <h3 class="sub-menu-header">Encuentra tu menú entre {{vm.searchedMenus.length}} disponibles</h3>
       <ol>
       <li ng-repeat="menu in vm.searchedMenus | filter:{nombre:filtro}" id="{{menu.id}}">
           <div class="detailmenu" >

@@ -66,18 +66,19 @@
     }
 
 /* ==========================================================================
-   Css para el section
+   Css para slideshow
    ========================================================================== */
-    .slide-viewer.taller {
-        height: 500px;
-        margin-top: 0px;
-    }
+
 /* ==========================================================================
    Css para el section
    ========================================================================== */
   main{
     background-color: #313b3d;
     padding: 0.2em;
+  }
+
+  .findmenu-container{
+    width: 100%;
   }
 
   section{
@@ -89,6 +90,7 @@
    Css footer
    ========================================================================== */
    footer {
+     color: #FFF;
      flex: 2 1 auto;
      align-self: flex-end;
      background-color: #dcdcdc;
@@ -98,7 +100,7 @@
   .footer {
       width: 100%;
       background-color: #313b3d;
-
+      border-top: 2px solid #37a000;
   }
   .footer .widget-title, .footer .widget-title a {
       font-size: 1.4rem;
@@ -119,4 +121,15 @@
   }
   .footer .navigation, .footer .social-list {
       float: none;
+  }
+
+  .box_logos *, *:before, *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  .box_logos .column {
+      display: inline-flex;
+      width: 24%;
   }

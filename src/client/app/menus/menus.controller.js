@@ -206,7 +206,6 @@
             for( i=0; i< vm.menus.length; i++){
               if( vm.menus[i].precio_menu <= $scope.menuPrice ){
                 vm.searchedMenus.push(vm.menus[i]);
-
               }
             }
           }

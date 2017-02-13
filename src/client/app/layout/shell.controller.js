@@ -22,6 +22,6 @@
         $rootScope.showSplash = false;
       }, 1000);
     }
-    
+
   }
 })();

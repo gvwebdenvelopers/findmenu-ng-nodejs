@@ -1,0 +1,20 @@
+/* ==========================================================================
+   CSS general de la aplicacion para la versión imprimible
+   ========================================================================== */
+@media print {
+
+  nav ul{
+    display: none;
+  }
+
+  /*vista menus*/
+  #filters{
+    display: none;
+  }
+  .detailmenu img{
+    display: none;
+  }
+  .detailmenu button{
+    display: none;
+  }
+}

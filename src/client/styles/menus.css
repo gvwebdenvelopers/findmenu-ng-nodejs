@@ -24,6 +24,16 @@ h2 span{
   color: #FFB03B;
 }
 
+.sub-menu-header{
+  font-family: 'Satisfy', sans-serif;
+  font-size: 1.5em;
+  color: #37a000;
+  padding: 0.5em;
+  background-color: #2E2E2E;
+  border:solid 1px rgba(144, 144, 144, 0.25);
+  margin-bottom: 0.5em;
+}
+
 .container_maps{
   height: 400px;
   width: 100%;
@@ -49,11 +59,11 @@ section #menu{
 
 
 #menus address{
-    background-color: RGBA(0, 0, 0, 0.61);
+    background-color: RGBA(0, 0, 0, 0.91);
     color: #FFF;
     align-self: flex-end;
-    padding: 1em;
-
+    size: 100%;
+    text-align: center;
 }
 
 #menus address label{
@@ -65,6 +75,32 @@ section #menu{
     padding: 10px 0px;
     font-weight: bold;
     font-size: 1.6em;
+}
+
+#menus address button{
+    font-size: 1.3em;
+    width: 45%;
+    background-color: #000000;
+    border-top: 2px solid lightgrey;
+    border-left: 2px solid lightgrey;
+}
+
+#menus address button:hover{
+    background-color: #FFB03B;
+    border-top: 2px solid #FFB03B;
+    border-left: 2px solid #FFB03B;
+}
+
+.star{
+    height: 2em;
+    width: 2em;
+}
+
+
+.rating-menus{
+    height: 40px;
+    width: 100%;
+    margin-bottom: 1em;
 }
 
 ol {
@@ -83,17 +119,18 @@ ol {
 }
 
 ol > li{
-
-  height: 19%;
-
+  border: 2px inset #FFB03B;
+  height: 7em;
   width: 100%;
   -webkit-transition: width 1.7s ease-out;
   transition: width 1.7s ease-out;
+  background-size: cover;
 }
 
 ol > li:hover{
-    height: 40%;
+    height: 80%;
     background-color: RGBA(255, 176, 59, 0.61);
+    background-size: cover;
 }
 
 #filters{
@@ -113,6 +150,7 @@ ol > li:hover{
 
 #filters input{
     border: 1px solid transparent !important;
+    width: auto;
 }
 
 #pager{
@@ -132,7 +170,7 @@ ol > li:hover{
 #ModalMenuDetails address{
     background-color: RGBA(0, 0, 0, 0.61);
     align-self: flex-end;
-    padding: 1em;
+    padding: 2em;
 }
 
 #ModalMenuDetails address strong {
@@ -143,9 +181,13 @@ ol > li:hover{
 }
 
 /* Pantallas tamaño medio */
-@media screen and (min-width: 456px) {
+@media screen and (min-width: 1080px) {
   section #menu{
     display: flex;
+  }
+
+  .sub-menu-header{
+    font-size: 2em;
   }
 
   #menus .container-maps{

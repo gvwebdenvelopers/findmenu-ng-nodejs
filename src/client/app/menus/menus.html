@@ -5,7 +5,7 @@
 
   <article class="container-maps">
 
-      <h2 class="header-h"><span>Algo más concreto<span></h2>
+      <h2 class="sub-menu-header">Algo más concreto</h2>
 
       <div id="filters">
         <md-input-container class="md-block" flex-gt-sm>
@@ -22,7 +22,6 @@
         <md-input-container class="select-ng">
            <label>Distancia:</label>
            <md-select ng-model="searchRadius">
-             <md-option><em>None</em></md-option>
              <md-option ng-repeat="distance in vm.radiusDistance" ng-value="distance.km" ng-disabled="$index === 1">
                {{distance.km}} Km
              </md-option>
@@ -41,26 +40,30 @@
         <ui-gmap-markers models="vm.markers" coords="'self'" icon="'icon'" options="vm.markersOptions" events="vm.map.markersEvents">
         </ui-gmap-markers>
         <ui-gmap-window show="vm.map.windows.show" coords= "vm.map.windows.model">
+          <address>
+            <label><strong>{{vm.infoWindow.nombre}}</strong></label>
+            <label>Precio: <strong>{{vm.infoWindow.precio_menu }} €</strong></label>
+            <div stars-menus-rating rating="{{vm.infoWindow.valoracion}}"></div>
+          </address>
             <div>{{vm.infoWindow.nombre}}</div>
+
         </ui-gmap-window>
 
       </ui-gmap-google-map>
   </article>
 
   <article class="menus">
-      <h3 class="header-h">Encuentra tu menú</h3>
+      <h3 class="sub-menu-header">Encuentra tu menú entre {{vm.searchedMenus.length}} disponibles</h3>
       <ol>
-      <li ng-repeat="menu in vm.searchedMenus | filter:{nombre:filtro}" id="{{menu.id}}"
-          style="background-image: url('src/client/images{{menu.foto_menu}}');">
+      <li ng-repeat="menu in vm.searchedMenus | filter:{nombre:filtro}" id="{{menu.id}}">
           <div class="detailmenu" >
               <address>
                 <label><strong>{{menu.nombre}}</strong></label>
                 <label>Precio: <strong>{{menu.precio_menu }} €</strong></label>
-                <button class="btn btn-imfo btn-read-more" ng-click="vm.showModalDetails( menu.id )">Ver más</button>
+                <div stars-menus-rating rating="{{menu.valoracion}}"></div>
+                <button class="btn btn-imfo btn-read-more" ng-click="vm.showModalDetails( menu.id )">+</button>
+                <button class="btn btn-imfo btn-read-more" ng-click="vm.centerOnMap( menu.id )">Ver</button>
               </address>
-              <div class="inline">
-                <img class="stars" src="../../img/estrellas-{{menu.valoracion}}.png" alt="Imagen de valoracion">
-              </div>
           </div>
       </li>
     </ol>

@@ -43,15 +43,18 @@
         padding-right: 0.4em;
     }
 
-    nav.menu ul li a {
+    .nav-button {
         display: block; /* Convertimos los elementos a en elementos bloque para manipular el padding */
         color: #FFB03B;
         margin-left: 0.2em;
+        background-color: #313b3d;
+        border: 2px solid #313b3d;
     }
 
-    nav.menu ul li a:hover{
+    .nav-button:hover{
         text-decoration:none;
         color: #37a000;
+        border-bottom: 2px solid #37a000;
     }
 
     li.active a{

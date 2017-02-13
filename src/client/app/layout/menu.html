@@ -2,12 +2,11 @@
 <nav class="menu">
     <a href="/" ><img class="logo" src="/images/findmenu_2.png"</a>
     <!--Directive to control access to the login module-->
-    <login-access></login-access>  
     <ul  ng-controller="MenuController as vm">
         <!--anulo el css-->
         <li class='findmenu' ng-class="vm.isCurrent(r)" ng-repeat="r in vm.navRoutes">
-            <a ui-sref="{{r.name}}" ng-bind-html="r.settings.content" class="float"></a>
+            <a ui-sref="{{r.name}}" ng-bind-html="r.settings.content" class="float nav-button"></a>
         </li>
     </ul>
-</nav> 
-
+    <login-access></login-access>
+</nav>

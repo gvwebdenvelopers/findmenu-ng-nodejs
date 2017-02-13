@@ -23,7 +23,7 @@
           title: 'Menus',
           settings: {
             nav: 3,
-            content: 'Menus'
+            content: '<i class="fa fa-search"></i> Menus'
           }
         }
       }

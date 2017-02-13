@@ -22,7 +22,7 @@
         title: 'Home',
         settings: {
           nav: 1,
-          content: 'Home'
+          content: '<i class="fa fa-home"></i> Home'
         }
       }
     }];

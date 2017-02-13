@@ -26,6 +26,7 @@
     nav.menu {
         background-color: #313b3d;
         border-color: transparent;
+        border-bottom: 2px solid #37a000;
         width: 100%;
         float: left; /* Desplazamos el nav hacia la izquierda */
     }

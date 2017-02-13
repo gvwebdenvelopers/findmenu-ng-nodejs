@@ -50,15 +50,14 @@
   <article class="menus">
       <h3 class="header-h">Encuentra tu menú</h3>
       <ol>
-      <li ng-repeat="menu in vm.searchedMenus | filter:{nombre:filtro}" id="{{menu.id}}"
-          style="background-image: url('src/client/images{{menu.foto_menu}}');">
+      <li ng-repeat="menu in vm.searchedMenus | filter:{nombre:filtro}" id="{{menu.id}}">
           <div class="detailmenu" >
               <address>
                 <label><strong>{{menu.nombre}}</strong></label>
                 <label>Precio: <strong>{{menu.precio_menu }} €</strong></label>
                 <div stars-menus-rating rating="{{menu.valoracion}}"></div>
                 <button class="btn btn-imfo btn-read-more" ng-click="vm.showModalDetails( menu.id )">+</button>
-                <button class="btn btn-imfo btn-read-more" ng-click="">Ver</button>
+                <button class="btn btn-imfo btn-read-more" ng-click="vm.centerOnMap( menu.id )">Ver</button>
               </address>
           </div>
       </li>

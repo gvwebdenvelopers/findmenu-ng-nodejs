@@ -35,6 +35,7 @@
       vm.searchedMenus =[];//Menús que pasan los criterios de búsqueda
       $scope.menuDetail = [];
       $scope.viewOnMap = viewOnMap;
+      vm.centerOnMap = centerOnMap;
       vm.selectedMenu = "";
       /* Maps variables */
 
@@ -123,16 +124,25 @@
       };
       /* Centra el mapa en el menú que se esta visualizando en details modal */
       function viewOnMap(){
-          vm.map = {
-              id: $scope.menuDetail.id,
-              center:{
-                latitude: $scope.menuDetail.latitud,
-                longitude: $scope.menuDetail.longitud
-              },
-              zoom: 18
-          };
+          vm.map.id= $scope.menuDetail.id;
+          vm.map.center.latitude= $scope.menuDetail.latitud;
+          vm.map.center.longitude= $scope.menuDetail.longitud;
+          vm.map.zoom= 18;
+
           //console.log(JSON.stringify(vm.map) );
           vm.modalInstance.dismiss("cancel");
+          return vm.map;
+      }
+
+      /* Centra el mapa en el menú que se esta visualizando en details modal */
+      function centerOnMap( idmenu ){
+          $scope.menuDetail = getMenu( idmenu );
+
+          vm.map.id= $scope.menuDetail.id;
+          vm.map.center.latitude= $scope.menuDetail.latitud;
+          vm.map.center.longitude= $scope.menuDetail.longitud;
+          vm.map.zoom= 18;
+          console.log($scope.menuDetail + idmenu);
           return vm.map;
       }
 
@@ -164,11 +174,35 @@
           /*para mostar menus en un radio
           1 punto latitud = 111km
           0,1 punto latitud = 11,1km
-          0,01  punto latitud = 1,11km*/
+          0,01  punto latitud = 1,11km
+          1 km = 0,009 punto latitud*/
           vm.searchedMenus=[];
-          if( $scope.searchRadius){
+          if( $scope.searchRadius && $scope.menuPrice){
+            console.log("En busqueda avanzada / searchRadius && menuPrice:" + $scope.searchRadius);
             console.log("En busqueda avanzada / searchRadius :" + $scope.searchRadius);
-            
+            var radius = parseInt( $scope.searchRadius ) * 0.009;
+            for( var i=0; i< vm.menus.length; i++){
+              if( (vm.menus[i].latitud <= (vm.map.center.latitude + radius))
+                  && (vm.menus[i].latitud >= (vm.map.center.latitude - radius))
+                  && (vm.menus[i].longitud <= (vm.map.center.longitude + radius))
+                  && (vm.menus[i].longitud >= (vm.map.center.longitude - radius))
+                  && (vm.menus[i].precio_menu <= $scope.menuPrice)){
+                vm.searchedMenus.push(vm.menus[i]);
+                console.log("advancedSearch " + JSON.stringify(vm.menus[i]));
+              }
+            }
+          }else if( $scope.searchRadius ){
+            console.log("En busqueda avanzada / searchRadius :" + $scope.searchRadius);
+            var radius = parseInt( $scope.searchRadius ) * 0.009;
+            for( var i=0; i< vm.menus.length; i++){
+              if( (vm.menus[i].latitud <= (vm.map.center.latitude + radius))
+                  && (vm.menus[i].latitud >= (vm.map.center.latitude - radius))
+                  && (vm.menus[i].longitud <= (vm.map.center.longitude + radius))
+                  && (vm.menus[i].longitud >= (vm.map.center.longitude - radius))){
+                vm.searchedMenus.push(vm.menus[i]);
+                console.log("advancedSearch " + JSON.stringify(vm.menus[i]));
+              }
+            }
           }
           else if( $scope.menuPrice ){
             console.log("En busqueda avanzada / menuPrice :" + $scope.searchRadius);
@@ -179,13 +213,12 @@
               }
             }
           }
-          else if( $scope.searchRadius && $scope.menuPrice){
-            console.log("En busqueda avanzada / searchRadius && menuPrice:" + $scope.searchRadius);
-          }else{
+          else {
             console.log("En busqueda avanzada / else :" + $scope.searchRadius);
             vm.searchedMenus=vm.menus;
           }
           //update();
+          getMarkers( vm.searchedMenus );
       }
   }
 })();

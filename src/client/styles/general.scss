@@ -1,27 +1,28 @@
 /* Colores */
-@color_amarillo: #FFB03B;
-@color_blanco: #FFFFFF;
-@color_gris: #999999;
-@color_gris_claro: #dcdcdc;
-@color_gris_oscuro: #313b3d;
-@gris_oscuro_menu: #2E2E2E;
-@color_verde: #37a000;
+$color_amarillo: #FFB03B;
+$color_blanco: #FFFFFF;
+$color_gris: #999999;
+$color_gris_claro: #dcdcdc;
+$color_gris_oscuro: #313b3d;
+$gris_oscuro_menu: #2E2E2E;
+$color_verde: #37a000;
 /* sizes */
-@border_size: 2px;
-@font_size: 1em;
-@padding_size: 0.5em;
-@padding_full: 1em;
+$border_size: 2px;
+$font_size: 1em;
+$padding_size: 0.5em;
+$padding_full: 1em;
 
 @import "menus.css";
 
 @import url('https://fonts.googleapis.com/css?family=Sarina');
 @import url('https://fonts.googleapis.com/css?family=Satisfy');
+
 /* ==========================================================================
    LESS MIXINGS
    ========================================================================== */
-    .border-invisible{
+    @mixin border-invisible($size) {
        border-color: transparent;
-       border-bottom: @border_size solid @color_verde;
+       border-bottom: $size solid $color_verde;
      }
 
 /* ==========================================================================
@@ -39,16 +40,16 @@
    ========================================================================== */
    header {
       flex: 0 0 auto;
-      background-color: @color_gris_claro;
-      padding-top: @padding_size;
+      background-color: $color_gris_claro;
+      padding-top: $padding_size;
     }
 
     nav {
       flex-direction: column;
 
       .menu {
-          background-color: @color_gris_oscuro;
-          .border-invisible;
+          @include border-invisible(2px);
+          background-color: $color_gris_oscuro;
           width: 100%;
           float: left; /* Desplazamos el nav hacia la izquierda */
 
@@ -59,10 +60,10 @@
               overflow: hidden; /* Limpiamos errores de float */
               li {
                   float: left;
-                  font-size: @font_size * 2;
-                  padding-right: @padding_size;
+                  font-size: $font_size * 2;
+                  padding-right: $padding_size;
                   li.active a{
-                      color: @color_verde !important;
+                      color: $color_verde !important;
                   }
               }
           }
@@ -71,14 +72,14 @@
 
   .nav-button {
       display: block; /* Convertimos los elementos a en elementos bloque para manipular el padding */
-      color: @color_amarillo;
-      margin-left: @padding_size / 2;
-      background-color: @color_gris_oscuro;
-      border: @border_size solid @color_gris_oscuro;
+      color: $color_amarillo;
+      margin-left: $padding_size / 2;
+      background-color: $color_gris_oscuro;
+      border: $border_size solid $color_gris_oscuro;
       &:hover{
           text-decoration:none;
-          color: @color_verde;
-          border-bottom: @border_size solid @color_verde;
+          color: $color_verde;
+          border-bottom: $border_size solid $color_verde;
       }
   }
 
@@ -94,8 +95,8 @@
    Css para el section
    ========================================================================== */
   main{
-    background-color: @color_gris_oscuro;
-    padding: @padding_size / 2;
+    background-color: $color_gris_oscuro;
+    padding: $padding_size / 2;
   }
 
   .findmenu-container{
@@ -104,39 +105,39 @@
 
   section{
       display: block;
-      background-color: @color_gris_oscuro;
-      padding: @padding_size;
-      .border-invisible;
+      background-color: $color_gris_oscuro;
+      padding: $padding_size;
+      @include border-invisible(2px);
   }
 /* ==========================================================================
    Css footer
    ========================================================================== */
    footer {
-     color: @color_blanco;
+     color: $color_blanco;
      flex: 2 1 auto;
      align-self: flex-end;
-     background-color: @color_gris_claro;
+     background-color: $color_gris_claro;
      text-align: center;
      max-height: 10%;
    }
   .footer {
       width: 100%;
-      background-color: @color_gris_oscuro;
-      border-top: @border_size solid @color_verde;
+      background-color: $color_gris_oscuro;
+      border-top: $border_size solid $color_verde;
       .widget-title, .footer .widget-title a {
-          font-size: @font_size * 1.5;
+          font-size: $font_size * 1.5;
           font-weight: 700;
-          letter-spacing: @padding_size / 2;
-          color: @color_gris;
+          letter-spacing: $padding_size / 2;
+          color: $color_gris;
       }
       .widget-title{
           font-family: 'Satisfy', sans-serif;
-          font-size: @font_size;
-          color: @color_verde;
+          font-size: $font_size;
+          color: $color_verde;
       }
 
       .widget, .footer address {
-          color: @color_gris;
+          color: $color_gris;
           text-transform: none;
           font-style: normal;
       }

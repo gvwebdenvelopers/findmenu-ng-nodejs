@@ -5,6 +5,7 @@ var del = require('del');
 var glob = require('glob');
 var gulp = require('gulp');
 var path = require('path');
+var sass = require('gulp-sass');
 var _ = require('lodash');
 var $ = require('gulp-load-plugins')({ lazy: true });
 
@@ -53,6 +54,20 @@ gulp.task('plato', function(done) {
   log('Browse to /report/plato/index.html to see Plato results');
 
   startPlatoVisualizer(done);
+});
+/**
+ * Compile sass to css
+ * @return {Stream}
+ */
+gulp.task('sass', function () {
+  log('Compiling Sass --> CSS');
+  return gulp.src(config.sass)
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest(config.temp));
+});
+
+gulp.task('sass:watch', function () {
+  gulp.watch('./sass/**/*.scss', ['sass']);
 });
 
 /**

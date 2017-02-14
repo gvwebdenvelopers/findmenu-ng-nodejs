@@ -1,0 +1,54 @@
+@import "general.css";
+/* ==========================================================================
+   Media query pantallas de gran tamaño
+   ========================================================================== */
+@media screen and (min-width: 1090px){
+  /* ==========================================================================
+     navegacion
+     ========================================================================== */
+     .logo{
+         padding:1em;
+     }
+     nav{
+         /* contenido justificado ocupando huecos */
+         display: flex;
+         flex-flow: row wrap;
+         justify-content: space-around;
+         ul{
+             display: inline-flex;
+             border-left: 2px solid #2E2E2E;
+             padding-top: @padding_size;
+             padding: 1em;
+         }
+         li{
+             display: inline-flex;
+             padding-right: 0.2em;
+         }
+     }
+     nav.menu ul li {
+         float: left;
+         font-size: 2em;
+         padding-top: 0.5em;
+     }
+
+     section{
+         display: flex;
+    }
+    /* ==========================================================================
+       Css para el section
+       ========================================================================== */
+     section {
+         display: flex;
+    }
+
+    .findmenu-container{
+      width: 60% !important;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ==========================================================================
+       Css para el footer
+       ========================================================================== */
+
+}

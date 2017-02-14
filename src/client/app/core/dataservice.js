@@ -14,6 +14,7 @@
             signup: signup,
             localSignin:localSignin ,
             socialLogin:socialLogin,
+            getProfile:getProfile,
             //getMenu: getMenu,
             //getMenusMarkers: getMenusMarkers,
             getCurrentLocation: getCurrenLocation
@@ -90,6 +91,22 @@
             function fail(e) {
         
                 return exception.catcher('XHR Failed for socialSignin')(e);
+            }
+        }
+        
+         function getProfile(user) {
+            return $http.post('/api/getprofile',user)
+                    .then(success)
+                    .catch(fail);
+
+            function success(response) {
+               
+                return response;
+            }
+
+            function fail(e) {
+        
+                return exception.catcher('XHR Failed for get profile')(e);
             }
         }
       /*Call /api/menu sending a menu id and get menu from DB

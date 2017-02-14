@@ -29,6 +29,17 @@
                     controller: 'socialController'
 
                 }
+            }, {
+                //Devuelve al usuario que está en sesión
+                state: 'profile',
+                config: {
+                    url: '/profile',
+                    templateUrl: 'app/login/profile.html',
+                    controller: 'ProfileController',
+                    controllerAs: 'vm',
+                    title: 'Profile'
+
+                }
             }
 
         ];

@@ -1,0 +1,118 @@
+<section layout="row" flex>
+        <md-sidenav class="md-sidenav-left md-whiteframe-z2"
+            md-component-id="left"
+            md-is-locked-open="$mdMedia('gt-xs')">
+            <md-toolbar class="md-warn">
+                <div class="md-toolbar-tools">
+                <h1 class="md-display-4">{{name}}</h1>
+            </div>
+            </md-toolbar>
+            <md-card>
+                <img alt="Gravatar image"
+                    src={{avatar}}>
+                <md-card-content>
+                    <h2 class="md-title">About Me</h2>
+                    <p>
+                        A passionate Blogger and Developer.
+                        He has more then 5 years of experience on web application development.
+                        He loves to work in javascript programming language.At present he is
+                        exploring W3C Web Component specification.
+                    </p>
+                </md-card-content>
+            </md-card>
+        </md-sidenav>
+        <md-content layout="row">
+            <md-card flex-xs flex-gt-xs="50">
+               <!--<img alt="Education"
+                    src="image/table-chair.jpg">-->
+               <md-card-content>
+                   <h2 class="md-title">My profile</h2>
+                   <md-list>
+                       <md-list-item class="md-1-line">
+                          <form role="form">
+	   <div class="form-group">
+	      <label for="name">name</label>
+	      <input type="name" class="form-control" id="fname" placeholder="Enter name" ng-model="vm.name" >
+	   </div>
+                              <div class="form-group">
+	      <label for="name">last name</label>
+	      <input type="name" class="form-control" id="fname" placeholder="Enter name" ng-model="vm.lastname" >
+	   </div>
+                              
+	   <div class="form-group">
+	      <div flex-gt-xs>
+      <h4>Standard date-picker</h4>
+      <md-datepicker ng-model="vm.birthday" md-placeholder="Enter date"></md-datepicker>
+    </div>
+	   </div>
+	   <div class="form-group">
+	      <label for="email">Email</label>
+	      <input type="email" class="form-control" id="email" placeholder="Enter email" ng-model="vm.email" >
+	   </div>
+	    <div class="control-group">
+                <label class="pefil">Pais:</label>
+                <p>
+                    <select name="country" id="country" ng-model="vm.country" 
+                            ng-options="item.sName for item in country" placeholder="Pais"  ng-change="resetCountry()"> 
+                        <option value="">{{vm.country}}</option>
+                    </select>
+                    <span class="text-danger" ng-show="AlertMessage" ng-model="user.pais_error">{{user.pais_error}}</span>
+                </p>
+            </div>
+            <div class="control-group">
+                <label class="pefil">Provincia:</label>
+                <p>
+                    <select name="province" id="province" ng-model="vm.province"
+                            ng-options="item.nombre for item in province"  
+                     placeholder="Provincia" ng-change="resetValues()" ng-disabled="profile.country.sISOCode!='ES'">
+                        <option value="">Seleccione una provincia</option>
+                    </select>
+                    <span class="text-danger" ng-show="AlertMessage" ng-model="user.prov_error">{{user.prov_error}}</span>
+                </p>
+            </div>
+            <div class="control-group">
+                <label class="pefil">Poblacion:</label>
+                <p>
+                    <select  name="city" id="city" ng-model="vm.city"
+                          ng-options="item.poblacion for item in cities 
+                          "placeholder="Poblacion" ng-disabled="profile.country.sISOCode!='ES'"> 
+                        <option value="">Seleccione una ciudad</option>
+                    </select>
+                    <span class="text-danger" ng-show="AlertMessage" ng-model="user.pob_error">{{user.pob_error}}</span>
+                </p>
+                 <br/>
+            
+            </div>
+	   </div>
+	     <button type="submit" class="btn btn-default">Modify</button>
+	</form>
+                       </md-list-item>
+                    </md-list>
+               </md-card-content>
+           </md-card>
+            
+            <md-card flex-xs flex-gt-xs="50">
+                <!--<img alt="Contact Me"
+                     src="image/contact-me.jpg">-->
+                <md-card-content>
+                    <h2 class="md-title">Contact Me</h2>
+                    <div layout>
+                        <div flex="20" layout layout-align="left center">
+                            <span class="md-body-1 md-primary">Email</span>
+                        </div>
+                        <span flex class="md-primary" layout-align="left center">
+                            sandeeppateltech@gmail.com
+                        </span>
+                    </div>
+                    <div layout>
+                        <div flex="20" layout layout-align="left center">
+                            <span class="md-body-1 md-primary">Blog</span>
+                        </div>
+                        <span flex class="md-primary" layout-align="left center">
+                            www.tutorialsavvy.com
+                        </span>
+                    </div>
+                </md-card-content>
+            </md-card>
+        </md-content>
+    </section>

@@ -25,6 +25,8 @@ module.exports = function (app, passport) {
        // console.log(req.user);
         res.json(req.user);
     });
+    
+    app.post('/api/getprofile', Controller.getProfile);
 
     /*app.get('/social/failure', function (req, res) {
         console.log('fail');

@@ -12,8 +12,10 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var passport = require('passport');
 var session = require('express-session');
+var dotenv = require('dotenv');
 var environment = process.env.NODE_ENV;
 
+dotenv.load({ path: './src/server/config/.env'});
 app.use(favicon(__dirname + '/favicon.ico'));
 app.use(bodyParser.urlencoded({
     extended: true

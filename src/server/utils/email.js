@@ -1,7 +1,5 @@
 var nodemailer = require('nodemailer');
 var sgTransport = require('nodemailer-sendgrid-transport');
-
-var sg = require('./../sendgrid.env');
 var style = require('./style.email.js');
 
 exports.sendEmail = function (req, res) {
@@ -74,7 +72,7 @@ exports.sendEmail = function (req, res) {
     //Input APIKEY Sendgrid
     var options = {
         auth: {
-            api_key: sg
+            api_key: process.env.sendgridKey
         }
     };
     var mailer = nodemailer.createTransport(sgTransport(options));

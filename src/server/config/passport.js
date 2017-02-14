@@ -1,13 +1,9 @@
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var TwitterStrategy = require('passport-twitter').Strategy;
-//var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var bcrypt = require('bcrypt-nodejs');
 var Mysql = require('../users/users.model');
-var configAuth = require('./auth'); // use this one for testing
-//var OAuthStrategy = require('passport-oauth').OAuthStrategy; //encara que no es gaste, fa falta
-//var OAuth2Strategy = require('passport-oauth').OAuth2Strategy; //encara que no es gaste, fa falta
 
 //exportamos lalibreria de funciones
 module.exports = function (passport) {
@@ -85,9 +81,9 @@ passport.deserializeUser(function(user, done) {
      * Sign in with Facebook.
      */
     passport.use(new FacebookStrategy({
-        clientID: configAuth.facebookAuth.clientID,
-        clientSecret: configAuth.facebookAuth.clientSecret,
-        callbackURL: configAuth.facebookAuth.callbackURL,
+        clientID: process.env.facebookID,
+        clientSecret: process.env.facebookSecret,
+        callbackURL: process.env.facebookCalback,
         profileFields: ['name', 'email', 'link', 'locale', 'timezone'],
         passReqToCallback: true
     }, function (req, accessToken, refreshToken, profile, done) {
@@ -111,7 +107,6 @@ passport.deserializeUser(function(user, done) {
                 });//fin de consulta
                 //return done(null, rows[0]);
             } else {
-                 console.log(profile);
                 Mysql.getUser(profile.id, function (error, rows) {
                     if (!rows.length) {
 
@@ -129,9 +124,9 @@ passport.deserializeUser(function(user, done) {
     }));
     
     passport.use(new TwitterStrategy({
-    consumerKey: configAuth.twitterAuth.consumerKey,
-    consumerSecret: configAuth.twitterAuth.consumerSecret,
-    callbackURL: configAuth.twitterAuth.callbackURL,
+    consumerKey: process.env.twitterID,
+    consumerSecret: process.env.twitterSecret,
+    callbackURL: process.env.twitterCallback,
     includeEmail: true,
     passReqToCallback : true
   },
@@ -170,9 +165,9 @@ passport.deserializeUser(function(user, done) {
   }));
   
   passport.use(new GoogleStrategy({
-        clientID       : configAuth.googleAuth.GOOGLE_ID,
-        clientSecret    : configAuth.googleAuth.GOOGLE_SECRET,
-        callbackURL     : configAuth.googleAuth.callbackURL,
+        clientID       : process.env.googleID,
+        clientSecret    : process.env.googleSecret,
+        callbackURL     : process.env.googleCallback,
         passReqToCallback : true 
     },
     function(req, token, refreshToken, profile, done) {

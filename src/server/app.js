@@ -1,6 +1,8 @@
 /*jshint node:true*/
 'use strict';
 
+var fs = require('fs');
+var https = require('https');
 var express = require('express');
 var app = express();
 var cors = require('cors');

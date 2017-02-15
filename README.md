@@ -40,12 +40,36 @@ node_modules/
 bower_components/
 
 OTROS
-.tmp --
-sendgrid.env --
+
+Estos ficheros debes configurarlos y colocarlos en la carpeta src/server/config
+
+.env --
 config.db.js --
 
-#gmaps:
-Comprobar que las API google que quiero usar estan habilitadas
-Misrar si en el enlace script se puede especificar la version
-Plugin jquery para coger geolocalizzacion generica (HTML5 navigator)
-directions, distancematrix
+Plantilla .env:
+
+sendgridKey=aqui tu key
+
+facebookID=aqui tu key
+facebookSecret=aqui tu key
+facebookCalback=http://localhost:3000/auth/facebook/callback
+
+twitterID=aqui tu key
+twitterSecret=aqui tu key
+twitterCallback=http://localhost:3000/auth/twitter/callback
+
+googleID=aqui tu key
+googleSecret=aqui tu key
+googleCallback=http://localhost:3000/auth/google/callback
+
+plantilla config.db.js
+
+var mysql = require('mysql');
+exports.connection = mysql.createConnection({
+  host: '127.0.0.1',
+  user: 'usuario',
+  password: '',
+  database: 'findmenu'
+});
+
+

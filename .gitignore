@@ -6,5 +6,5 @@ bower_components/
 # other
 .tmp
 sendgrid.env
-
+*.env
 config.db.js

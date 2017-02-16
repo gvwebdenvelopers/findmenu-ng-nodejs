@@ -11,7 +11,7 @@
         var vm = this;
         var states = routerHelper.getStates();
         vm.isCurrent = isCurrent;
-
+        vm.setLang = setLang;
         activate();
 
         function activate() {

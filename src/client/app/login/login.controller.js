@@ -5,16 +5,18 @@
             .module('app.login')
             .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['dataservice', '$state', '$uibModalInstance', 
-        'cookiesService', 'logger', 'headerService'];
+    LoginController.$inject = ['$translatePartialLoader','dataservice', '$state', '$uibModalInstance',
+                              'cookiesService', 'logger', 'headerService'];
 
-    function LoginController(dataservice, $state, $uibModalInstance, cookiesService, logger, headerService) {
+    function LoginController( $translatePartialLoader, dataservice, $state, $uibModalInstance,
+                              cookiesService, logger, headerService) {
         var vm = this;
+        $translatePartialLoader.addPart('layout');
         vm.inputUser = '';
         vm.inputPass = '';
         vm.SubmitLogin = SubmitLogin;
         vm.SubmitSignup = SubmitSignup;
-       
+
         function CloseModal() {
             $uibModalInstance.dismiss('cancel');
         }
@@ -48,8 +50,8 @@
 
         function SubmitSignup() {
             CloseModal();
-            $state.go('signup');           
+            $state.go('signup');
         }
-               
+
     }
 })();

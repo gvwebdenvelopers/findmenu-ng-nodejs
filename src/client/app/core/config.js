@@ -21,9 +21,9 @@
 
   core.config(configure);
 
-  configure.$inject = ['$logProvider', 'routerHelperProvider', 'exceptionHandlerProvider'];
+  configure.$inject = ['$translatePartialLoaderProvider', '$translateProvider', '$logProvider', 'routerHelperProvider', 'exceptionHandlerProvider'];
   /* @ngInject */
-  function configure($logProvider, routerHelperProvider, exceptionHandlerProvider) {
+  function configure($translatePartialLoaderProvider, $translateProvider, $logProvider, routerHelperProvider, exceptionHandlerProvider) {
     $translateProvider.registerAvailableLanguageKeys(['ca','gl','en','es'],{
       'ca-ES': 'ca',
       'gl_ES': 'gl',

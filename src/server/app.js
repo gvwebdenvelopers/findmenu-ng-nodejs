@@ -31,8 +31,8 @@ require('./config/passport.js')(passport);
 
 //Configuración de la sesión para Passport
 app.use(session({
-    resave: false,
-    saveUninitialized: false,
+    resave: true,
+    saveUninitialized: true,
     secret: 'findmenuangularnodejs'
 })); // session secret
 app.use(passport.initialize());
@@ -46,33 +46,45 @@ console.log('PORT=' + port);
 console.log('NODE_ENV=' + environment);
 
 switch (environment) {
-    case 'build':
-        //console.log('** BUILD **');
-        app.use(express.static('./build/'));
-        // Any invalid calls for templateUrls are under app/* and should return 404
-        app.use('/app/*', function (req, res, next) {
-            four0four.send404(req, res);
-        });
-        // Any deep link calls should return index.html
-        app.use('/*', express.static('./build/index.html'));
-        break;
-    default:
-        //console.log('** DEV **');
-        app.use(express.static('./src/client/'));
-        app.use(express.static('./'));
-        app.use(express.static('./tmp'));
-        // Any invalid calls for templateUrls are under app/* and should return 404
-        app.use('/app/*', function (req, res, next) {
-            four0four.send404(req, res);
-        });
-        // Any deep link calls should return index.html
-        app.use('/*', express.static('./src/client/index.html'));
-        break;
+  case 'build':
+    console.log('** BUILD **');
+    app.use(express.static('./build/'));
+    // Any invalid calls for templateUrls are under app/* and should return 404
+    app.use('/app/*', function(req, res, next) {
+      four0four.send404(req, res);
+    });
+    // Any deep link calls should return index.html
+    app.use('/*', express.static('./build/index.html'));
+    console.log('WARNING: OPEN BROWSER WITH HTTPS');
+    https.createServer({
+      key: fs.readFileSync('privkey1.pem'),
+      cert: fs.readFileSync('cert1.pem')
+    }, app).listen(port);
+
+    break;
+  default:
+    console.log('** DEV **');
+    app.use(express.static('./src/client/'));
+    app.use(express.static('./'));
+    app.use(express.static('./tmp'));
+    // Any invalid calls for templateUrls are under app/* and should return 404
+    app.use('/app/*', function(req, res, next) {
+      four0four.send404(req, res);
+    });
+    // Any deep link calls should return index.html
+    app.use('/*', express.static('./src/client/index.html'));
+    app.listen(port, function() {
+      console.log('Express server listening on port ' + port);
+      console.log('env = ' + app.get('env') +
+      '\n__dirname = ' + __dirname +
+      '\nprocess.cwd = ' + process.cwd());
+    });
+    break;
 }
 
-app.listen(port, function () {
+/*app.listen(port, function () {
     console.log('Express server listening on port ' + port);
     console.log('env = ' + app.get('env') +
             '\n__dirname = ' + __dirname +
             '\nprocess.cwd = ' + process.cwd());
-});
+});*/

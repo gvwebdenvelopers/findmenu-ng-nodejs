@@ -12,7 +12,7 @@
     function ContactController(dataservice, $state, $timeout) {
         var vm = this;
         //variables del formulario
-        vm.title = 'Contact';
+        //vm.title = 'Contact';
         vm.inputName = '';
         vm.inputEmail = '';
         vm.inputSubject = '';

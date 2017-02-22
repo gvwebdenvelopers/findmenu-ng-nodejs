@@ -14,7 +14,7 @@
         function social() {
 
             dataservice.socialLogin().then(function (response) {
-                console.log(response);
+                //console.log(response);
                 logger.success('Usuario autentificado');
                 cookiesService.SetCredentials(response.data);
                 headerService.login();

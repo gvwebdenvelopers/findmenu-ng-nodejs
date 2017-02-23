@@ -19,10 +19,10 @@
         templateUrl: 'app/contact/contact.html',
         controller: 'ContactController',
         controllerAs: 'vm',
-        title: 'Contact',
+        title: 'CONTACT',
         settings: {
           nav: 2,
-          content: '<i class="fa fa-envelope-open-o"></i> Contact'
+          //content: '<i class="fa fa-envelope-open-o"></i> Contact'
         }
       }
     }];

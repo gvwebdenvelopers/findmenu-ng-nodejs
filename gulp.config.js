@@ -8,7 +8,9 @@ module.exports = function() {
   var temp = './.tmp/';
   var style = './src/client/styles/';
   var wiredep = require('wiredep');
-  var bowerFiles = wiredep({ devDependencies: true })['js'];
+  var bowerFiles = wiredep({
+    devDependencies: true
+  })['js'];
   var bower = {
     json: require('./bower.json'),
     directory: './bower_components/',
@@ -28,15 +30,15 @@ module.exports = function() {
     build: './build/',
     client: client,
     css: [style + 'forms.css',
-          style + 'general-min1080.css',
-          style + 'general-min456.css',
-          style + 'general.css',
-          style + 'menus.css',
-          style + 'print.css',
-          style + 'signup.css',
-          style + 'style.css'
-      ],
-       // css: style + 'general.css',
+      style + 'general-min1080.css',
+      style + 'general-min456.css',
+      style + 'general.css',
+      style + 'menus.css',
+      style + 'print.css',
+      style + 'signup.css',
+      style + 'style.css'
+    ],
+    // css: style + 'general.css',
     fonts: bower.directory + 'font-awesome/fonts/**/*.*',
     html: client + '**/*.html',
     htmltemplates: clientApp + '**/*.html',
@@ -63,7 +65,6 @@ module.exports = function() {
       client + 'stubs/**/*.js'
     ],
     temp: temp,
-
     /**
      * optimized files
      */
@@ -75,7 +76,9 @@ module.exports = function() {
     /**
      * plato
      */
-    plato: { js: clientApp + '**/*.js' },
+    plato: {
+      js: clientApp + '**/*.js'
+    },
 
     /**
      * browser sync
@@ -126,7 +129,9 @@ module.exports = function() {
     ],
     specHelpers: [client + 'test-helpers/*.js'],
     specs: [clientApp + '**/*.spec.js'],
-    serverIntegrationSpecs: [client + '/tests/server-integration/**/*.spec.js'],
+    serverIntegrationSpecs: [client +
+      '/tests/server-integration/**/*.spec.js'
+    ],
 
     /**
      * Node settings
@@ -171,9 +176,15 @@ module.exports = function() {
         dir: report + 'coverage',
         reporters: [
           // reporters not supporting the `file` property
-          { type: 'html', subdir: 'report-html' },
-          { type: 'lcov', subdir: 'report-lcov' },
-          { type: 'text-summary' } //, subdir: '.', file: 'text-summary.txt'}
+          {
+            type: 'html',
+            subdir: 'report-html'
+          }, {
+            type: 'lcov',
+            subdir: 'report-lcov'
+          }, {
+            type: 'text-summary'
+          } //, subdir: '.', file: 'text-summary.txt'}
         ]
       },
       preprocessors: {}

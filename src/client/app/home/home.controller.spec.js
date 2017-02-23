@@ -13,7 +13,6 @@ describe('home.controller', function() {
   });
 
   bard.verifyNoOutstandingHttpRequests();
-
   describe('Home controller', function() {
     it('should be created successfully', function() {
       expect(controller).to.be.defined;
@@ -30,6 +29,3 @@ describe('home.controller', function() {
     });
   });
 });
-
-
-

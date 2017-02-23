@@ -6,11 +6,12 @@ describe('login.routes', function() {
 
     beforeEach(function() {
       module('app.login', bard.fakeToastr);
-      bard.inject('$httpBackend', '$location', '$rootScope', '$state', '$templateCache');
+      bard.inject('$httpBackend', '$location', '$rootScope',
+        '$state', '$templateCache');
     });
 
     beforeEach(function() {
-      $templateCache.put(signupView,profileView, '');
+      $templateCache.put(signupView, profileView, '');
     });
 
     bard.verifyNoOutstandingHttpRequests();
@@ -28,13 +29,14 @@ describe('login.routes', function() {
       $rootScope.$apply();
       expect($state.is('signup'));
     });
-    
+
     it('should map state profile to url /profile ', function() {
       expect($state.href('profile', {})).to.equal('/profile');
     });
 
     it('should map /profile route to profile View template', function() {
-      expect($state.get('profile').templateUrl).to.equal(profileView);
+      expect($state.get('profile').templateUrl).to.equal(
+        profileView);
     });
 
     it('of profile should work with $state.go', function() {
@@ -42,8 +44,5 @@ describe('login.routes', function() {
       $rootScope.$apply();
       expect($state.is('profile'));
     });
-    
   });
 });
-
-

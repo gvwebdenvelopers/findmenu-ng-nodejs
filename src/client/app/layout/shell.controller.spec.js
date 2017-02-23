@@ -4,21 +4,21 @@ describe('shell.controller', function() {
 
   beforeEach(function() {
     bard.appModule('app.layout');
-    bard.inject('$controller', '$q', '$rootScope', '$timeout', 'dataservice');
+    bard.inject('$controller', '$q', '$rootScope', '$timeout',
+      'dataservice');
   });
 
-//Inicializa el contexto antes de cada test
+  //Inicializa el contexto antes de cada test
   beforeEach(function() {
     controller = $controller('ShellController');
     $rootScope.$apply();
   });
 
   bard.verifyNoOutstandingHttpRequests();
-
-    //describe los test que pertenecen a este banco de test
+  //describe los test que pertenecen a este banco de test
   describe('Shell controller', function() {
-      
-    //test para saber si está defindo el controlador  
+
+    //test para saber si está defindo el controlador
     it('should be created successfully', function() {
       expect(controller).to.be.defined;
     });

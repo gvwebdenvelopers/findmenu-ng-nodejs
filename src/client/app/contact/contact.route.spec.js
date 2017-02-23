@@ -5,7 +5,8 @@ describe('contact.routes', function() {
 
     beforeEach(function() {
       module('app.contact', bard.fakeToastr);
-      bard.inject('$httpBackend', '$location', '$rootScope', '$state', '$templateCache');
+      bard.inject('$httpBackend', '$location', '$rootScope',
+        '$state', '$templateCache');
     });
 
     beforeEach(function() {
@@ -29,5 +30,3 @@ describe('contact.routes', function() {
     });
   });
 });
-
-

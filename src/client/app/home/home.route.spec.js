@@ -5,13 +5,13 @@ describe('home.routes', function() {
 
     beforeEach(function() {
       module('app.home', bard.fakeToastr);
-      bard.inject('$httpBackend', '$location', '$rootScope', '$state', '$templateCache');
+      bard.inject('$httpBackend', '$location', '$rootScope',
+        '$state', '$templateCache');
     });
 
     beforeEach(function() {
       $templateCache.put(view, '');
     });
-
     bard.verifyNoOutstandingHttpRequests();
 
     it('should map state home to url / ', function() {
@@ -29,6 +29,3 @@ describe('home.routes', function() {
     });
   });
 });
-
-
-

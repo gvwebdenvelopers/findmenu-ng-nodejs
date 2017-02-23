@@ -20,10 +20,10 @@
           templateUrl: 'app/menus/menus.html',
           controller: 'MenusController',
           controllerAs: 'vm',
-          title: 'Menus',
+          title: 'MENUS',
           settings: {
             nav: 3,
-            content: '<i class="fa fa-search"></i> Menus'
+            //content: '<i class="fa fa-search"></i> Menus'
           }
         }
       }

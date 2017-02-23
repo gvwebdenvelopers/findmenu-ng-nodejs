@@ -2,11 +2,23 @@
 <nav class="menu">
     <a href="/" ><img class="logo" src="/images/findmenu_2.png"/></a>
     <!--Directive to control access to the login module-->
-    <ul  ng-controller="MenuController as vm">
+    <ul ng-controller="MenuController as vm">
         <!--anulo el css-->
         <li class='findmenu' ng-class="vm.isCurrent(r)" ng-repeat="r in vm.navRoutes">
-            <a ui-sref="{{r.name}}" ng-bind-html="r.settings.content" class="float nav-button"></a>
+            <a ui-sref="{{r.name}}" ng-bind-html="r.settings.content" class="float nav-button" translate="{{r.title}}"></a>
+        </li>
+        <li class="dropdown nav navbar-nav pull-left">
+          <button id="translateButton" type="button" data-toggle="dropdown" translate="LANGUAGE">
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li> <a ng-click="vm.setLang('ca')" translate="CATALA"></a></li>
+            <li> <a ng-click="vm.setLang('gl')" translate="GALICIAN"></a></li>
+            <li> <a ng-click="vm.setLang('en')" translate="ENGLISH"></a></li>
+            <li> <a ng-click="vm.setLang('es')" translate="SPANISH"></a></li>
+          </ul>
         </li>
     </ul>
     <login-access></login-access>
+
 </nav>

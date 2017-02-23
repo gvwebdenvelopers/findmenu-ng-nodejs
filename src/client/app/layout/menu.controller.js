@@ -5,18 +5,18 @@
             .module('app.layout')
             .controller('MenuController', MenuController);
 
-    MenuController.$inject = ['$state', 'routerHelper'];
+    MenuController.$inject = ['$translate', '$translatePartialLoader','$state', 'routerHelper'];
     /* @ngInject */
-    function MenuController($state, routerHelper) {
+    function MenuController($translate, $translatePartialLoader, $state, routerHelper) {
         var vm = this;
+        $translatePartialLoader.addPart('layout');
         var states = routerHelper.getStates();
         vm.isCurrent = isCurrent;
-
+        vm.setLang = setLang;
         activate();
 
         function activate() {
             getNavRoutes();
-
         }
 
         function getNavRoutes() {
@@ -25,6 +25,12 @@
             }).sort(function (r1, r2) {
                 return r1.settings.nav - r2.settings.nav;
             });
+        }
+
+        function setLang(langKey) {
+          // You can change the language during runtime
+          console.log("Language set to "+ langKey);
+          $translate.use(langKey);
         }
 
         function isCurrent(route) {

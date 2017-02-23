@@ -1,0 +1,14 @@
+{
+  "HOME": "Inici",
+  "LANGUAGE": "Llengua",
+  "CATALA": "Catalá",
+  "GALICIAN": "Gallec",
+  "ENGLISH": "Angles",
+  "SPANISH": "Espanyol",
+  "SING OUT": "<i class='fa fa-sign-out'></i> Eixir",
+  "SING IN": "<i class='fa fa-sign-in'></i> Accedir",
+  "WELCOME": "<i class='fa fa-user'/> Benvingut : {{name}}</i>",
+  "MENUS": "<i class='fa fa-search'></i> Menús",
+  "CONTACT": "<i class='fa fa-envelope-open-o'></i> Contacte",
+  "HOME": "<i class='fa fa-home'></i> Inici"
+}

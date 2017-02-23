@@ -1,0 +1,14 @@
+{
+  "HOME": "Fogar",
+  "LANGUAGE": "Linguaxe",
+  "CATALA": "Catalán",
+  "GALICIAN": "Galego",
+  "ENGLISH": "Inglés",
+  "SPANISH": "Español",
+  "SING OUT": "<i class='fa fa-sign-out'></i> Sair",
+  "SING IN": "<i class='fa fa-sign-in'></i> Entrar",
+  "WELCOME": "<i class='fa fa-user'/> Benvido : {{name}}</i>",
+  "MENUS": "<i class='fa fa-search'></i> Menús",
+  "CONTACT": "<i class='fa fa-envelope-open-o'></i> Contacto",
+  "HOME": "<i class='fa fa-home'></i> Inicio"
+}

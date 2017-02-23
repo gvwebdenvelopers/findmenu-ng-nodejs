@@ -19,10 +19,10 @@
         templateUrl: 'app/home/home.html',
         controller: 'HomeController',
         controllerAs: 'vm',
-        title: 'Home',
+        title: 'HOME',
         settings: {
           nav: 1,
-          content: '<i class="fa fa-home"></i> Home'
+          //content: '<i class="fa fa-home"></i> Home'
         }
       }
     }];

@@ -1,0 +1,9 @@
+{
+  "TITLE": "Findmenu",
+  "CONTACT US": "Contact us",
+  "NAME": "Name",
+  "REQUIRED": "This field is required",
+  "EMAIL": "Email",
+  "EMAIL_ERROR": "Your email must be between 10 and 100 characters long and look like an e-mail address.",
+  "SUGGESTIONS": "Suggestions"
+}

@@ -1,0 +1,9 @@
+{
+  "TITLE": "Findmenu",
+  "CONTACT US": "Contacta con nosotros",
+  "NAME": "Nombre",
+  "REQUIRED": "Este campo es obligatorio",
+  "EMAIL": "Correo electrónico",
+  "EMAIL_ERROR": "La dirección debe tener formato email, de 10  a 100 caracteres",
+  "SUGGESTIONS": "Sugerencias"
+}

@@ -2,8 +2,11 @@
 var mockData = (function() {
   return {
     getMockStates: getMockStates,
+    getMockMailData: getMockMailData,
     getMockMenus: getMockMenus,
-    getMockLocation: getMockLocation
+    getMockLocation: getMockLocation,
+    getMockUserCredentials: getMockUserCredentials,
+    getMockUserData: getMockUserData
   };
 
   function getMockStates() {
@@ -23,6 +26,17 @@ var mockData = (function() {
     ];
   }
 
+  function getMockMailData(){
+    return {
+        name: 'Ignatius',
+        from: 'Aplace',
+        to: '',
+        subject: 'Subject',
+        text: 'message',
+        type: 'admin'
+    };
+  }
+
   function getMockMenus() {
     return [
       { id: 00, nombre: 'Elbar0', precio_menu: 13, valoracion: 4, latitud: 0.00000, longitud: 0.00000, direccion:'C/la direció' },
@@ -37,5 +51,18 @@ var mockData = (function() {
     return {
       coords: { latitude: 38.810543, longitude: -0.604137 }
     };
+  }
+
+  function getMockUserCredentials(){
+    return {
+      user: 'user',
+      password: 'pass'
+    }
+  }
+
+  function getMockUserData(){
+    return {
+      user: 'user'
+    }
   }
 })();

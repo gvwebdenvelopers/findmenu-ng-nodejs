@@ -62,7 +62,12 @@ var mockData = (function() {
 
   function getMockUserData(){
     return {
-      user: 'user'
+      avatar: 'avatar.jpg',
+      email: 'user@email.com',
+      password: 'pass',
+      user: 'user',
+      usertype: 'client'
     }
   }
+
 })();

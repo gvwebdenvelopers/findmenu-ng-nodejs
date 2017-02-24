@@ -102,20 +102,75 @@ describe('Dataservice (CORE)', function () {
       $httpFlush();
     });
   });
+
   /*Testing  signup(data)*/
-  describe('When call POST /api/signup:userCredentials and it returns 2xx:', function () {
+  describe('When call POST /api/signup:userSingData, it returns 2xx and the user do not previously exits:', function () {
+    var userSingData;
+
+    beforeEach(function() {
+      userSingData = mockData.getMockUserData();
+      $httpBackend.when('POST', '/api/signup', userSingData)
+                    .respond(200, true);
+    });
+
+    it('-> Should return true', function () {
+      dataservice.signup(userSingData)
+        .then(function(response) {
+          expect(response.data).to.equal(true);
+        });
+      $httpFlush();
+    });
+  });
+
+  describe('When call POST /api/signup:userSingData, it returns 2xx and the user name allready exits:', function () {
+    var userSignData;
+
+    beforeEach(function() {
+      userSignData = mockData.getMockUserData();
+      $httpBackend.when('POST', '/api/signup', userSignData)
+                    .respond(200,  'name');
+    });
+
+    it('-> Should return the user name', function () {
+      dataservice.signup(userSignData)
+        .then(function(response) {
+          expect(response.data).to.equal('name');
+        });
+      $httpFlush();
+    });
+  });
+
+  describe('When call POST /api/signup:userSingData and server fails', function () {
+    var userSignData;
+
+    beforeEach(function() {
+      userSignData = mockData.getMockUserData();
+      $httpBackend.when('POST', '/api/signup', userSignData)
+                    .respond(500,  {description:'ERROR 500 - Service Unavailable'});
+    });
+
+    it('-> Should return false', function () {
+      dataservice.signup(userSignData)
+        .then(function(response) {
+          expect(response.data).to.equal(false);
+        });
+      $httpFlush();
+    });
+  });
+  /*Testing  localSignin(data)*/
+  describe('When call POST /api/localSignin:userCredentials, user credentials are OK and it returns 2xx:', function () {
     var userCredentials;
     var userData;
 
     beforeEach(function() {
       userCredentials = mockData.getMockUserCredentials();
       userData = mockData.getMockUserData();
-      $httpBackend.when('POST', '/api/signup', userCredentials)
+      $httpBackend.when('POST', '/api/localSignin', userCredentials)
                     .respond(200, userData);
     });
 
     it('-> Should return the user info', function () {
-      dataservice.signup(userCredentials)
+      dataservice.localSignin(userCredentials)
         .then(function(response) {
           expect(response.data.user).to.equal(userCredentials.user);
         });
@@ -123,7 +178,7 @@ describe('Dataservice (CORE)', function () {
     });
   });
 
-  describe('When call POST /api/signup:userCredentials, it returns 2xx and user credentials are NOT OK', function () {
+  describe('When call POST /api/localSignin:userCredentials, it returns 2xx and user credentials are NOT OK', function () {
     var userCredentials;
 
     beforeEach(function() {
@@ -131,12 +186,12 @@ describe('Dataservice (CORE)', function () {
         user: '',
         password: ''
       };
-      $httpBackend.when('POST', '/api/signup', userCredentials)
+      $httpBackend.when('POST', '/api/localSignin', userCredentials)
                     .respond(200, 'errorcredentials');
     });
 
     it('-> Should return an error', function () {
-      dataservice.signup(userCredentials)
+      dataservice.localSignin()
         .then(function(response) {
           expect(response.data).to.equal('errorcredentials');
         });
@@ -144,19 +199,115 @@ describe('Dataservice (CORE)', function () {
     });
   });
 
-  describe('When call POST /api/signup:userCredentials and server fails', function () {
+  describe('When call POST /api/localSignin:userCredentials and server fails', function () {
     var userCredentials;
 
     beforeEach(function() {
       userCredentials =  mockData.getMockUserCredentials();
-      $httpBackend.when('POST', '/api/signup', userCredentials)
+      $httpBackend.when('POST', '/api/localSignin', userCredentials)
                     .respond(500, {description:'ERROR 500 - Service Unavailable'});
     });
 
     it('-> Should return data false', function () {
-      dataservice.signup(userCredentials)
-        .then(function(data) {
-          expect(data).to.equal(false);
+      dataservice.localSignin(userCredentials)
+        .then(function(response) {
+          expect(response.data).to.equal(false);
+        });
+      $httpFlush();
+    });
+  });
+
+  describe('When call GET /auth/success and it returns 2xx:', function () {
+    var userSignData;
+
+    beforeEach(function() {
+      userSignData = mockData.getMockUserData();
+      $httpBackend.when('GET', '/auth/success')
+                  .respond(200,  userSignData);
+    });
+
+    it('-> User should contain the field user like "user"', function () {
+      dataservice.socialLogin()
+        .then(function(response) {
+          expect(response.data.user).to.equal('user');
+        });
+      $httpFlush();
+    });
+
+    it('-> User should contain the field email like "user@email.com"', function () {
+      dataservice.socialLogin()
+        .then(function(response) {
+          expect(response.data.email).to.equal('user@email.com');
+        });
+      $httpFlush();
+    });
+
+    it('-> User should contain the field avatar like "avatar.jpg"', function () {
+      dataservice.socialLogin()
+        .then(function(response) {
+          expect(response.data.avatar).to.equal('avatar.jpg');
+        });
+      $httpFlush();
+    });
+  });
+
+  describe('When call GET /auth/success and it returns petition fails', function () {
+    beforeEach(function() {
+      userSignData = mockData.getMockUserData();
+      $httpBackend.when('GET', '/auth/success')
+                  .respond(500,  {description:'ERROR 500 - Service Unavailable'});
+    });
+
+    it('-> Should return data false', function () {
+      dataservice.socialLogin()
+        .then(function(response) {
+          expect(response.data).to.equal(false);
+        });
+      $httpFlush();
+    });
+  });
+
+  describe('When call POST /api/getprofile:userName and it returns 2xx:', function () {
+    var userName;
+    var userData;
+
+    beforeEach(function() {
+      userData = mockData.getMockUserData();
+      userName = userData.user;
+      $httpBackend.when('POST', '/api/getprofile', userName)
+                  .respond(200,  userData);
+    });
+
+    it('-> User field must be the same as the input user name ', function () {
+      dataservice.getProfile(userName)
+        .then(function(response) {
+          expect(response.data.user).to.equal(userName);
+        });
+      $httpFlush();
+    });
+
+    it('-> User should contain the field user like "user"', function () {
+      dataservice.getProfile(userName)
+        .then(function(response) {
+          expect(response.data.user).to.equal('user');
+        });
+      $httpFlush();
+    });
+  });
+
+  describe('When call POST /api/getprofile:userName and it fails:', function () {
+    var userName;
+
+    beforeEach(function() {
+      userName = 'user';
+      $httpBackend.when('POST', '/api/getprofile', userName)
+                  .respond(500,  {description:'ERROR 500 - Service Unavailable'});
+    });
+
+    it('-> Should return data false', function () {
+      dataservice.getProfile(userName)
+        .then(function(response) {
+          expect(response.data).to.equal(false);
         });
       $httpFlush();
     });

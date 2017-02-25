@@ -1,26 +1,25 @@
 (function() {
-  'use strict';
+    'use strict';
 
-  angular
-    .module('app.login')
-    .controller('socialController', socialController);
+    angular
+        .module('app.login')
+        .controller('socialController', socialController);
 
-  socialController.$inject = ['dataservice', '$state', 'cookiesService',
-    'logger', 'headerService'
-  ];
+    socialController.$inject = ['dataservice', '$state', 'cookiesService',
+        'logger', 'headerService'
+    ];
 
-  function socialController(dataservice, $state, cookiesService, logger,
-    headerService) {
+    function socialController(dataservice, $state, cookiesService, logger,
+        headerService) {
 
-    social();
+        social();
 
-    function social() {
-      dataservice.socialLogin().then(function(response) {
-        logger.success('Usuario autentificado');
-        cookiesService.SetCredentials(response.data);
-        headerService.login();
-        $state.go('home');
-      });
+        function social() {
+            dataservice.socialLogin().then(function(response) {
+                logger.success('Usuario autentificado');
+                cookiesService.SetCredentials(response.data);
+                headerService.login();
+            });
+        }
     }
-  }
 })();

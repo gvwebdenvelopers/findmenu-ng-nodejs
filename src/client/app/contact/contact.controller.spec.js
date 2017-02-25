@@ -1,7 +1,6 @@
 /* jshint -W117, -W030 */
 describe('contact.controller', function() {
     var controller;
-
     var emailFake;
 
     beforeEach(function() {
@@ -18,8 +17,6 @@ describe('contact.controller', function() {
         });
 
     });
-
-    //bard.verifyNoOutstandingHttpRequests();
 
     describe('Contact controller', function() {
 

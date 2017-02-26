@@ -11,3 +11,5 @@ report/
 config.db.js
 cert1.pem
 privkey1.pem
+nbproject/
+hook/

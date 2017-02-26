@@ -22,16 +22,18 @@ Tener en cuenta aspectos sobre Accesibilidad**
 ## Running findemnu
 
 1.- Descargarse el proyecto desde github
+  1.1- ficheros que no está en git necesarios para el funcionamiento, hay ejemplos en eldirectorios examples
+      - .env ubícalo en /src/server/config aqui van tus social apikeys y la apikey para enviar correos con sebdgrid
+      - config.db.js este será el fichero de configuración para tu base de datos
 
 2.- Instalar paquetes:
-2.1- Ejecutar el comando `npm install`
+  2.1- Instala paquetes npm en global 
+      npm install -g bower gulp nodemon
+  2.2- Ejecutar el comando `npm install`
+  2.3- Ejecutar el comando `bower install`
+  2.4- Al realizar el bowwer install tener en cuenta si usamos ngmaterials escoger la version 1.4.14
 
-2.2- Ejecutar el comando `bower install`
-2.3- Al realizar el bowwer install tener en cuenta si usamos ngmaterials escoger la version 1.4.14
-
--> MOMENTANEO: añadir archivos sendgrid.env y config.db.js en la ruta /src/server/
-
-3.- Run the project with `gulp serve-dev`
+3.- Run the project with `gulp serve-dev` modo desarrollo para modificar la aplicación
 
 ##Archivos gitignore
 Los siguientes archivos no se encuentran disponibles en el repositorio
@@ -39,37 +41,5 @@ CARPETAS
 node_modules/
 bower_components/
 
-OTROS
-
-Estos ficheros debes configurarlos y colocarlos en la carpeta src/server/config
-
-.env --
-config.db.js --
-
-Plantilla .env:
-
-sendgridKey=aqui tu key
-
-facebookID=aqui tu key
-facebookSecret=aqui tu key
-facebookCalback=http://localhost:3000/auth/facebook/callback
-
-twitterID=aqui tu key
-twitterSecret=aqui tu key
-twitterCallback=http://localhost:3000/auth/twitter/callback
-
-googleID=aqui tu key
-googleSecret=aqui tu key
-googleCallback=http://localhost:3000/auth/google/callback
-
-plantilla config.db.js
-
-var mysql = require('mysql');
-exports.connection = mysql.createConnection({
-  host: '127.0.0.1',
-  user: 'usuario',
-  password: '',
-  database: 'findmenu'
-});
 
 

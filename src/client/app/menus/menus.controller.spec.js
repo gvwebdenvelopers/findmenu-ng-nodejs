@@ -11,7 +11,7 @@ describe('MenusController', function() {
     //bard.appModule('app.dashboard');
     module('app.menus');
     bard.inject('$controller','$rootScope',
-                '$q','$log');
+                '$q','$log', '$httpBackend');
 
     scope = $rootScope.$new();
 
@@ -28,6 +28,11 @@ describe('MenusController', function() {
     controller = $controller('MenusController',{
       dataservice: dsFake, $scope: scope
     });
+    /*para que no de error en translate */
+    $httpBackend.whenGET("/i18n/core/en.json").respond({});
+    $httpBackend.whenGET("/i18n/core/es.json").respond({});
+    $httpBackend.whenGET("/i18n/core/gl.json").respond({});
+    $httpBackend.whenGET("/i18n/core/ca.json").respond({});
   });
 
   describe('Menus controller', function() {
@@ -55,7 +60,7 @@ describe('MenusController', function() {
         expect($log.info.logs).to.match(/Activated/);
       });
 
-      
+
     });
   });
 });

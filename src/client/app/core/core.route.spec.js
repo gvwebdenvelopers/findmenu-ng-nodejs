@@ -7,8 +7,13 @@ describe('core', function() {
 
     beforeEach(function() {
       module('app.core', bard.fakeToastr);
-      bard.inject('$location', '$rootScope', '$state', '$templateCache');
+      bard.inject('$location', '$rootScope', '$state', '$templateCache', '$httpBackend');
       $templateCache.put(views.core, '');
+      /*para que no de error en translate */
+      $httpBackend.whenGET("/i18n/core/en.json").respond({});
+      $httpBackend.whenGET("/i18n/core/es.json").respond({});
+      $httpBackend.whenGET("/i18n/core/gl.json").respond({});
+      $httpBackend.whenGET("/i18n/core/ca.json").respond({});
     });
 
     it('should map /404 route to 404 View template', function() {

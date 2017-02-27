@@ -22,7 +22,9 @@
     };
 
     this.$get = function() {
-      return { config: this.config };
+      return {
+        config: this.config
+      };
     };
   }
 
@@ -50,7 +52,10 @@
   function extendExceptionHandler($delegate, exceptionHandler, logger) {
     return function(exception, cause) {
       var appErrorPrefix = exceptionHandler.config.appErrorPrefix || '';
-      var errorData = { exception: exception, cause: cause };
+      var errorData = {
+        exception: exception,
+        cause: cause
+      };
       exception.message = appErrorPrefix + exception.message;
       $delegate(exception, cause);
       /**
@@ -62,7 +67,7 @@
        * @example
        *     throw { message: 'error message we added' };
        */
-     // logger.error(exception.message, errorData);
+      // logger.error(exception.message, errorData);
     };
   }
 })();

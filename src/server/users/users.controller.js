@@ -5,7 +5,7 @@ var Mysql = require('../users/users.model');
 
 exports.signup = function (req, res, next) {
     passport.authenticate('local-signup', function (err, user, info) {
-        
+
         if (err) {
             return res.send('err');
         }
@@ -47,11 +47,3 @@ exports.getProfile = function (req, res, next) {
     });
 
 };
-
-
-
-
-
-
-
-

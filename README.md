@@ -1,5 +1,5 @@
 
-![alt text](https://github.com/gvwebdenvelopers/findmenu-ng-nodejs.git/raw/master/src/client/images/findmenu_2.png "Logo Title Text 1")
+![alt text](https://github.com/gvwebdenvelopers/findmenu-ng-nodejs.git/master/src/client/images/findmenu_2.png "Logo Title Text 1")
 
 
 ##FINDMENU by Jorge Martínez y Oscar Otero
@@ -8,7 +8,7 @@ El Frontend utiliza las tecnologias Angular 1, CSS3 y HTML5. Para su funcionamie
 
 ## Demo 
 
-[Findmenu.tk](https://findmenu.tk:3000)
+[Findmenu.tk](https://findmenu.tk)
 
 ## Requerimientos generales
 

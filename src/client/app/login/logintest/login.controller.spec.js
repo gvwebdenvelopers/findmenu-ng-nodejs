@@ -52,89 +52,89 @@ describe('login.controller', function() {
         });
 
         //test de la función SubmitLogin
-        describe('SubmitLogin function', function() {
+        /* describe('SubmitLogin function', function() {
 
-            //test de error de credenciales al loguearse
-            it('should be login not successfully error credentials', function() {
+             //test de error de credenciales al loguearse
+             it('should be login not successfully error credentials', function() {
 
-                controller.SubmitLogin();
-                $rootScope.$apply();
-                expect($log.error.logs).to.match(/credenciales/);
-
-            });
-
-            //test de error de server
-            it('should be login not successfully error server', function() {
-
-                //función que simula la respuesta al servidor
-                dsFake.localSignin = function(datas) {
-                    var response = { data: 'error' };
-                    return $q.when(response);
-
-                };
-
-                controller = $controller('LoginController', {
-                    dataservice: dsFake,
-                    $uibModalInstance: modalInstance
-                });
-
-                controller.SubmitLogin();
-                $rootScope.$apply();
-                expect($log.error.logs).to.match(/server/);
-
-            });
-
-            //test de usuario autentificado con éxito
-            it('should be login successfully', function() {
-
-                //función que simula la respuesta al servidor
-                dsFake.localSignin = function(datas) {
-                    var response = { data: { user: 'user' } };
-                    return $q.when(response);
-                };
-
-                //fake para servicio externo cookies
-                cSFake = {
-                    SetCredentials: function() {
-
-                    }
-                };
-
-                //fake para servicio externo headerService
-                hSFake = {
-                    login: function() {
-
-                    }
-                };
-
-                controller = $controller('LoginController', {
-                    dataservice: dsFake,
-                    $uibModalInstance: modalInstance,
-                    cookiesService: cSFake,
-                    headerService: hSFake
-                });
-
-                controller.inputUser = 'user';
-                controller.SubmitLogin();
-                $rootScope.$apply();
-                expect($log.info.logs).to.match(/Usuario/);
-
-            });
-        });
-
-        //test de la función RedirectSignup
-        /* describe('RedirectSignup function', function() {
-
-             //test de redirección a signup
-             it('of current view should work with $state.go signup', function() {
-
-                 controller.RedirectSignup();
-                 $rootScope.$digest();
-                 expect($state.current.name).to.equal('signup');
+                 controller.SubmitLogin();
+                 $rootScope.$apply();
+                 expect($log.error.logs).to.match(/credenciales/);
 
              });
 
-         });*/
+             //test de error de server
+             it('should be login not successfully error server', function() {
+
+                 //función que simula la respuesta al servidor
+                 dsFake.localSignin = function(datas) {
+                     var response = { data: 'error' };
+                     return $q.when(response);
+
+                 };
+
+                 controller = $controller('LoginController', {
+                     dataservice: dsFake,
+                     $uibModalInstance: modalInstance
+                 });
+
+                 controller.SubmitLogin();
+                 $rootScope.$apply();
+                 expect($log.error.logs).to.match(/server/);
+
+             });
+
+             //test de usuario autentificado con éxito
+             it('should be login successfully', function() {
+
+                 //función que simula la respuesta al servidor
+                 dsFake.localSignin = function(datas) {
+                     var response = { data: { user: 'user' } };
+                     return $q.when(response);
+                 };
+
+                 //fake para servicio externo cookies
+                 cSFake = {
+                     SetCredentials: function() {
+
+                     }
+                 };
+
+                 //fake para servicio externo headerService
+                 hSFake = {
+                     login: function() {
+
+                     }
+                 };
+
+                 controller = $controller('LoginController', {
+                     dataservice: dsFake,
+                     $uibModalInstance: modalInstance,
+                     cookiesService: cSFake,
+                     headerService: hSFake
+                 });
+
+                 controller.inputUser = 'user';
+                 controller.SubmitLogin();
+                 $rootScope.$apply();
+                 expect($log.info.logs).to.match(/Usuario/);
+
+             });
+         });
+
+         //test de la función RedirectSignup
+          describe('RedirectSignup function', function() {
+
+              //test de redirección a signup
+              it('of current view should work with $state.go signup', function() {
+
+                  controller.RedirectSignup();
+                  $rootScope.$digest();
+                  expect($state.current.name).to.equal('signup');
+
+              });
+
+          });*/
 
     });
 

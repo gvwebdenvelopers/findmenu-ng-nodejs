@@ -12,7 +12,7 @@
     vm.busyMessage = 'Please wait ...';
     vm.isBusy = true;
     $rootScope.showSplash = true;
-    
+
     //mostramos barra de carga
     hideSplash();
 
@@ -22,6 +22,5 @@
         $rootScope.showSplash = false;
       }, 1000);
     }
-
   }
 })();

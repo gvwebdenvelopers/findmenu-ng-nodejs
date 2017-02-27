@@ -62,18 +62,18 @@
       };
       vm.icon = {
         url: '../../images/findmenuGreen.png',
-        scaledSize: new google.maps.Size(50, 50),
+        //scaledSize: new google.maps.Size(50, 50),
       };
       vm.markers = [];
-      vm.markersOptions = { animation: window.google.maps.Animation.BOUNCE };
+      //vm.markersOptions = { animation: window.google.maps.Animation.BOUNCE };
 
       activate();
 
       function activate() {
-          var promises = [getMenus(), getCurrentLocation()];
-          return $q.all(promises).then(function() {
-                //logger.info('Activated Menus View');
-            });
+        var promises = [getMenus(), getCurrentLocation()];
+        return $q.all(promises).then(function() {
+          logger.info('Activated Menus View');
+        });
       }
 
       /* menus functions */

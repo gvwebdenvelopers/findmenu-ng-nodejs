@@ -17,30 +17,32 @@ var session = require('express-session');
 var dotenv = require('dotenv');
 var environment = process.env.NODE_ENV;
 
-dotenv.load({ path: './src/server/config/.env'});
+dotenv.load({
+  path: './src/server/config/.env'
+});
 app.use(favicon(__dirname + '/favicon.ico'));
 app.use(bodyParser.urlencoded({
-    extended: true
+  extended: true
 }));
 app.use(bodyParser.json());
 app.use(logger('dev'));
-app.use(cookieParser());//esto se debe poner sino da fallo conect.sid
+app.use(cookieParser()); //esto se debe poner sino da fallo conect.sid
 app.use(cors());
 
 require('./config/passport.js')(passport);
 
 //Configuración de la sesión para Passport
 app.use(session({
-    resave: true,
-    saveUninitialized: true,
-    secret: 'findmenuangularnodejs'
+  resave: true,
+  saveUninitialized: true,
+  secret: 'findmenuangularnodejs'
 })); // session secret
 app.use(passport.initialize());
 app.use(passport.session());
 
 //importamos routes general
-require('./config/routes').init(app,passport); 
-  
+require('./config/routes').init(app, passport);
+
 console.log('About to crank up node');
 console.log('PORT=' + port);
 console.log('NODE_ENV=' + environment);
@@ -76,8 +78,8 @@ switch (environment) {
     app.listen(port, function() {
       console.log('Express server listening on port ' + port);
       console.log('env = ' + app.get('env') +
-      '\n__dirname = ' + __dirname +
-      '\nprocess.cwd = ' + process.cwd());
+        '\n__dirname = ' + __dirname +
+        '\nprocess.cwd = ' + process.cwd());
     });
     break;
 }

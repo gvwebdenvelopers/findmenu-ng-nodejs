@@ -1,11 +1,11 @@
-(function () {
+(function() {
     'use strict';
 
     angular
-            .module('app.layout')
-            .controller('MenuController', MenuController);
+        .module('app.layout')
+        .controller('MenuController', MenuController);
 
-    MenuController.$inject = ['$translate', '$translatePartialLoader','$state', 'routerHelper'];
+    MenuController.$inject = ['$translate', '$translatePartialLoader', '$state', 'routerHelper'];
     /* @ngInject */
     function MenuController($translate, $translatePartialLoader, $state, routerHelper) {
         var vm = this;
@@ -20,17 +20,17 @@
         }
 
         function getNavRoutes() {
-            vm.navRoutes = states.filter(function (r) {
+            vm.navRoutes = states.filter(function(r) {
                 return r.settings && r.settings.nav;
-            }).sort(function (r1, r2) {
+            }).sort(function(r1, r2) {
                 return r1.settings.nav - r2.settings.nav;
             });
         }
 
         function setLang(langKey) {
-          // You can change the language during runtime
-          console.log("Language set to "+ langKey);
-          $translate.use(langKey);
+            // You can change the language during runtime
+            console.log('Language set to ' + langKey);
+            $translate.use(langKey);
         }
 
         function isCurrent(route) {

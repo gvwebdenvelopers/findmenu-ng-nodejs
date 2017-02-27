@@ -1,9 +1,9 @@
-(function () {
+(function() {
     'use strict';
 
     angular
-            .module('app.contact')
-            .controller('ContactController', ContactController);
+        .module('app.contact')
+        .controller('ContactController', ContactController);
 
     //inyecto funcionalidad y servicio dataservice
     ContactController.$inject = ['dataservice', '$state', '$timeout'];
@@ -12,7 +12,6 @@
     function ContactController(dataservice, $state, $timeout) {
         var vm = this;
         //variables del formulario
-        vm.title = 'Contact';
         vm.inputName = '';
         vm.inputEmail = '';
         vm.inputSubject = '';
@@ -28,31 +27,31 @@
                 text: vm.inputMessage,
                 type: 'admin'
             };
-            dataservice.sendEmail(data).then(function (response) {
+            dataservice.sendEmail(data).then(function(response) {
 
                 if (response) {
-                    data.type='user';
-                    //console.log(data);
-                    dataservice.sendEmail(data).then(function (response) {
+                    data.type = 'user';
+                    dataservice.sendEmail(data).then(function(response) {
 
                         if (response) {
-                            vm.resultMessageOk = 'Su email ha sido enviado correctamente';
-                            $timeout(function () {
+                            vm.resultMessageOk =
+                                'Su email ha sido enviado correctamente';
+                            $timeout(function() {
                                 vm.resultMessageOk = '';
                                 $state.go('home');
                             }, 3000);
                         } else {
                             vm.resultMessageFail =
-                                    'Ha habido un error al enviar el email, intentelo mas tarde';
-                            $timeout(function () {
+                                'Ha habido un error al enviar el email de usuario, intentelo mas tarde';
+                            $timeout(function() {
                                 vm.resultMessageFail = '';
                             }, 3000);
                         }
                     });
                 } else {
                     vm.resultMessageFail =
-                            'Ha habido un error al enviar el email, intentelo mas tarde';
-                    $timeout(function () {
+                        'Ha habido un error al enviar el email, intentelo mas tarde';
+                    $timeout(function() {
                         vm.resultMessageFail = '';
                     }, 3000);
                 }

@@ -1,9 +1,9 @@
 /* customerInfo.directive.js */
 
 /**
-* @desc directiva que muestra el numero de estrellas según el atributo rating
-* @example <div stars-menus-rating></div>
-*/
+ * @desc directiva que muestra el numero de estrellas según el atributo rating
+ * @example <div stars-menus-rating></div>
+ */
 (function() {
   'use strict';
 
@@ -26,17 +26,17 @@
       templateUrl: 'app/menus/directives/svg-stars.html',
 
       restrict: 'EA',
-      link:link
+      link: link
     };
     return directive;
 
     function link(scope, element, iAttrs) {
-        scope.stars=['silver', 'silver','silver','silver','silver'];
-        var rating = iAttrs.rating;
+      scope.stars = ['silver', 'silver', 'silver', 'silver', 'silver'];
+      var rating = iAttrs.rating;
 
-        for(var i=0; i< rating; i++ ){
-          scope.stars[i] = 'gold';
-        }
+      for (var i = 0; i < rating; i++) {
+        scope.stars[i] = 'gold';
+      }
     }
   }
 })();
